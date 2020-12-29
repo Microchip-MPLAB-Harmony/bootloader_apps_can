@@ -38,10 +38,10 @@ To clone or download these application from Github,go to the [main page of this 
 
 The following applications are provided to demonstrate the CAN Bootloader
 
-| Name                                              | Description                                                                      |
-| ---------                                         | -----------                                                                      |
-| [UDP Bootloader](apps/udp_bootloader/readme.md)   | This example application shows how to use the Bootloader Library to bootload an application using UDP protocol |
-
+| Name                                                                   | Description                                                                      |
+| ---------                                                              | -----------                                                                      |
+| [CAN Bootloader](apps/can_bootloader/readme.md)                        | This example application shows how to use the Bootloader Library to bootload an application using CAN-FD protocol |
+| [CAN Faile Safe Bootloader](apps/can_fail_safe_bootloader/readme.md)   | This example application shows how to use the Bootloader Library to bootload an application on device having dual flash bank feature using CAN-FD protocol  |
 
 ## Bootloader Library
 
