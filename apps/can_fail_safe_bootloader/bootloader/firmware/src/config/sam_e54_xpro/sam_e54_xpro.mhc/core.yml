@@ -11,6 +11,15 @@ children:
       children:
       - type: Dynamic
         attributes: {id: can_bootloader, value: 'false'}
+  - type: Boolean
+    attributes: {id: ADVANCED_EXCEPTION}
+    children:
+    - type: Attributes
+      children:
+      - type: Boolean
+        attributes: {id: visible}
+        children:
+        - {type: Value, value: 'false'}
   - type: String
     attributes: {id: APP_START_ADDRESS}
     children:
@@ -127,6 +136,15 @@ children:
       children:
       - type: Dynamic
         attributes: {id: can_bootloader, value: 'false'}
+  - type: String
+    attributes: {id: CoreMainFileName}
+    children:
+    - type: Attributes
+      children:
+      - type: Boolean
+        attributes: {id: visible}
+        children:
+        - {type: Value, value: 'false'}
   - type: Boolean
     attributes: {id: CoreSysCallsFile}
     children:
@@ -169,6 +187,15 @@ children:
       children:
       - type: Dynamic
         attributes: {id: can_bootloader, value: 'false'}
+  - type: File
+    attributes: {id: DEBUG_CONSOLE_C}
+    children:
+    - type: Attributes
+      children:
+      - type: Boolean
+        attributes: {id: enabled}
+        children:
+        - {type: Value, value: 'false'}
   - type: KeyValueSet
     attributes: {id: DEVICE_SECURITY_CMD}
     children:
@@ -340,6 +367,33 @@ children:
       children:
       - type: Dynamic
         attributes: {id: core, value: 'true'}
+  - type: File
+    attributes: {id: INITIALIZATION_C}
+    children:
+    - type: Attributes
+      children:
+      - type: Boolean
+        attributes: {id: enabled}
+        children:
+        - {type: Value, value: 'false'}
+  - type: File
+    attributes: {id: INTERRUPTS_C}
+    children:
+    - type: Attributes
+      children:
+      - type: Boolean
+        attributes: {id: enabled}
+        children:
+        - {type: Value, value: 'false'}
+  - type: File
+    attributes: {id: INTERRUPTS_H}
+    children:
+    - type: Attributes
+      children:
+      - type: Boolean
+        attributes: {id: enabled}
+        children:
+        - {type: Value, value: 'false'}
   - type: String
     attributes: {id: KEIL_STACK_HEAP_SIZE}
     children:
@@ -349,6 +403,24 @@ children:
         attributes: {id: core, value: '0x1200'}
   - type: File
     attributes: {id: LIBC_SYSCALLS_C}
+    children:
+    - type: Attributes
+      children:
+      - type: Boolean
+        attributes: {id: enabled}
+        children:
+        - {type: Value, value: 'false'}
+  - type: File
+    attributes: {id: LINKER_SCRIPT}
+    children:
+    - type: Attributes
+      children:
+      - type: Boolean
+        attributes: {id: enabled}
+        children:
+        - {type: Value, value: 'false'}
+  - type: File
+    attributes: {id: MAIN_C}
     children:
     - type: Attributes
       children:
@@ -370,6 +442,20 @@ children:
       children:
       - type: Dynamic
         attributes: {id: core, value: '0xffffff'}
+  - type: Boolean
+    attributes: {id: NVIC_-1_0_ENABLE}
+    children:
+    - type: Values
+      children:
+      - type: Dynamic
+        attributes: {id: core, value: 'false'}
+  - type: Boolean
+    attributes: {id: NVIC_-1_0_HANDLER_LOCK}
+    children:
+    - type: Values
+      children:
+      - type: Dynamic
+        attributes: {id: core, value: 'false'}
   - type: Boolean
     attributes: {id: NVIC_29_0_ENABLE}
     children:
@@ -462,8 +548,32 @@ children:
       - type: Dynamic
         attributes: {id: nvmctrl, value: 'false'}
   - type: Boolean
+    attributes: {id: PAC_ERROR_EVENT}
+    children:
+    - type: Attributes
+      children:
+      - type: Boolean
+        attributes: {id: visible}
+        children:
+        - {type: Value, value: 'true'}
+  - type: File
+    attributes: {id: PAC_HEADER}
+    children:
+    - type: Attributes
+      children:
+      - type: Boolean
+        attributes: {id: enabled}
+        children:
+        - {type: Value, value: 'true'}
+  - type: Boolean
     attributes: {id: PAC_INTERRRUPT_MODE}
     children:
+    - type: Attributes
+      children:
+      - type: Boolean
+        attributes: {id: visible}
+        children:
+        - {type: Value, value: 'true'}
     - type: Values
       children:
       - type: Dynamic
@@ -496,6 +606,33 @@ children:
       children:
       - type: Dynamic
         attributes: {id: core, value: 'false'}
+  - type: File
+    attributes: {id: PAC_SOURCE}
+    children:
+    - type: Attributes
+      children:
+      - type: Boolean
+        attributes: {id: enabled}
+        children:
+        - {type: Value, value: 'true'}
+  - type: File
+    attributes: {id: PAC_SYS_DEF}
+    children:
+    - type: Attributes
+      children:
+      - type: Boolean
+        attributes: {id: enabled}
+        children:
+        - {type: Value, value: 'true'}
+  - type: File
+    attributes: {id: PAC_SYS_INIT}
+    children:
+    - type: Attributes
+      children:
+      - type: Boolean
+        attributes: {id: enabled}
+        children:
+        - {type: Value, value: 'true'}
   - type: Boolean
     attributes: {id: PAC_USE}
     children:
@@ -860,6 +997,15 @@ children:
       children:
       - type: Dynamic
         attributes: {id: core, value: '0'}
+  - type: File
+    attributes: {id: STARTUP_C}
+    children:
+    - type: Attributes
+      children:
+      - type: Boolean
+        attributes: {id: enabled}
+        children:
+        - {type: Value, value: 'false'}
   - type: String
     attributes: {id: SYSTICK_PERIOD}
     children:
@@ -888,11 +1034,49 @@ children:
       children:
       - type: Dynamic
         attributes: {id: core, value: 'false'}
+  - type: Boolean
+    attributes: {id: SysTick_INTERRUPT_ENABLE}
+    children:
+    - type: Values
+      children:
+      - type: Dynamic
+        attributes: {id: core, value: 'false'}
+  - type: Boolean
+    attributes: {id: SysTick_INTERRUPT_ENABLE_UPDATE}
+    children:
+    - type: Values
+      children:
+      - type: Dynamic
+        attributes: {id: core, value: 'true'}
+  - type: Boolean
+    attributes: {id: SysTick_INTERRUPT_HANDLER_LOCK}
+    children:
+    - type: Values
+      children:
+      - type: Dynamic
+        attributes: {id: core, value: 'false'}
+  - type: Boolean
+    attributes: {id: USE_SYSTICK_INTERRUPT}
+    children:
+    - type: Attributes
+      children:
+      - type: Boolean
+        attributes: {id: readOnly}
+        children:
+        - {type: Value, value: 'false'}
+    - type: Values
+      children:
+      - type: Dynamic
+        attributes: {id: core, value: 'false'}
   - type: Setting
     attributes: {id: XC32_LINKER_PREPROC_MARCOS}
     children:
     - type: Attributes
       children:
+      - type: Boolean
+        attributes: {id: enabled}
+        children:
+        - {type: Value, value: 'false'}
       - type: String
         attributes: {id: value}
         children:
