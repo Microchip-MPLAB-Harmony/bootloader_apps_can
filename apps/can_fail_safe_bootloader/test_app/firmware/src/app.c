@@ -147,15 +147,15 @@ void APP_Tasks ( void )
 
             if ((nvmctrlStatus & NVMCTRL_AFIRST_MSK) != 0)
             {
-                printf("\n\r####### Application running from NVM Flash BANK A #######\n\r");
+                printf("\r\n####### Application running from NVM Flash BANK A #######\r\n");
             }
             else
             {
-                printf("\n\r####### Application running from NVM Flash BANK B  #######\n\r");
+                printf("\r\n####### Application running from NVM Flash BANK B  #######\r\n");
             }
 
 
-            printf("\n\r####### Press and Hold the Switch to trigger Bootloader #######\n\r");
+            printf("\r\n####### Press and Hold the Switch to trigger Bootloader #######\r\n");
 
             appData.state = APP_SWITCH_PRESS_WAIT;
             break;
@@ -177,7 +177,7 @@ void APP_Tasks ( void )
 
         case APP_TRIGGER_BOOTLOADER:
         {
-            printf("\n\r####### Bootloader Triggered #######\n\r");
+            printf("\r\n####### Bootloader Triggered #######\r\n");
 
             ramStart[0] = BTL_TRIGGER_PATTERN;
             ramStart[1] = BTL_TRIGGER_PATTERN;
