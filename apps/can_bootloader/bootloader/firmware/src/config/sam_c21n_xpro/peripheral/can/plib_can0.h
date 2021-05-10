@@ -103,6 +103,8 @@ bool CAN0_TxFIFOIsFull(void);
 void CAN0_MessageRAMConfigSet(uint8_t *msgRAMConfigBaseAddress);
 bool CAN0_StandardFilterElementSet(uint8_t filterNumber, can_sidfe_registers_t *stdMsgIDFilterElement);
 bool CAN0_StandardFilterElementGet(uint8_t filterNumber, can_sidfe_registers_t *stdMsgIDFilterElement);
+void CAN0_SleepModeEnter(void);
+void CAN0_SleepModeExit(void);
 // DOM-IGNORE-BEGIN
 #ifdef __cplusplus  // Provide C++ Compatibility
     }

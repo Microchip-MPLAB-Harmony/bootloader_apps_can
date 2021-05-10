@@ -50,8 +50,6 @@
 #include <string.h>
 #include "plib_nvmctrl.h"
 
-static uint32_t status = 0;
-
 // *****************************************************************************
 // *****************************************************************************
 // Section: NVMCTRL Implementation
@@ -80,9 +78,6 @@ bool NVMCTRL_RWWEEPROM_PageWrite ( uint32_t *data, const uint32_t address )
     uint32_t i = 0U;
     uint32_t * paddress = (uint32_t *)address;
 
-    /* Clear global error flag */
-    status = 0U;
-
     /* Writing 32-bit words in the given address */
     for ( i = 0U; i < (NVMCTRL_RWWEEPROM_PAGESIZE/4U); i++)
     {
@@ -99,9 +94,6 @@ bool NVMCTRL_RWWEEPROM_PageWrite ( uint32_t *data, const uint32_t address )
 
 bool NVMCTRL_RWWEEPROM_RowErase( uint32_t address )
 {
-    /* Clear global error flag */
-    status = 0U;
-
      /* Set address and command */
     NVMCTRL_REGS->NVMCTRL_ADDR = address >> 1U;
 
@@ -121,9 +113,6 @@ bool NVMCTRL_PageWrite( uint32_t *data, const uint32_t address )
     uint32_t i = 0U;
     uint32_t * paddress = (uint32_t *)address;
 
-    /* Clear global error flag */
-    status = 0U;
-
     /* writing 32-bit data into the given address */
     for (i = 0U; i < (NVMCTRL_FLASH_PAGESIZE/4U); i++)
     {
@@ -140,9 +129,6 @@ bool NVMCTRL_PageWrite( uint32_t *data, const uint32_t address )
 
 bool NVMCTRL_RowErase( uint32_t address )
 {
-    /* Clear global error flag */
-    status = 0U;
-
     /* Set address and command */
     NVMCTRL_REGS->NVMCTRL_ADDR = address >> 1U;
 
@@ -153,8 +139,17 @@ bool NVMCTRL_RowErase( uint32_t address )
 
 NVMCTRL_ERROR NVMCTRL_ErrorGet( void )
 {
-    status |= NVMCTRL_REGS->NVMCTRL_STATUS;
-    return ((NVMCTRL_ERROR) status);
+    volatile uint32_t nvm_error = 0;
+
+    /* Get the error bits set */
+    nvm_error = (NVMCTRL_REGS->NVMCTRL_STATUS & (NVMCTRL_STATUS_NVME_Msk | NVMCTRL_STATUS_LOCKE_Msk | NVMCTRL_STATUS_PROGE_Msk));
+
+    /* Clear the error bits in both STATUS and INTFLAG register */
+    NVMCTRL_REGS->NVMCTRL_STATUS |= nvm_error;
+
+    NVMCTRL_REGS->NVMCTRL_INTFLAG = NVMCTRL_INTFLAG_ERROR_Msk;
+
+    return ((NVMCTRL_ERROR) nvm_error);
 }
 
 bool NVMCTRL_IsBusy(void)
@@ -164,9 +159,6 @@ bool NVMCTRL_IsBusy(void)
 
 void NVMCTRL_RegionLock(uint32_t address)
 {
-    /* Clear global error flag */
-    status = 0U;
-
     /* Set address and command */
     NVMCTRL_REGS->NVMCTRL_ADDR = address >> 1U;
 
@@ -175,9 +167,6 @@ void NVMCTRL_RegionLock(uint32_t address)
 
 void NVMCTRL_RegionUnlock(uint32_t address)
 {
-    /* Clear global error flag */
-    status = 0U;
-
     /* Set address and command */
     NVMCTRL_REGS->NVMCTRL_ADDR = address >> 1U;
 
