@@ -57,7 +57,7 @@
 #ifndef DONT_USE_PREDEFINED_PERIPHERALS_HANDLERS
     #define DONT_USE_PREDEFINED_PERIPHERALS_HANDLERS
 #endif //DONT_USE_PREDEFINED_PERIPHERALS_HANDLERS
-#include "atsamv71q21b.h"
+#include "samv71q21b.h"
 #pragma GCC diagnostic pop
 #include "device_cache.h"
 #include "toolchain_specifics.h"
