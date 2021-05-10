@@ -201,7 +201,7 @@ bool CAN0_MessageTransmit(uint32_t id, uint8_t length, uint8_t* data, CAN_MODE m
             {
                 tfqpi = (uint8_t)((CAN0_REGS->CAN_TXFQS & CAN_TXFQS_TFQPI_Msk) >> CAN_TXFQS_TFQPI_Pos);
                 fifo = (can_txbe_registers_t *) ((uint8_t*)can0Obj.msgRAMConfig.txBuffersAddress + ((uint32_t)tfqpi * CAN0_TX_FIFO_BUFFER_ELEMENT_SIZE));
-                op_success = true;            
+                op_success = true;
             }
             break;
         default:
@@ -257,7 +257,7 @@ bool CAN0_MessageTransmit(uint32_t id, uint8_t length, uint8_t* data, CAN_MODE m
         }
 
         messageMarker++;
-        fifo->CAN_TXBE_1 |= (((uint32_t)(messageMarker) << CAN_TXBE_1_MM_Pos) & CAN_TXBE_1_MM_Msk);
+        fifo->CAN_TXBE_1 |= (((uint32_t)(messageMarker) << CAN_TXBE_1_MM_Pos) & CAN_TXBE_1_MM_Msk) | CAN_TXBE_1_EFC_Msk;
 
         /* request the transmit */
         CAN0_REGS->CAN_TXBAR = 1UL << tfqpi;
@@ -602,6 +602,29 @@ void CAN0_MessageRAMConfigSet(uint8_t *msgRAMConfigBaseAddress)
 }
 
 
+
+void CAN0_SleepModeEnter(void)
+{
+    CAN0_REGS->CAN_CCCR |=  CAN_CCCR_CSR_Msk;
+    while ((CAN0_REGS->CAN_CCCR & CAN_CCCR_CSA_Msk) != CAN_CCCR_CSA_Msk)
+    {
+        /* Wait for clock stop request to complete */
+    }
+}
+
+void CAN0_SleepModeExit(void)
+{
+    CAN0_REGS->CAN_CCCR &=  ~CAN_CCCR_CSR_Msk;
+    while ((CAN0_REGS->CAN_CCCR & CAN_CCCR_CSA_Msk) == CAN_CCCR_CSA_Msk)
+    {
+        /* Wait for no clock stop */
+    }
+    CAN0_REGS->CAN_CCCR &= ~CAN_CCCR_INIT_Msk;
+    while ((CAN0_REGS->CAN_CCCR & CAN_CCCR_INIT_Msk) == CAN_CCCR_INIT_Msk)
+    {
+        /* Wait for initialization complete */
+    }
+}
 
 
 

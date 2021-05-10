@@ -100,6 +100,8 @@ bool CAN0_InterruptGet(CAN_INTERRUPT_MASK interruptMask);
 void CAN0_InterruptClear(CAN_INTERRUPT_MASK interruptMask);
 bool CAN0_TxFIFOIsFull(void);
 void CAN0_MessageRAMConfigSet(uint8_t *msgRAMConfigBaseAddress);
+void CAN0_SleepModeEnter(void);
+void CAN0_SleepModeExit(void);
 // DOM-IGNORE-BEGIN
 #ifdef __cplusplus  // Provide C++ Compatibility
     }
