@@ -117,7 +117,7 @@ static uint32_t flash_ptr;
 static uint32_t unlock_begin;
 static uint32_t unlock_end;
 
-static uint8_t CACHE_ALIGN __attribute__((space(data), section (".ram_nocache"))) mcan1MessageRAM[MCAN1_MESSAGE_RAM_CONFIG_SIZE];
+static uint8_t CACHE_ALIGN __attribute__((space(data), section (".mcan1_message_ram"))) mcan1MessageRAM[MCAN1_MESSAGE_RAM_CONFIG_SIZE];
 static uint8_t rx_message[HEADER_SIZE + MAX_DATA_SIZE];
 static uint8_t data_seq;
 
