@@ -142,23 +142,13 @@ SECTIONS
     . = ALIGN(4);
     _etext = .;
 
-    .ram_nocache (NOLOAD):
+    .mcan1_message_ram (NOLOAD):
     {
     . = ALIGN(4);
-    _s_ram_nocache = .;
-    *(.ram_nocache)
+    _s_mcan1_message_ram = .;
+    *(.mcan1_message_ram)
     . = ALIGN(4);
-    _e_ram_nocache = .;
-    } > ram_nocache
-
-    .ram_nocache_data : AT (_etext)
-    {
-    . = ALIGN(4);
-    _s_ram_nocache_vma = .;
-    _s_ram_nocache_lma = LOADADDR(.ram_nocache_data);
-    *(.ram_nocache_data)
-    . = ALIGN(4);
-    _e_ram_nocache_vma = .;
+    _e_mcan1_message_ram = .;
     } > ram_nocache
 
     /* Locate text/rodata in special data section to be copied
