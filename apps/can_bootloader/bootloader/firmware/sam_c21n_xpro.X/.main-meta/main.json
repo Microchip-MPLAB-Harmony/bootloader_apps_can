@@ -1,0 +1,78 @@
+{
+	"metaDataVersion": "1.0.0",
+	"category": "com.microchip.ide.project",
+	"content": {
+		"metaDataVersion": "1.1.0",
+		"name": "com.microchip.mcu32.mplabx.project.bootloader_apps_can_can_bootloader_sam_c21n_xpro",
+		"version": "3.0.0",
+		"displayName": "CAN Bootloader Example for SAM C20/C21 Family",
+		"projectName": "can_bootloader_sam_c21n_xpro",
+		"shortDescription": "This example application shows how to use the Bootloader Library to bootload an application using CAN protocol.",
+		"ide": {
+			"name": "MPLABX",
+			"semverRange": ">=5.50.0"
+		},
+		"compiler": [
+			{
+				"name": "XC32",
+				"semverRange": ">=3.00.0"
+			}
+		],
+		"dfp": {
+			"name": "CMSIS",
+			"semverRange": "^5.4.0"
+		},
+		"configurator": {
+			"name": "MHC",
+			"semverRange": ">=3.7.2"
+		},
+		"device": {
+			"metaDataVersion": "1.0.0",
+			"category": "com.microchip.portal.contentRef",
+			"content": {
+				"metaDataVersion": "1.0.0",
+				"category": "com.microchip.device",
+				"name": "ATSAMC21N18A",
+				"versionRange": "*"
+			}
+		},
+		"author": "Microchip",
+		"subcategories": [
+			[
+				"Development Kit",
+				"SAM C21N Xplained Pro Evaluation Kit",
+			],
+			[
+				"Harmony",
+				"Bootloader",
+				"CAN"
+			],
+			[
+				"Bootloader",
+				"CAN"
+			]
+		],
+		"peripherals": [
+			"Bootloader"
+		],
+		"keywords": [
+			"MHC",
+			"Harmony",
+			"Bootloader",
+			"CAN",
+			"ATSAMC21N18A",
+			"SAM C20/C21 Family"
+		],
+		"additionalData": {
+			"longDescription": {
+				"metaDataVersion": "1.0.0",
+				"category": "com.microchip.portal.fileRef",
+				"content": {
+					"metaDataVersion": "1.0.0",
+					"fileName": "./../../../readme.md",
+					"mimeType": "text/markdown"
+				}
+			}
+		}
+	}
+}
