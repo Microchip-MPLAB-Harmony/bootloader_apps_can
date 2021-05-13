@@ -34,11 +34,10 @@ has_toc: false
 ## MPLAB X Settings
 
 - Specifying post build option to automatically generate the binary file from hex file once the build is complete
-    - The generated binary file can directly be copied on to the SD card when using **host_app_sdcard** host application
     - The generated binary file will serve as an input to the **btl_bin_to_c_array.py** to generate a C style array containing HEX data when the **host_app_nvm** host application is used
 
     ```
-${MP_CC_DIR}/xc32-objcopy -I ihex -O binary ${DISTDIR}/${PROJECTNAME}.${IMAGE_TYPE}.hex ${DISTDIR}/${PROJECTNAME}.${IMAGE_TYPE}.bin
+    ${MP_CC_DIR}/xc32-objcopy -I ihex -O binary ${DISTDIR}/${PROJECTNAME}.${IMAGE_TYPE}.hex ${DISTDIR}/${PROJECTNAME}.${IMAGE_TYPE}.bin
     ```
 
     ![application_config_post_build_script](./images/application_config_post_build_script.png)
