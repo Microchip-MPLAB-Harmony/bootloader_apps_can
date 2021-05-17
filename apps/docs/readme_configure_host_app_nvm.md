@@ -29,7 +29,7 @@ To clone or download this application from Github,go to the [main page of this r
 3. Convert the generated binary (.bin file) to a header file containing the image data in a C style array:
     - On a Windows machine, open the command prompt and launch the **btl_bin_to_c_array.py** utility to generate a header file containing the image data in an array
 
-          python <harmony3_path>\bootloader\tools\btl_bin_to_c_array.py -b <binary_file> -o <hex_file> -d <device>
+          python <harmony3_path>/bootloader/tools/btl_bin_to_c_array.py -b <binary_file> -o <hex_file> -d <device>
 
     - Refer to [btl_bin_to_c_array utility](../../tools/docs/readme_btl_bin_to_c_array.md) for converting the binary to C array in hex format
 

@@ -123,7 +123,9 @@ To build the application, refer to the following table and open the project usin
 3. Convert the generated binary (.bin file) to a header file containing the image data in a C style array:
     - On a Windows machine, open the command prompt and run the [btl_bin_to_c_array](../../../tools/docs/readme_btl_bin_to_c_array.md) utility to generate a header file containing the image data in an array
 
-          python <harmony3_path>\bootloader\tools\btl_bin_to_c_array_gen.py -b <binary_file> -o <harmony3_path>\bootloader_apps_can\apps\can_fail_safe_bootloader\host_app_nvm\firmware\src\test_app_images\image_pattern_hex_sam_e54_xpro.h -d same5x
+```
+python <harmony3_path>/bootloader/tools/btl_bin_to_c_array_gen.py -b <binary_file> -o <harmony3_path>/bootloader_apps_can/apps/can_fail_safe_bootloader/host_app_nvm/firmware/src/test_app_images/image_pattern_hex_sam_e54_xpro.h -d same5x
+```
 
 4. Once done repeat the applicable steps mentioned in [Running The Application](#running-the-application)
 
@@ -157,13 +159,17 @@ To build the application, refer to the following table and open the project usin
 
 9. Run the [btl_app_merge_bin.py](../../../tools/docs/readme_btl_app_merge_bin.md) utiliy from command prompt to merge the generated Bootloader binary and test application binary. Below output should be displayed on command prompt
 
-        python <harmony3_path>\bootloader\tools\btl_app_merge_bin.py -o 0x2000 -b <harmony3_path>\bootloader_apps_can\apps\can_fail_safe_bootloader\bootloader\firmware\sam_e54_xpro.X\dist\sam_e54_xpro\production\sam_e54_xpro.X.production.bin -a <harmony3_path>\bootloader_apps_can\apps\can_fail_safe_bootloader\test_app\firmware\sam_e54_xpro.X\dist\sam_e54_xpro\production\sam_e54_xpro.X.production.bin
+```c
+python <harmony3_path>/bootloader/tools/btl_app_merge_bin.py -o 0x2000 -b <harmony3_path>/bootloader_apps_can/apps/can_fail_safe_bootloader/bootloader/firmware/sam_e54_xpro.X/dist/sam_e54_xpro/production/sam_e54_xpro.X.production.bin -a <harmony3_path>/bootloader_apps_can/apps/can_fail_safe_bootloader/test_app/firmware/sam_e54_xpro.X/dist/sam_e54_xpro/production/sam_e54_xpro.X.production.bin
+```
 
-    ![btl_can_fail_safe_app_merger_console](./images/btl_can_fail_safe_app_merger_console.png)
+  ![btl_can_fail_safe_app_merger_console](./images/btl_can_fail_safe_app_merger_console.png)
 
 10. Run [btl_bin_to_c_array](../../../tools/docs/readme_btl_bin_to_c_array.md) utility to convert the generated merged binary **btl_app_merged.bin** to a header file containing the image data in a C style array
     - The merged binary will be created in the directory from where the script was called
 
-          python <harmony3_path>\bootloader\tools\btl_bin_to_c_array.py -b <Path_to_merged_binary>\btl_app_merged.bin -o <harmony3_path>\bootloader_apps_can\apps\can_fail_safe_bootloader\host_app_nvm\firmware\src\test_app_images\image_pattern_hex_sam_e54_xpro_bootloader_app_merged.h -d same5x
+```c
+python <harmony3_path>/bootloader/tools/btl_bin_to_c_array.py -b <Path_to_merged_binary>/btl_app_merged.bin -o <harmony3_path>/bootloader_apps_can/apps/can_fail_safe_bootloader/host_app_nvm/firmware/src/test_app_images/image_pattern_hex_sam_e54_xpro_bootloader_app_merged.h -d same5x
+```
 
 11. Once done repeat the applicable steps mentioned in [Running The Application](#running-the-application)
