@@ -4,6 +4,15 @@ attributes: {id: can_bootloader}
 children:
 - type: Symbols
   children:
+  - type: Boolean
+    attributes: {id: BTL_FUSE_PROGRAM_ENABLE}
+    children:
+    - type: Attributes
+      children:
+      - type: Boolean
+        attributes: {id: visible}
+        children:
+        - {type: Value, value: 'true'}
   - type: String
     attributes: {id: BTL_SIZE}
     children:
