@@ -2,7 +2,7 @@
   CAN Bootloader Source File
 
   File Name:
-    bootloader.c
+    bootloader_can.c
 
   Summary:
     This file contains source code necessary to execute CAN bootloader.
@@ -53,15 +53,6 @@
 // *****************************************************************************
 // *****************************************************************************
 
-#define FLASH_START              (0x00400000UL)
-#define FLASH_LENGTH             (0x00200000UL)
-#define PAGE_SIZE                (512UL)
-#define ERASE_BLOCK_SIZE         (8192UL)
-
-#define BOOTLOADER_SIZE          8192
-
-#define APP_START_ADDRESS        (0x402000UL)
-
 #define ADDR_OFFSET              1
 #define SIZE_OFFSET              2
 #define CRC_OFFSET               1
@@ -77,8 +68,13 @@
 #define SIZE_SIZE                4
 #define MAX_DATA_SIZE            60
 
+
 #define HEADER_MAGIC             0xE2
 #define MCAN_FILTER_ID 0x45A
+
+/* Standard identifier id[28:18]*/
+#define WRITE_ID(id)             (id << 18U)
+#define READ_ID(id)              (id >> 18U)
 
 #define WORDS(x)                 ((int)((x) / sizeof(uint32_t)))
 
@@ -91,6 +87,7 @@ enum
     BL_CMD_DATA         = 0xa1,
     BL_CMD_VERIFY       = 0xa2,
     BL_CMD_RESET        = 0xa3,
+    BL_CMD_READ_VERSION = 0xa6,
 };
 
 enum
@@ -118,8 +115,13 @@ static uint32_t unlock_begin;
 static uint32_t unlock_end;
 
 static uint8_t CACHE_ALIGN __attribute__((space(data), section (".mcan1_message_ram"))) mcan1MessageRAM[MCAN1_MESSAGE_RAM_CONFIG_SIZE];
-static uint8_t rx_message[HEADER_SIZE + MAX_DATA_SIZE];
+static uint8_t rxFiFo0[MCAN1_RX_FIFO0_SIZE];
+static uint8_t txFiFo[MCAN1_TX_FIFO_BUFFER_SIZE];
 static uint8_t data_seq;
+
+static bool canBLInitDone      = false;
+
+static bool canBLActive        = false;
 
 // *****************************************************************************
 // *****************************************************************************
@@ -127,61 +129,37 @@ static uint8_t data_seq;
 // *****************************************************************************
 // *****************************************************************************
 
-/* Function to Generate CRC by reading the firmware programmed into internal flash */
-static uint32_t crc_generate(void)
+/* Data length code to Message Length */
+static uint8_t CANDlcToLengthGet(uint8_t dlc)
 {
-    uint32_t   i, j, value;
-    uint32_t   crc_tab[256];
-    uint32_t   size    = unlock_end - unlock_begin;
-    uint32_t   crc     = 0xffffffff;
-    uint8_t    data;
-
-    for (i = 0; i < 256; i++)
-    {
-        value = i;
-
-        for (j = 0; j < 8; j++)
-        {
-            if (value & 1)
-            {
-                value = (value >> 1) ^ 0xEDB88320;
-            }
-            else
-            {
-                value >>= 1;
-            }
-        }
-        crc_tab[i] = value;
-    }
-
-    for (i = 0; i < size; i++)
-    {
-        data = *(uint8_t *)(unlock_begin + i);
-        crc = crc_tab[(crc ^ data) & 0xff] ^ (crc >> 8);
-    }
-    return crc;
+    uint8_t msgLength[] = {0U, 1U, 2U, 3U, 4U, 5U, 6U, 7U, 8U, 12U, 16U, 20U, 24U, 32U, 48U, 64U};
+    return msgLength[dlc];
 }
 
 /* Function to program received application firmware data into internal flash */
 static void flash_write(void)
 {
     if (0 == (flash_addr % ERASE_BLOCK_SIZE))
-	{
-		/* Lock region size is always bigger than the row size */
-		EFC_RegionUnlock(flash_addr);
+    {
+        /* Lock region size is always bigger than the row size */
+        EFC_RegionUnlock(flash_addr);
 
-		while(EFC_IsBusy() == true);
+        while(EFC_IsBusy() == true);
 
-		/* Erase the Current sector */
-		EFC_SectorErase(flash_addr);
+        /* Erase the Current sector */
+        EFC_SectorErase(flash_addr);
 
-		while(EFC_IsBusy() == true);
-	}
+        while(EFC_IsBusy() == true)
+        {
+        }
+    }
 
     /* Write Page */
     EFC_PageWrite((uint32_t *)&flash_data[0], flash_addr);
 
-    while(EFC_IsBusy() == true);
+    while(EFC_IsBusy() == true)
+    {
+    }
 }
 
 /* Function to process command from the received message */
@@ -190,13 +168,20 @@ static void process_command(uint8_t *rx_message, uint8_t rx_messageLength)
     uint32_t command = rx_message[HEADER_CMD_OFFSET];
     uint32_t size = rx_message[HEADER_SIZE_OFFSET];
     uint32_t *data = (uint32_t *)rx_message;
-    uint8_t tx_message = 0;
+    MCAN_TX_BUFFER *txBuffer = NULL;
+
+    memset(txFiFo, 0U, MCAN1_TX_FIFO_BUFFER_ELEMENT_SIZE);
+    txBuffer = (MCAN_TX_BUFFER *)txFiFo;
+    txBuffer->id = WRITE_ID(MCAN_FILTER_ID);
+    txBuffer->dlc = 1U;
+    txBuffer->fdf = 1U;
+    txBuffer->brs = 1U;
 
     if ((rx_messageLength < HEADER_SIZE) || (size > MAX_DATA_SIZE) ||
         (rx_messageLength < (HEADER_SIZE + size)) || (HEADER_MAGIC != rx_message[HEADER_MAGIC_OFFSET]))
     {
-        tx_message = BL_RESP_ERROR;
-        MCAN1_MessageTransmit(MCAN_FILTER_ID, 1, &tx_message, MCAN_MODE_FD_WITH_BRS, MCAN_MSG_ATTR_TX_FIFO_DATA_FRAME);
+        txBuffer->data[0] = BL_RESP_ERROR;
+        MCAN1_MessageTransmitFifo(1U, txBuffer);
     }
     else if (BL_CMD_UNLOCK == command)
     {
@@ -208,15 +193,15 @@ static void process_command(uint8_t *rx_message, uint8_t rx_messageLength)
         {
             unlock_begin = begin;
             unlock_end = end;
-            tx_message = BL_RESP_OK;
-            MCAN1_MessageTransmit(MCAN_FILTER_ID, 1, &tx_message, MCAN_MODE_FD_WITH_BRS, MCAN_MSG_ATTR_TX_FIFO_DATA_FRAME);
+            txBuffer->data[0] = BL_RESP_OK;
+            MCAN1_MessageTransmitFifo(1U, txBuffer);
         }
         else
         {
             unlock_begin = 0;
             unlock_end = 0;
-            tx_message = BL_RESP_ERROR;
-            MCAN1_MessageTransmit(MCAN_FILTER_ID, 1, &tx_message, MCAN_MODE_FD_WITH_BRS, MCAN_MSG_ATTR_TX_FIFO_DATA_FRAME);
+            txBuffer->data[0] = BL_RESP_ERROR;
+            MCAN1_MessageTransmitFifo(1U, txBuffer);
         }
         data_seq = 0;
         flash_ptr = 0;
@@ -227,8 +212,8 @@ static void process_command(uint8_t *rx_message, uint8_t rx_messageLength)
     {
         if (rx_message[HEADER_SEQ_OFFSET] != data_seq)
         {
-            tx_message = BL_RESP_SEQ_ERROR;
-            MCAN1_MessageTransmit(MCAN_FILTER_ID, 1, &tx_message, MCAN_MODE_FD_WITH_BRS, MCAN_MSG_ATTR_TX_FIFO_DATA_FRAME);
+            txBuffer->data[0] = BL_RESP_SEQ_ERROR;
+            MCAN1_MessageTransmitFifo(1U, txBuffer);
         }
         else
         {
@@ -236,8 +221,8 @@ static void process_command(uint8_t *rx_message, uint8_t rx_messageLength)
             {
                 if (0 == flash_size)
                 {
-                    tx_message = BL_RESP_ERROR;
-                    MCAN1_MessageTransmit(MCAN_FILTER_ID, 1, &tx_message, MCAN_MODE_FD_WITH_BRS, MCAN_MSG_ATTR_TX_FIFO_DATA_FRAME);
+                    txBuffer->data[0] = BL_RESP_ERROR;
+                    MCAN1_MessageTransmitFifo(1U, txBuffer);
                     return;
                 }
 
@@ -253,9 +238,20 @@ static void process_command(uint8_t *rx_message, uint8_t rx_messageLength)
                 }
             }
             data_seq++;
-            tx_message = BL_RESP_OK;
-            MCAN1_MessageTransmit(MCAN_FILTER_ID, 1, &tx_message, MCAN_MODE_FD_WITH_BRS, MCAN_MSG_ATTR_TX_FIFO_DATA_FRAME);
+            txBuffer->data[0] = BL_RESP_OK;
+            MCAN1_MessageTransmitFifo(1U, txBuffer);
         }
+    }
+    else if (BL_CMD_READ_VERSION == command)
+    {
+        uint16_t btlVersion = bootloader_GetVersion();
+
+        txBuffer->data[0] = BL_RESP_OK;
+
+        txBuffer->data[1] = (uint8_t)((btlVersion >> 8) & 0xFF);
+        txBuffer->data[2] = (uint8_t)(btlVersion & 0xFF);
+
+        MCAN1_MessageTransmitFifo(3U, txBuffer);
     }
     else if (BL_CMD_VERIFY == command)
     {
@@ -264,50 +260,50 @@ static void process_command(uint8_t *rx_message, uint8_t rx_messageLength)
 
         if (size != CRC_SIZE)
         {
-            tx_message = BL_RESP_ERROR;
-            MCAN1_MessageTransmit(MCAN_FILTER_ID, 1, &tx_message, MCAN_MODE_FD_WITH_BRS, MCAN_MSG_ATTR_TX_FIFO_DATA_FRAME);
+            txBuffer->data[0] = BL_RESP_ERROR;
+            MCAN1_MessageTransmitFifo(1U, txBuffer);
         }
 
-        crc_gen = crc_generate();
+        crc_gen = bootloader_CRCGenerate(unlock_begin, (unlock_end - unlock_begin));
 
         if (crc == crc_gen)
         {
-            tx_message = BL_RESP_CRC_OK;
-            MCAN1_MessageTransmit(MCAN_FILTER_ID, 1, &tx_message, MCAN_MODE_FD_WITH_BRS, MCAN_MSG_ATTR_TX_FIFO_DATA_FRAME);
+            txBuffer->data[0] = BL_RESP_CRC_OK;
+            MCAN1_MessageTransmitFifo(1U, txBuffer);
         }
         else
         {
-            tx_message = BL_RESP_CRC_FAIL;
-            MCAN1_MessageTransmit(MCAN_FILTER_ID, 1, &tx_message, MCAN_MODE_FD_WITH_BRS, MCAN_MSG_ATTR_TX_FIFO_DATA_FRAME);
+            txBuffer->data[0] = BL_RESP_CRC_FAIL;
+            MCAN1_MessageTransmitFifo(1U, txBuffer);
         }
     }
     else if (BL_CMD_RESET == command)
     {
-        tx_message = BL_RESP_OK;
-
         if (MCAN1_InterruptGet(MCAN_INTERRUPT_TFE_MASK))
         {
             MCAN1_InterruptClear(MCAN_INTERRUPT_TFE_MASK);
         }
-        MCAN1_MessageTransmit(MCAN_FILTER_ID, 1, &tx_message, MCAN_MODE_FD_WITH_BRS, MCAN_MSG_ATTR_TX_FIFO_DATA_FRAME);
+
+        txBuffer->data[0] = BL_RESP_OK;
+        MCAN1_MessageTransmitFifo(1U, txBuffer);
         while (MCAN1_InterruptGet(MCAN_INTERRUPT_TFE_MASK) == false);
 
         NVIC_SystemReset();
     }
     else
     {
-        tx_message = BL_RESP_INVALID;
-        MCAN1_MessageTransmit(MCAN_FILTER_ID, 1, &tx_message, MCAN_MODE_FD_WITH_BRS, MCAN_MSG_ATTR_TX_FIFO_DATA_FRAME);
+        txBuffer->data[0] = BL_RESP_INVALID;
+        MCAN1_MessageTransmitFifo(1U, txBuffer);
     }
 }
 
 /* Function to receive application firmware via MCAN1 */
 static void MCAN1_task(void)
 {
-    uint32_t                   status = 0;
-    uint32_t                   rx_messageID = 0;
-    uint8_t                    rx_messageLength = 0;
-    MCAN_MSG_RX_FRAME_ATTRIBUTE msgFrameAttr = MCAN_MSG_RX_DATA_FRAME;
+    uint32_t                   status = 0U;
+    uint8_t                    numberOfMessage = 0U;
+    uint8_t                    count = 0U;
+    MCAN_RX_BUFFER   *rxBuf = NULL;
 
     if (MCAN1_InterruptGet(MCAN_INTERRUPT_RF0N_MASK))
     {
@@ -317,13 +313,23 @@ static void MCAN1_task(void)
         status = MCAN1_ErrorGet();
         if (((status & MCAN_PSR_LEC_Msk) == MCAN_ERROR_NONE) || ((status & MCAN_PSR_LEC_Msk) == MCAN_ERROR_LEC_NO_CHANGE))
         {
-            memset(rx_message, 0x00, sizeof(rx_message));
-
-            /* Receive FIFO 0 New Message */
-            if (MCAN1_MessageReceive(&rx_messageID, &rx_messageLength, rx_message, 0, MCAN_MSG_ATTR_RX_FIFO0, &msgFrameAttr) == true)
+            numberOfMessage = MCAN1_RxFifoFillLevelGet(MCAN_RX_FIFO_0);
+            if (numberOfMessage != 0U)
             {
-                process_command(rx_message, rx_messageLength);
-                (void)rx_messageID;
+                canBLActive = true;
+
+                memset(rxFiFo0, 0U, (numberOfMessage * MCAN1_RX_FIFO0_ELEMENT_SIZE));
+
+                if (MCAN1_MessageReceiveFifo(MCAN_RX_FIFO_0, numberOfMessage, (MCAN_RX_BUFFER *)rxFiFo0) == true)
+                {
+                    rxBuf = (MCAN_RX_BUFFER *)rxFiFo0;
+
+                    for (count = 0U; count < numberOfMessage; count++)
+                    {
+                        process_command(rxBuf->data, CANDlcToLengthGet(rxBuf->dlc));
+                        rxBuf += MCAN1_RX_FIFO0_ELEMENT_SIZE;
+                    }
+                }
             }
         }
     }
@@ -335,34 +341,19 @@ static void MCAN1_task(void)
 // *****************************************************************************
 // *****************************************************************************
 
-void run_Application(void)
+void bootloader_CAN_Tasks(void)
 {
-    uint32_t msp            = *(uint32_t *)(APP_START_ADDRESS);
-    uint32_t reset_vector   = *(uint32_t *)(APP_START_ADDRESS + 4);
-
-    if (msp == 0xffffffff)
+    if (canBLInitDone == false)
     {
-        return;
+        /* Set MCAN1 Message RAM Configuration */
+        MCAN1_MessageRAMConfigSet(mcan1MessageRAM);
+
+        canBLInitDone = true;
     }
 
-    __set_MSP(msp);
-
-    asm("bx %0"::"r" (reset_vector));
-}
-
-bool __WEAK bootloader_Trigger(void)
-{
-    /* Function can be overriden with custom implementation */
-    return false;
-}
-
-void bootloader_Tasks(void)
-{
-    /* Set MCAN1 Message RAM Configuration */
-    MCAN1_MessageRAMConfigSet(mcan1MessageRAM);
-
-    while (1)
+    do
     {
         MCAN1_task();
-    }
+
+    }  while (canBLActive);
 }

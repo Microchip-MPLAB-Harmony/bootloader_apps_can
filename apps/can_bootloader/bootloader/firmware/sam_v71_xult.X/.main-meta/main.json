@@ -10,21 +10,21 @@
 		"shortDescription": "This example application shows how to use the Bootloader Library to bootload an application using CAN protocol.",
 		"ide": {
 			"name": "MPLABX",
-			"semverRange": ">=5.50.0"
+			"semverRange": ">=6.0.0"
 		},
 		"compiler": [
 			{
 				"name": "XC32",
-				"semverRange": ">=3.00.0"
+				"semverRange": ">=4.1.0"
 			}
 		],
 		"dfp": {
 			"name": "SAMV71_DFP",
-			"semverRange": "^4.3.66"
+			"semverRange": "^4.6.90"
 		},
 		"configurator": {
 			"name": "MHC",
-			"semverRange": ">=3.7.2"
+			"semverRange": ">=3.8.5"
 		},
 		"device": {
 			"metaDataVersion": "1.0.0",

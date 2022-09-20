@@ -54,7 +54,7 @@
 #include "peripheral/mpu/plib_mpu.h"
 #include "peripheral/mcan/plib_mcan1.h"
 #include "peripheral/efc/plib_efc.h"
-#include "bootloader/bootloader.h"
+#include "bootloader/bootloader_can.h"
 
 // DOM-IGNORE-BEGIN
 #ifdef __cplusplus  // Provide C++ Compatibility
