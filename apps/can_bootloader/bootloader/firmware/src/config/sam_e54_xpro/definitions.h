@@ -56,7 +56,7 @@
 #include "peripheral/nvic/plib_nvic.h"
 #include "peripheral/pac/plib_pac.h"
 #include "peripheral/cmcc/plib_cmcc.h"
-#include "bootloader/bootloader.h"
+#include "bootloader/bootloader_can.h"
 #include "peripheral/dsu/plib_dsu.h"
 
 // DOM-IGNORE-BEGIN
