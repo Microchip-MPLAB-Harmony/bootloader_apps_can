@@ -68,6 +68,10 @@
 #define CAN_DATA_FRAME_SIZE                         (64UL)
 #define CAN_FILTER_ID                               0x45A
 
+/* Standard identifier id[28:18]*/
+#define WRITE_ID(id) (id << 18)
+#define READ_ID(id)  (id >> 18)
+
 enum
 {
     BL_RESP_OK          = 0x50,
@@ -127,6 +131,90 @@ typedef struct
 /* Global Data */
 APP_DATA                            appData;
 static uint8_t CACHE_ALIGN          can0MessageRAM[CAN0_MESSAGE_RAM_CONFIG_SIZE];
+
+static uint32_t status = 0;
+static uint8_t loop_count = 0;
+
+static uint8_t txFiFo[CAN0_TX_FIFO_BUFFER_SIZE];
+static uint8_t rxFiFo0[CAN0_RX_FIFO0_SIZE];
+
+// *****************************************************************************
+// *****************************************************************************
+// Section: Local functions
+// *****************************************************************************
+// *****************************************************************************
+
+/* Message Length to Data length code */
+static uint8_t CANLengthToDlcGet(uint8_t length)
+{
+    uint8_t dlc = 0;
+
+    if (length <= 8U)
+    {
+        dlc = length;
+    }
+    else if (length <= 12U)
+    {
+        dlc = 0x9U;
+    }
+    else if (length <= 16U)
+    {
+        dlc = 0xAU;
+    }
+    else if (length <= 20U)
+    {
+        dlc = 0xBU;
+    }
+    else if (length <= 24U)
+    {
+        dlc = 0xCU;
+    }
+    else if (length <= 32U)
+    {
+        dlc = 0xDU;
+    }
+    else if (length <= 48U)
+    {
+        dlc = 0xEU;
+    }
+    else
+    {
+        dlc = 0xFU;
+    }
+    return dlc;
+}
+
+/* Data length code to Message Length */
+static uint8_t CANDlcToLengthGet(uint8_t dlc)
+{
+    uint8_t msgLength[] = {0U, 1U, 2U, 3U, 4U, 5U, 6U, 7U, 8U, 12U, 16U, 20U, 24U, 32U, 48U, 64U};
+    return msgLength[dlc];
+}
+
+static void rx_message(uint8_t numberOfMessage, CAN_RX_BUFFER *rxBuf, uint8_t rxBufLen)
+{
+    uint8_t msgLength = 0;
+    uint32_t id = 0;
+
+    for (uint8_t count = 0; count < numberOfMessage; count++)
+    {
+        id = rxBuf->xtd ? rxBuf->id : READ_ID(rxBuf->id);
+        msgLength = CANDlcToLengthGet(rxBuf->dlc);
+        if ((id == CAN_FILTER_ID) && (msgLength == 1))
+        {
+            if ((rxBuf->data[0] == BL_RESP_OK) || (rxBuf->data[0] == BL_RESP_CRC_OK))
+            {
+                appData.trasnferStatus = APP_TRANSFER_STATUS_SUCCESS;
+            }
+            else
+            {
+                appData.trasnferStatus = APP_TRANSFER_STATUS_ERROR;
+            }
+            break;
+        }
+        rxBuf += rxBufLen;
+    }
+}
 
 static void APP_Initialize(void)
 {
@@ -222,11 +310,7 @@ static uint32_t APP_ResetCommandSend(void)
 
 void APP_CheckBTLResponse(void)
 {
-    uint32_t                   status = 0;
-    uint32_t                   rx_messageID = 0;
-    uint8_t                    rx_message[8];
-    uint8_t                    rx_messageLength = 0;
-    CAN_MSG_RX_FRAME_ATTRIBUTE msgFrameAttr = CAN_MSG_RX_DATA_FRAME;
+    uint8_t numberOfMessage = 0;
 
     if (CAN0_InterruptGet(CAN_INTERRUPT_RF0N_MASK))
     {
@@ -236,21 +320,13 @@ void APP_CheckBTLResponse(void)
         status = CAN0_ErrorGet();
         if (((status & CAN_PSR_LEC_Msk) == CAN_ERROR_NONE) || ((status & CAN_PSR_LEC_Msk) == CAN_ERROR_LEC_NC))
         {
-            memset(rx_message, 0x00, sizeof(rx_message));
-
-            /* Receive FIFO 0 New Message */
-            if (CAN0_MessageReceive(&rx_messageID, &rx_messageLength, rx_message, 0, CAN_MSG_ATTR_RX_FIFO0, &msgFrameAttr) == true)
+            numberOfMessage = CAN0_RxFifoFillLevelGet(CAN_RX_FIFO_0);
+            if (numberOfMessage != 0)
             {
-                if ((rx_messageID == CAN_FILTER_ID) && (rx_messageLength == 1))
+                memset(rxFiFo0, 0x00, (numberOfMessage * CAN0_RX_FIFO0_ELEMENT_SIZE));
+                if (CAN0_MessageReceiveFifo(CAN_RX_FIFO_0, numberOfMessage, (CAN_RX_BUFFER *)rxFiFo0) == true)
                 {
-                    if ((rx_message[0] == BL_RESP_OK) || (rx_message[0] == BL_RESP_CRC_OK))
-                    {
-                        appData.trasnferStatus = APP_TRANSFER_STATUS_SUCCESS;
-                    }
-                    else
-                    {
-                        appData.trasnferStatus = APP_TRANSFER_STATUS_ERROR;
-                    }
+                    rx_message(numberOfMessage, (CAN_RX_BUFFER *)rxFiFo0, CAN0_RX_FIFO0_ELEMENT_SIZE);
                 }
             }
         }
@@ -266,6 +342,7 @@ int main ( void )
 {
     uint32_t nTxBytes;
     uint32_t crc;
+    CAN_TX_BUFFER *txBuffer = NULL;
 
     /* Initialize all modules */
     SYS_Initialize ( NULL );
@@ -293,7 +370,17 @@ int main ( void )
             case APP_STATE_SEND_UNLOCK_COMMAND:
                 nTxBytes = APP_UnlockCommandSend(APP_IMAGE_START_ADDR, APP_IMAGE_SIZE);
                 appData.trasnferStatus = APP_TRANSFER_STATUS_IN_PROGRESS;
-                if (CAN0_MessageTransmit(CAN_FILTER_ID, nTxBytes, &appData.wrBuffer[0], CAN_MODE_FD_WITH_BRS, CAN_MSG_ATTR_TX_FIFO_DATA_FRAME) == true)
+
+                memset(txFiFo, 0x00, CAN0_TX_FIFO_BUFFER_ELEMENT_SIZE);
+                txBuffer = (CAN_TX_BUFFER *)txFiFo;
+                txBuffer->id = WRITE_ID(CAN_FILTER_ID);
+                txBuffer->dlc = CANLengthToDlcGet(nTxBytes);
+                txBuffer->fdf = 1;
+                txBuffer->brs = 1;
+                for (loop_count = 0; loop_count < nTxBytes; loop_count++){
+                    txBuffer->data[loop_count] = appData.wrBuffer[loop_count];
+                }                
+                if (CAN0_MessageTransmitFifo(1, txBuffer) == true)
                 {
                     appData.state = APP_STATE_WAIT_UNLOCK_COMMAND_TRANSFER_COMPLETE;
                 }
@@ -318,7 +405,17 @@ int main ( void )
                 }
                 nTxBytes = APP_ImageDataWrite((appData.appMemStartAddr + appData.nBytesWritten), appData.nBytesSent);
                 appData.trasnferStatus = APP_TRANSFER_STATUS_IN_PROGRESS;
-                if (CAN0_MessageTransmit(CAN_FILTER_ID, nTxBytes, &appData.wrBuffer[0], CAN_MODE_FD_WITH_BRS, CAN_MSG_ATTR_TX_FIFO_DATA_FRAME) == true)
+
+                memset(txFiFo, 0x00, CAN0_TX_FIFO_BUFFER_ELEMENT_SIZE);
+                txBuffer = (CAN_TX_BUFFER *)txFiFo;
+                txBuffer->id = WRITE_ID(CAN_FILTER_ID);
+                txBuffer->dlc = CANLengthToDlcGet(nTxBytes);
+                txBuffer->fdf = 1;
+                txBuffer->brs = 1;
+                for (loop_count = 0; loop_count < nTxBytes; loop_count++){
+                    txBuffer->data[loop_count] = appData.wrBuffer[loop_count];
+                }                
+                if (CAN0_MessageTransmitFifo(1, txBuffer) == true)
                 {
                     appData.state = APP_STATE_WAIT_DATA_COMMAND_TRANSFER_COMPLETE;
                 }
@@ -332,7 +429,17 @@ int main ( void )
                 crc = APP_CRCGenerate();
                 nTxBytes = APP_VerifyCommandSend(crc);
                 appData.trasnferStatus = APP_TRANSFER_STATUS_IN_PROGRESS;
-                if (CAN0_MessageTransmit(CAN_FILTER_ID, nTxBytes, &appData.wrBuffer[0], CAN_MODE_FD_WITH_BRS, CAN_MSG_ATTR_TX_FIFO_DATA_FRAME) == true)
+
+                memset(txFiFo, 0x00, CAN0_TX_FIFO_BUFFER_ELEMENT_SIZE);
+                txBuffer = (CAN_TX_BUFFER *)txFiFo;
+                txBuffer->id = WRITE_ID(CAN_FILTER_ID);
+                txBuffer->dlc = CANLengthToDlcGet(nTxBytes);
+                txBuffer->fdf = 1;
+                txBuffer->brs = 1;
+                for (loop_count = 0; loop_count < nTxBytes; loop_count++){
+                    txBuffer->data[loop_count] = appData.wrBuffer[loop_count];
+                }                
+                if (CAN0_MessageTransmitFifo(1, txBuffer) == true)
                 {
                     appData.state = APP_STATE_WAIT_VERIFY_COMMAND_TRANSFER_COMPLETE;
                 }
@@ -345,7 +452,17 @@ int main ( void )
             case APP_STATE_SEND_RESET_COMMAND:
                 nTxBytes = APP_ResetCommandSend();
                 appData.trasnferStatus = APP_TRANSFER_STATUS_IN_PROGRESS;
-                if (CAN0_MessageTransmit(CAN_FILTER_ID, nTxBytes, &appData.wrBuffer[0], CAN_MODE_FD_WITH_BRS, CAN_MSG_ATTR_TX_FIFO_DATA_FRAME) == true)
+
+                memset(txFiFo, 0x00, CAN0_TX_FIFO_BUFFER_ELEMENT_SIZE);
+                txBuffer = (CAN_TX_BUFFER *)txFiFo;
+                txBuffer->id = WRITE_ID(CAN_FILTER_ID);
+                txBuffer->dlc = CANLengthToDlcGet(nTxBytes);
+                txBuffer->fdf = 1;
+                txBuffer->brs = 1;
+                for (loop_count = 0; loop_count < nTxBytes; loop_count++){
+                    txBuffer->data[loop_count] = appData.wrBuffer[loop_count];
+                }                
+                if (CAN0_MessageTransmitFifo(1, txBuffer) == true)
                 {
                     appData.state = APP_STATE_WAIT_RESET_COMMAND_TRANSFER_COMPLETE;
                 }

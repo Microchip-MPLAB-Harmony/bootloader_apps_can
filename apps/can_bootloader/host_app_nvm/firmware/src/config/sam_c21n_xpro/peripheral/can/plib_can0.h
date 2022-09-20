@@ -89,16 +89,18 @@
 // Section: Interface Routines
 // *****************************************************************************
 // *****************************************************************************
-void CAN0_Initialize (void);
-bool CAN0_MessageTransmit(uint32_t id, uint8_t length, uint8_t* data, CAN_MODE mode, CAN_MSG_TX_ATTRIBUTE msgAttr);
-bool CAN0_MessageReceive(uint32_t *id, uint8_t *length, uint8_t *data, uint16_t *timestamp,
-                                         CAN_MSG_RX_ATTRIBUTE msgAttr, CAN_MSG_RX_FRAME_ATTRIBUTE *msgFrameAttr);
-bool CAN0_TransmitEventFIFOElementGet(uint32_t *id, uint8_t *messageMarker, uint16_t *timestamp);
+void CAN0_Initialize(void);
+bool CAN0_MessageTransmitFifo(uint8_t numberOfMessage, CAN_TX_BUFFER *txBuffer);
+uint8_t CAN0_TxFifoFreeLevelGet(void);
+bool CAN0_TxBufferIsBusy(uint8_t bufferNumber);
+bool CAN0_TxEventFifoRead(uint8_t numberOfTxEvent, CAN_TX_EVENT_FIFO *txEventFifo);
+uint8_t CAN0_TxEventFifoFillLevelGet(void);
+bool CAN0_MessageReceiveFifo(CAN_RX_FIFO_NUM rxFifoNum, uint8_t numberOfMessage, CAN_RX_BUFFER *rxBuffer);
+uint8_t CAN0_RxFifoFillLevelGet(CAN_RX_FIFO_NUM rxFifoNum);
 CAN_ERROR CAN0_ErrorGet(void);
 void CAN0_ErrorCountGet(uint8_t *txErrorCount, uint8_t *rxErrorCount);
 bool CAN0_InterruptGet(CAN_INTERRUPT_MASK interruptMask);
 void CAN0_InterruptClear(CAN_INTERRUPT_MASK interruptMask);
-bool CAN0_TxFIFOIsFull(void);
 void CAN0_MessageRAMConfigSet(uint8_t *msgRAMConfigBaseAddress);
 void CAN0_SleepModeEnter(void);
 void CAN0_SleepModeExit(void);
