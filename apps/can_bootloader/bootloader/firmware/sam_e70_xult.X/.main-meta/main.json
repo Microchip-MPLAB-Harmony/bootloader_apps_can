@@ -4,7 +4,7 @@
 	"content": {
 		"metaDataVersion": "1.1.0",
 		"name": "com.microchip.mcu32.mplabx.project.bootloader_apps_can_can_bootloader_sam_e70_xult",
-		"version": "3.0.0",
+		"version": "3.1.0",
 		"displayName": "CAN Bootloader Example for SAM E70/S70/V70/V71 Family",
 		"projectName": "can_bootloader_sam_e70_xult",
 		"shortDescription": "This example application shows how to use the Bootloader Library to bootload an application using CAN protocol.",

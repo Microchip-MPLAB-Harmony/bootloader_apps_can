@@ -4,7 +4,7 @@
 	"content": {
 		"metaDataVersion": "1.1.0",
 		"name": "com.microchip.mcu32.mplabx.project.bootloader_apps_can_can_bootloader_sam_c21n_xpro",
-		"version": "3.0.0",
+		"version": "3.1.0",
 		"displayName": "CAN Bootloader Example for SAM C20/C21 Family",
 		"projectName": "can_bootloader_sam_c21n_xpro",
 		"shortDescription": "This example application shows how to use the Bootloader Library to bootload an application using CAN protocol.",
