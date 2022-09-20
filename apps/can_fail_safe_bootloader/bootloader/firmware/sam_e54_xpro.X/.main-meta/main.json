@@ -4,27 +4,27 @@
 	"content": {
 		"metaDataVersion": "1.1.0",
 		"name": "com.microchip.mcu32.mplabx.project.bootloader_apps_can_can_fail_safe_bootloader_sam_e54_xpro",
-		"version": "3.0.0",
+		"version": "3.1.0",
 		"displayName": "CAN Bootloader Example for SAM D5x/E5x Family",
 		"projectName": "can_fail_safe_bootloader_sam_e54_xpro",
 		"shortDescription": "This example application shows how to use the Bootloader Library to bootload an application on device having dual flash bank feature using CAN protocol.",
 		"ide": {
 			"name": "MPLABX",
-			"semverRange": ">=5.50.0"
+			"semverRange": ">=6.0.0"
 		},
 		"compiler": [
 			{
 				"name": "XC32",
-				"semverRange": ">=3.00.0"
+				"semverRange": ">=4.1.0"
 			}
 		],
 		"dfp": {
 			"name": "SAME54_DFP",
-			"semverRange": "^3.3.64"
+			"semverRange": "^3.6.95"
 		},
 		"configurator": {
 			"name": "MHC",
-			"semverRange": ">=3.7.2"
+			"semverRange": ">=3.8.5"
 		},
 		"device": {
 			"metaDataVersion": "1.0.0",
