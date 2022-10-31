@@ -9,9 +9,9 @@ has_toc: false
 
 # Configuring an application to be bootloaded for CORTEX-M based MCUs
 
-## Application settings in MHC system configuration
+## Application settings in MCC system configuration
 
-1. Launch MHC for the application project to be configured
+1. Launch MCC for the application project to be configured
 2. Select **system** component from the project graph and configure the below highlighted settings
 
     <p align="center">
@@ -26,7 +26,7 @@ has_toc: false
     - When updating the bootloader itself, make sure that the fuse settings for the bootloader application are also disabled
 
 4. **Specify the Application Start Address:**
-    - Specify the Start address from where the application will run under the **Application Start Address (Hex)** option in System block in MHC.
+    - Specify the Start address from where the application will run under the **Application Start Address (Hex)** option in System block in MCC.
 
     - This value should be equal to or greater than the bootloader size and must be aligned to the erase unit size on that device.
 

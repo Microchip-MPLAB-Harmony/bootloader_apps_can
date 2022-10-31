@@ -1,0 +1,14 @@
+package:
+  format-version: "1.0.0"
+  name: "bootloader_apps_can"
+  version: "3.1.0"
+  type: "application"
+  status: "production"
+  required: true
+
+  dependencies:
+    - name: "bootloader"
+      type: "package"
+      version: "3.6.0"
+
+
