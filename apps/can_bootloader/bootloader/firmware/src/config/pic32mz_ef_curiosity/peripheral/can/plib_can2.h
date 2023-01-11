@@ -1,25 +1,27 @@
 /*******************************************************************************
-  Main Source File
+  CAN Peripheral Library Interface Header File
 
   Company:
     Microchip Technology Inc.
 
   File Name:
-    main.c
+    plib_can2.h
 
   Summary:
-    This file contains the "main" function for bootloader project.
+    CAN PLIB interface declarations.
 
   Description:
-    This file contains the "main" function for bootloader project.  The
-    "main" function calls the "SYS_Initialize" function to initialize
-    all modules in the system.
-    It calls "bootloader_start" once system is initialized.
- *******************************************************************************/
+    The CAN plib provides a simple interface to manage the CAN modules on
+    Microchip microcontrollers. This file defines the interface declarations
+    for the CAN plib.
 
-// DOM-IGNORE-BEGIN
+  Remarks:
+    None.
+
+*******************************************************************************/
+//DOM-IGNORE-BEGIN
 /*******************************************************************************
-* Copyright (C) 2023 Microchip Technology Inc. and its subsidiaries.
+* Copyright (C) 2019 Microchip Technology Inc. and its subsidiaries.
 *
 * Subject to your compliance with these terms, you may use Microchip software
 * and any derivatives exclusively with Microchip products. It is your
@@ -39,8 +41,11 @@
 * FULLEST EXTENT ALLOWED BY LAW, MICROCHIP'S TOTAL LIABILITY ON ALL CLAIMS IN
 * ANY WAY RELATED TO THIS SOFTWARE WILL NOT EXCEED THE AMOUNT OF FEES, IF ANY,
 * THAT YOU HAVE PAID DIRECTLY TO MICROCHIP FOR THIS SOFTWARE.
- *******************************************************************************/
-// DOM-IGNORE-END
+*******************************************************************************/
+//DOM-IGNORE-END
+
+#ifndef PLIB_CAN2_H
+#define PLIB_CAN2_H
 
 // *****************************************************************************
 // *****************************************************************************
@@ -48,66 +53,42 @@
 // *****************************************************************************
 // *****************************************************************************
 
-#include <stddef.h>                     // Defines NULL
-#include <stdbool.h>                    // Defines true
-#include <stdlib.h>                     // Defines EXIT_FAILURE
-#include "definitions.h"                // SYS function prototypes
+/*
+ * This section lists the other files that are included in this file.
+ */
+#include <stdbool.h>
+#include <string.h>
+#include "device.h"
+#include "plib_can_common.h"
 
-#define BTL_TRIGGER_PATTERN (0x5048434DUL)
-
-static uint32_t *ramStart = (uint32_t *)BTL_TRIGGER_RAM_START;
-
-bool bootloader_Trigger(void)
-{
-    uint32_t i;
-
-    // Cheap delay. This should give at leat 1 ms delay.
-    for (i = 0; i < 2000; i++)
-    {
-        asm("nop");
-    }
-
-    /* Check for Bootloader Trigger Pattern in first 16 Bytes of RAM to enter
-     * Bootloader.
-     */
-    if (BTL_TRIGGER_PATTERN == ramStart[0] && BTL_TRIGGER_PATTERN == ramStart[1] &&
-        BTL_TRIGGER_PATTERN == ramStart[2] && BTL_TRIGGER_PATTERN == ramStart[3])
-    {
-        ramStart[0] = 0;
-        return true;
-    }
-
-    /* Check for Switch press to enter Bootloader */
-    if (SWITCH_Get() == 0)
-    {
-        return true;
-    }
-
-    return false;
-}
+// DOM-IGNORE-BEGIN
+#ifdef __cplusplus  // Provide C++ Compatibility
+    extern "C" {
+#endif
+// DOM-IGNORE-END
 
 // *****************************************************************************
 // *****************************************************************************
-// Section: Main Entry Point
+// Section: Interface Routines
 // *****************************************************************************
 // *****************************************************************************
-
-int main ( void )
-{
-    /* Initialize all modules */
-    SYS_Initialize ( NULL );
-
-    while (true)
-    {
-        bootloader_CAN_Tasks();
+void CAN2_Initialize(void);
+bool CAN2_MessageTransmit(uint32_t id, uint8_t length, uint8_t* data, uint8_t fifoNum, CAN_MSG_TX_ATTRIBUTE msgAttr);
+bool CAN2_MessageReceive(uint32_t *id, uint8_t *length, uint8_t *data, uint16_t *timestamp, uint8_t fifoNum, CAN_MSG_RX_ATTRIBUTE *msgAttr);
+void CAN2_MessageAbort(uint8_t fifoNum);
+void CAN2_MessageAcceptanceFilterSet(uint8_t filterNum, uint32_t id);
+uint32_t CAN2_MessageAcceptanceFilterGet(uint8_t filterNum);
+void CAN2_MessageAcceptanceFilterMaskSet(uint8_t acceptanceFilterMaskNum, uint32_t id);
+uint32_t CAN2_MessageAcceptanceFilterMaskGet(uint8_t acceptanceFilterMaskNum);
+CAN_ERROR CAN2_ErrorGet(void);
+void CAN2_ErrorCountGet(uint8_t *txErrorCount, uint8_t *rxErrorCount);
+bool CAN2_InterruptGet(uint8_t fifoNum, CAN_FIFO_INTERRUPT_FLAG_MASK fifoInterruptFlagMask);
+bool CAN2_TxFIFOIsFull(uint8_t fifoNum);
+bool CAN2_AutoRTRResponseSet(uint32_t id, uint8_t length, uint8_t* data, uint8_t fifoNum);
+// DOM-IGNORE-BEGIN
+#ifdef __cplusplus  // Provide C++ Compatibility
     }
+#endif
+// DOM-IGNORE-END
 
-    /* Execution should not come here during normal operation */
-    return ( EXIT_FAILURE );
-}
-
-
-/*******************************************************************************
- End of File
-*/
-
+#endif // PLIB_CAN2_H

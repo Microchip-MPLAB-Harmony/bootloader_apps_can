@@ -1,25 +1,20 @@
 /*******************************************************************************
-  Main Source File
-
-  Company:
-    Microchip Technology Inc.
+  System Definitions
 
   File Name:
-    main.c
+    definitions.h
 
   Summary:
-    This file contains the "main" function for bootloader project.
+    project system definitions.
 
   Description:
-    This file contains the "main" function for bootloader project.  The
-    "main" function calls the "SYS_Initialize" function to initialize
-    all modules in the system.
-    It calls "bootloader_start" once system is initialized.
+    This file contains the system-wide prototypes and definitions for a project.
+
  *******************************************************************************/
 
-// DOM-IGNORE-BEGIN
+//DOM-IGNORE-BEGIN
 /*******************************************************************************
-* Copyright (C) 2023 Microchip Technology Inc. and its subsidiaries.
+* Copyright (C) 2018 Microchip Technology Inc. and its subsidiaries.
 *
 * Subject to your compliance with these terms, you may use Microchip software
 * and any derivatives exclusively with Microchip products. It is your
@@ -40,73 +35,103 @@
 * ANY WAY RELATED TO THIS SOFTWARE WILL NOT EXCEED THE AMOUNT OF FEES, IF ANY,
 * THAT YOU HAVE PAID DIRECTLY TO MICROCHIP FOR THIS SOFTWARE.
  *******************************************************************************/
-// DOM-IGNORE-END
+//DOM-IGNORE-END
+
+#ifndef DEFINITIONS_H
+#define DEFINITIONS_H
 
 // *****************************************************************************
 // *****************************************************************************
 // Section: Included Files
 // *****************************************************************************
 // *****************************************************************************
+#include <stdint.h>
+#include <stddef.h>
+#include <stdbool.h>
+#include "peripheral/can/plib_can2.h"
+#include "peripheral/clk/plib_clk.h"
+#include "peripheral/gpio/plib_gpio.h"
+#include "peripheral/evic/plib_evic.h"
+#include "bootloader/bootloader_can.h"
+#include "peripheral/nvm/plib_nvm.h"
 
-#include <stddef.h>                     // Defines NULL
-#include <stdbool.h>                    // Defines true
-#include <stdlib.h>                     // Defines EXIT_FAILURE
-#include "definitions.h"                // SYS function prototypes
+// DOM-IGNORE-BEGIN
+#ifdef __cplusplus  // Provide C++ Compatibility
 
-#define BTL_TRIGGER_PATTERN (0x5048434DUL)
+extern "C" {
 
-static uint32_t *ramStart = (uint32_t *)BTL_TRIGGER_RAM_START;
+#endif
+// DOM-IGNORE-END
 
-bool bootloader_Trigger(void)
-{
-    uint32_t i;
-
-    // Cheap delay. This should give at leat 1 ms delay.
-    for (i = 0; i < 2000; i++)
-    {
-        asm("nop");
-    }
-
-    /* Check for Bootloader Trigger Pattern in first 16 Bytes of RAM to enter
-     * Bootloader.
-     */
-    if (BTL_TRIGGER_PATTERN == ramStart[0] && BTL_TRIGGER_PATTERN == ramStart[1] &&
-        BTL_TRIGGER_PATTERN == ramStart[2] && BTL_TRIGGER_PATTERN == ramStart[3])
-    {
-        ramStart[0] = 0;
-        return true;
-    }
-
-    /* Check for Switch press to enter Bootloader */
-    if (SWITCH_Get() == 0)
-    {
-        return true;
-    }
-
-    return false;
-}
+/* CPU clock frequency */
+#define CPU_CLOCK_FREQUENCY 120000000
 
 // *****************************************************************************
 // *****************************************************************************
-// Section: Main Entry Point
+// Section: System Functions
 // *****************************************************************************
 // *****************************************************************************
 
-int main ( void )
-{
-    /* Initialize all modules */
+// *****************************************************************************
+/* System Initialization Function
+
+  Function:
+    void SYS_Initialize( void *data )
+
+  Summary:
+    Function that initializes all modules in the system.
+
+  Description:
+    This function initializes all modules in the system, including any drivers,
+    services, middleware, and applications.
+
+  Precondition:
+    None.
+
+  Parameters:
+    data            - Pointer to the data structure containing any data
+                      necessary to initialize the module. This pointer may
+                      be null if no data is required and default initialization
+                      is to be used.
+
+  Returns:
+    None.
+
+  Example:
+    <code>
     SYS_Initialize ( NULL );
 
-    while (true)
+    while ( true )
     {
-        bootloader_CAN_Tasks();
+        SYS_Tasks ( );
     }
+    </code>
 
-    /* Execution should not come here during normal operation */
-    return ( EXIT_FAILURE );
+  Remarks:
+    This function will only be called once, after system reset.
+*/
+
+void SYS_Initialize( void *data );
+
+/* Nullify SYS_Tasks() if only PLIBs are used. */
+#define     SYS_Tasks()
+
+// *****************************************************************************
+// *****************************************************************************
+// Section: extern declarations
+// *****************************************************************************
+// *****************************************************************************
+
+
+
+
+//DOM-IGNORE-BEGIN
+#ifdef __cplusplus
 }
+#endif
+//DOM-IGNORE-END
 
-
+#endif /* DEFINITIONS_H */
 /*******************************************************************************
  End of File
 */

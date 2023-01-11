@@ -1,25 +1,32 @@
 /*******************************************************************************
-  Main Source File
+  SYS CLK Static Functions for Clock System Service
 
   Company:
     Microchip Technology Inc.
 
   File Name:
-    main.c
+    plib_clk.h
 
   Summary:
-    This file contains the "main" function for bootloader project.
+    SYS CLK static function interface for the Clock System Service.
 
   Description:
-    This file contains the "main" function for bootloader project.  The
-    "main" function calls the "SYS_Initialize" function to initialize
-    all modules in the system.
-    It calls "bootloader_start" once system is initialized.
- *******************************************************************************/
+    The Clock System Service provides a simple interface to manage the
+    oscillators on Microchip microcontrollers. This file defines the static
+    implementation for the Clock System Service.
 
-// DOM-IGNORE-BEGIN
+  Remarks:
+    Static functions incorporate all system clock configuration settings as
+    determined by the user via the Microchip Harmony Configurator GUI.
+    It provides static version of the routines, eliminating the need for an
+    object ID or object handle.
+
+    Static single-open interfaces also eliminate the need for the open handle.
+
+*******************************************************************************/
+
 /*******************************************************************************
-* Copyright (C) 2023 Microchip Technology Inc. and its subsidiaries.
+* Copyright (C) 2019 Microchip Technology Inc. and its subsidiaries.
 *
 * Subject to your compliance with these terms, you may use Microchip software
 * and any derivatives exclusively with Microchip products. It is your
@@ -39,8 +46,10 @@
 * FULLEST EXTENT ALLOWED BY LAW, MICROCHIP'S TOTAL LIABILITY ON ALL CLAIMS IN
 * ANY WAY RELATED TO THIS SOFTWARE WILL NOT EXCEED THE AMOUNT OF FEES, IF ANY,
 * THAT YOU HAVE PAID DIRECTLY TO MICROCHIP FOR THIS SOFTWARE.
- *******************************************************************************/
-// DOM-IGNORE-END
+*******************************************************************************/
+
+#ifndef PLIB_CLK_H
+#define PLIB_CLK_H
 
 // *****************************************************************************
 // *****************************************************************************
@@ -48,66 +57,62 @@
 // *****************************************************************************
 // *****************************************************************************
 
-#include <stddef.h>                     // Defines NULL
-#include <stdbool.h>                    // Defines true
-#include <stdlib.h>                     // Defines EXIT_FAILURE
-#include "definitions.h"                // SYS function prototypes
+#include <stddef.h>
+#include <stdbool.h>  
 
-#define BTL_TRIGGER_PATTERN (0x5048434DUL)
+// DOM-IGNORE-BEGIN
+#ifdef __cplusplus // Provide C++ Compatibility
 
-static uint32_t *ramStart = (uint32_t *)BTL_TRIGGER_RAM_START;
+	extern "C" {
 
-bool bootloader_Trigger(void)
-{
-    uint32_t i;
-
-    // Cheap delay. This should give at leat 1 ms delay.
-    for (i = 0; i < 2000; i++)
-    {
-        asm("nop");
-    }
-
-    /* Check for Bootloader Trigger Pattern in first 16 Bytes of RAM to enter
-     * Bootloader.
-     */
-    if (BTL_TRIGGER_PATTERN == ramStart[0] && BTL_TRIGGER_PATTERN == ramStart[1] &&
-        BTL_TRIGGER_PATTERN == ramStart[2] && BTL_TRIGGER_PATTERN == ramStart[3])
-    {
-        ramStart[0] = 0;
-        return true;
-    }
-
-    /* Check for Switch press to enter Bootloader */
-    if (SWITCH_Get() == 0)
-    {
-        return true;
-    }
-
-    return false;
-}
-
+#endif
+// DOM-IGNORE-END
+ 
 // *****************************************************************************
 // *****************************************************************************
-// Section: Main Entry Point
+// Section: CLK Module System Interface Routines
 // *****************************************************************************
 // *****************************************************************************
 
-int main ( void )
-{
-    /* Initialize all modules */
-    SYS_Initialize ( NULL );
+// *****************************************************************************
+/* Function:
+    void CLK_Initialize( void )
 
-    while (true)
-    {
-        bootloader_CAN_Tasks();
-    }
+  Summary:
+    Initializes hardware of the System Clock and Peripheral Clock.
+    
+  Description:
+    This function initializes the hardware of System Clock and Peripheral Clocks.
 
-    /* Execution should not come here during normal operation */
-    return ( EXIT_FAILURE );
-}
+  Precondition:
+    None.
 
+  Parameters:
+    None.
 
-/*******************************************************************************
- End of File
+  Returns:
+    None.
+
+  Example:
+    <code>
+    //Example 1: Do not alter the configuration bit settings
+    CLK_Initialize ( );
+
+    </code>
+
+  Remarks:
+    None.
 */
+
+void CLK_Initialize( void );
+
+// DOM-IGNORE-BEGIN
+#ifdef __cplusplus  // Provide C++ Compatibility
+
+    }
+
+#endif
+// DOM-IGNORE-END
+
+#endif //PLIB_CLK_H
 
