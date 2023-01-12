@@ -143,36 +143,45 @@ void APP_Tasks ( void )
         {
             printf("\r\n####### Application loaded from Bootloader #######\r\n");
             printf("####### Press and Hold the Switch to re-trigger Bootloader #######\r\n");
-
+            
+            /* Set application's state to wait customer to press switch */
             appData.state = APP_SWITCH_PRESS_WAIT;
             break;
         }
-
+        
+        /* Application's Switch Press Wait state*/
         case APP_SWITCH_PRESS_WAIT:
         {
             if (SWITCH_GET() == SWITCH_PRESSED)
             {
+                /* Set application's state to Trigger Bootloader */
                 appData.state = APP_TRIGGER_BOOTLOADER;
             }
-
+               
+            /* Wait for 1s */
             APP_TIMER_DelayMs(1000);
 
+            /* Toggle LED1 state */
             LED_TOGGLE();
 
             break;
         }
 
+        /* Application's Trigger Bootloader state */
         case APP_TRIGGER_BOOTLOADER:
         {
             printf("####### Bootloader Triggered #######\r\n");
 
+            /* Configure RAM with Bootloader Trigger Pattern */
             ramStart[0] = BTL_TRIGGER_PATTERN;
             ramStart[1] = BTL_TRIGGER_PATTERN;
             ramStart[2] = BTL_TRIGGER_PATTERN;
             ramStart[3] = BTL_TRIGGER_PATTERN;
 
+            /* Clean RAM 16B dedicated to bootloader */
             DCACHE_CLEAN_BY_ADDR(ramStart, 16);
 
+            /* Reset board */
             APP_SystemReset();
         }
 
