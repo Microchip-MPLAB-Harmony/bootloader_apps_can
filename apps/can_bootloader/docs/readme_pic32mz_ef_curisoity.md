@@ -1,11 +1,11 @@
 ---
 grand_parent: CAN Bootloader Applications
 parent: CAN Bootloader
-title: Building and Running on SAM V71 Xplained Ultra Evaluation Kit
+title: Building and Running on PIC32MZ EF Curiosity 2.0 Development Kit
 has_toc: false
 ---
 
-[![MCHP](https://www.microchip.com/ResourcePackages/Microchip/assets/dist/images/logo.png)](https://www.microchip.com)
+[ ![MCHP](https://www.microchip.com/ResourcePackages/Microchip/assets/dist/images/logo.png) ] (https://www.microchip.com) 
 
 # Building and Running the CAN Bootloader applications
 
@@ -21,19 +21,19 @@ To build the application, refer to the following table and open the project usin
 
 | Project Name      | Description                                    |
 | ----------------- | ---------------------------------------------- |
-| bootloader/firmware/sam_v71_xult.X    | MPLABX Project for [SAM V71 Xplained Ultra Evaluation Kit](https://www.microchip.com/DevelopmentTools/ProductDetails/PartNO/ATSAMV71-XULT)|
+| bootloader/firmware/pic32mz_ef_curiosity.X    | MPLABX Project for [PIC32MZ EF Curiosity 2.0 Development Kit](https://www.microchip.com/en-us/development-tool/DM320209) |
 
 
 ### Test Application
 
 | Project Name      | Description                                    |
 | ----------------- | ---------------------------------------------- |
-| test_app/firmware/sam_v71_xult.X    | MPLABX Project for [SAM V71 Xplained Ultra Evaluation Kit](https://www.microchip.com/DevelopmentTools/ProductDetails/PartNO/ATSAMV71-XULT)|
+| test_app/firmware/pic32mz_ef_curiosity.X    | MPLABX Project for [PIC32MZ EF Curiosity 2.0 Development Kit](https://www.microchip.com/en-us/development-tool/DM320209) |
 
 
-## Setting up [SAM V71 Xplained Ultra Evaluation Kit](https://www.microchip.com/DevelopmentTools/ProductDetails/PartNO/ATSAMV71-XULT)
+## Setting up [PIC32MZ EF Curiosity 2.0 Development Kit](https://www.microchip.com/en-us/development-tool/DM320209)
 
-- [SAM V71 Xplained Ultra Evaluation Kit](https://www.microchip.com/DevelopmentTools/ProductDetails/PartNO/ATSAMV71-XULT) is used for both **Host Development kit** and **Target Development kit**
+- [PIC32MZ EF Curiosity 2.0 Development Kit](https://www.microchip.com/en-us/development-tool/DM320209) is used for both **Host Development Kit** and **Target Development Kit**
 
     ![can_bootloader_host_target_connection](../../docs/images/can_bootloader_host_target_connection.png)
 
@@ -50,28 +50,19 @@ To build the application, refer to the following table and open the project usin
 
 ![host_app_nvm_setup](../../docs/images/can_bootloader_host_app_nvm_setup.png)
 
-If the NVM Host Development Kit being used is other than [SAM V71 Xplained Ultra Evaluation Kit](https://www.microchip.com/DevelopmentTools/ProductDetails/PartNO/ATSAMV71-XULT) then follow the steps mentioned in [Configuring NVM Host application project](../../docs/readme_configure_host_app_nvm.md#configuring-the-nvm-host-application)
+If the NVM Host Development Kit being used is other than [PIC32MZ EF Curiosity 2.0 Development Kit](https://www.microchip.com/en-us/development-tool/DM320209) then follow the steps mentioned in [Configuring NVM Host application project](../../docs/readme_configure_host_app_nvm.md#configuring-the-nvm-host-application)
 
-1. Open the NVM host application project *host_app_nvm/firmware/sam_v71_xult.X* in the IDE
+1. Open the NVM host application project *host_app_nvm/firmware/pic32mz_ef_curiosity.X* in the IDE
     - If a NVM host application project of different development kit is used then open that project in the IDE
 
 2. Build and program the NVM host application using the IDE on to the Host development kit
-    - The prebuilt test application image available under **host_app_nvm/firmware/src/test_app_images/image_pattern_hex_sam_v71_xult.h** will be programmed on to the Target development kit with default **host_app_nvm** project configuration
+    - The prebuilt test application image available under **host_app_nvm/firmware/src/test_app_images/image_pattern_hex_pic32mk_gp_db.h** will be programmed on to the Target development kit with default **host_app_nvm** project configuration
 
 3. Jump to [Running The Application](#running-the-application)
 
-#### MCAN Message RAM configuration
-- Allocate MCAN Message RAM configuration in contiguous non-cacheable buffer in the NVM host application.
-  For example, static uint8_t CACHE_ALIGN __attribute__((space(data), section (".ram_nocache"))) mcan1MessageRAM[MCAN1_MESSAGE_RAM_CONFIG_SIZE]; 
-
-- Add non-cacheable section "ram_nocache" in the Custom linker script **apps/can_bootloader/host_app_nvm/firmware/src/config/sam_v71_xult/ATSAMV71Q21B.ld**
-
-- Please refer [How to Create Non-Cacheable Memory Region on CortexM7 (SAM S70/ E70/ V70/ V71) MCUs Using MPLAB Harmony
-v3](http://ww1.microchip.com/downloads/en/DeviceDoc/How_to_Create_Non-Cacheabl_%20Memory_Region_on_Cortex-M7_(SAME70)_MCU_Using_MPLAB_Harmonyv3_DS90003260A.pdf) to create a non-cacheable memory region.
-
 ## Running the Application
 
-1. Open the bootloader project *bootloader/firmware/sam_v71_xult.X* in the IDE
+1. Open the bootloader project *bootloader/firmware/pic32mz_ef_curiosity.X* in the IDE
 2. Build and program the application using the IDE on to the **Target development kit**
     - **LED0** will be turned-on to indicate that bootloader code is running on the target
     - **LED0** will also turn on when the bootloader does not find a valid application; i.e. the first word of the application (stack pointer), contains 0xFFFFFFFF
@@ -83,9 +74,9 @@ v3](http://ww1.microchip.com/downloads/en/DeviceDoc/How_to_Create_Non-Cacheabl_%
     - Stop : 1 Bit
     - Flow Control : None
 
-4. Press the Switch **SW0** on the Host development kit to trigger programming of the application binary
+4. Press the Switch **SW1** on the Host development kit to trigger programming of the application binary
 5. Once the programming is complete,
-    - **LED0** on the Host development kit will be turned on indicating success
+    - **LED3** on the Host development kit will be turned on indicating success
 
     - The target development kit will be reset. Upon re-start, the boot-loader will jump to the user application
 
@@ -93,20 +84,22 @@ v3](http://ww1.microchip.com/downloads/en/DeviceDoc/How_to_Create_Non-Cacheabl_%
 
         ![output](./images/btl_can_test_app_console_success.png)
 
-6. Press and hold the Switch **SW0** to trigger Bootloader from test application and you should see below output
+6. Press and hold the Switch **SW1** to trigger Bootloader from test application and you should see below output
 
     ![output](./images/btl_can_test_app_console_trigger_bootloader.png)
 
 7. Press Reset button on the Host development kit to reprogram the application binary
 8. Repeat Steps 4-5 once
     - This step is to verify that bootloader is running after triggering bootloader from test application in Step 6
-
+9. Note that **LED2** light on when an error occurs during the progamming sequence.
+10. This is possible to see log from host on a console using an FTDI cable connected to U3RX (RD15) and U3TX (RF4) pins of the PIC32MZ EF Curiosity 2.0 Development Kit
+	![output](.images/host_app_nvm_console_output.png)
 
 ## Additional Steps (Optional)
 
 ### Using CAN NVM Host application
 
-- To bootload any application other than **host_app_nvm/firmware/src/test_app_images/image_pattern_hex_sam_v71_xult.h** refer to [Application Configurations](../../docs/readme_configure_application_sam.md)
+- To bootload any application other than **host_app_nvm/firmware/src/test_app_images/image_pattern_hex_pic32mk_gp_db.h** refer to [Application Configurations](../../docs/readme_configure_application_pic32.md)
 
 - Once the application is configured, Refer to [Configuring NVM Host application project](../../docs/readme_configure_host_app_nvm.md) for setting up the **host_app_nvm** project
 
