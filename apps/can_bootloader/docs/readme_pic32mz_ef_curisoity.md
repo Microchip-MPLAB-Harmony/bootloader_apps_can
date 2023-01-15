@@ -64,8 +64,8 @@ If the NVM Host Development Kit being used is other than [PIC32MZ EF Curiosity 2
 
 1. Open the bootloader project *bootloader/firmware/pic32mz_ef_curiosity.X* in the IDE
 2. Build and program the application using the IDE on to the **Target development kit**
-    - **LED0** will be turned-on to indicate that bootloader code is running on the target
-    - **LED0** will also turn on when the bootloader does not find a valid application; i.e. the first word of the application (stack pointer), contains 0xFFFFFFFF
+    - **LED1** will be turned-on to indicate that bootloader code is running on the target
+    - **LED2** will turn on when the bootloader does not find a valid application; i.e. the first word of the application (stack pointer), contains 0xFFFFFFFF
 
 3. **If the test application is being programmed**, Open the Terminal application (Ex.:Tera Term) on the computer and configure the serial port settings for **Target Development kit** as follows:
     - Baud : 115200

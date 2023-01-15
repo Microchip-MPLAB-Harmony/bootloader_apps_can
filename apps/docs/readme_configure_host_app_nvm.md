@@ -59,5 +59,7 @@ To clone or download this application from Github,go to the [main page of this r
 
     - **APP_HEX_HEADER_FILE:** Relative path to the generated header file containing the application hex image in an array
     - **APP_IMAGE_START_ADDR:** User application start address (This value should be same as the application start address specified in Application Configurations steps).
-        - If the bootloader itself is being upgraded then the APP_IMAGE_START_ADDR must be set to 0x00 (start of bootloader)
+        - If the bootloader itself is being upgraded then the APP_IMAGE_START_ADDR must be set to:
+			- 0x00 for SAM devices (start of bootloader)
+			- 0x9d000000 for PIC32MK and PIC32MZ devices (start of program flash memory)
         - Ensure that the bootloader and application are also configured with the same value of user application start address
