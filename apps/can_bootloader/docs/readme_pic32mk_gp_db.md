@@ -5,7 +5,7 @@ title: Building and Running on PIC32MK GPE Development Kit
 has_toc: false
 ---
 
-[ ![MCHP](https://www.microchip.com/ResourcePackages/Microchip/assets/dist/images/logo.png) ] (https://www.microchip.com) 
+[![MCHP](https://www.microchip.com/ResourcePackages/Microchip/assets/dist/images/logo.png)](https://www.microchip.com) 
 
 # Building and Running the CAN Bootloader applications
 
@@ -93,7 +93,8 @@ If the NVM Host Development Kit being used is other than [PIC32MK GPE Developmen
     - This step is to verify that bootloader is running after triggering bootloader from test application in Step 6
 9. Note that **LED2** light on when an error occurs during the progamming sequence.
 10. This is possible to see log from host on a console using an FTDI cable connected to U3RX (RD15) and U3TX (RF4) pins of the PIC32MZ EF Curiosity 2.0 Development Kit
-	![output](.images/host_app_nvm_console_output.png)
+
+	![output](./images/host_app_nvm_console_output.png)
 
 
 ## Additional Steps (Optional)
