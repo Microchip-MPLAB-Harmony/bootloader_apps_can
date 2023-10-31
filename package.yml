@@ -9,6 +9,6 @@ package:
   dependencies:
     - name: "bootloader"
       type: "package"
-      version: "3.6.0"
+      version: "dev"
 
 
