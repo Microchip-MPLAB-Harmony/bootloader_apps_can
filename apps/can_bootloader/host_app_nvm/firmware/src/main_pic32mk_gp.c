@@ -119,7 +119,7 @@ static uint8_t loop_count = 0;
 static uint32_t rx_messageID = 0;
 static uint8_t rx_message[8];
 static uint8_t rx_messageLength = 0;
-CAN_MSG_RX_ATTRIBUTE msgAttr = CAN_MSG_RX_DATA_FRAME;
+CAN_MSG_RX_ATTRIBUTE msgAttr1 = CAN_MSG_RX_DATA_FRAME;
 
 /* CAN3 Message RAM Configuration Size */
 #define CAN3_RX_FIFO_SIZE                   8U
@@ -279,7 +279,7 @@ void APP_CheckBTLResponse (void)
         {
             memset (rx_message, 0x00, sizeof(rx_message));
             
-            if (CAN3_MessageReceive (&rx_messageID, &rx_messageLength, rx_message, 0, 1, &msgAttr) == true)
+            if (CAN3_MessageReceive (&rx_messageID, &rx_messageLength, rx_message, 0, 1, &msgAttr1) == true)
             {
                 /* Check CAN3 Status */
                 status = CAN3_ErrorGet();

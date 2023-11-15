@@ -71,7 +71,7 @@
 
 
 #define HEADER_MAGIC             0xE2
-#define CAN_FILTER_ID			 0x45A
+#define CAN_FILTER_ID            0x45A
 
 /* Standard identifier id[28:18]*/
 #define WRITE_ID(id)             (id << 18U)
@@ -86,7 +86,7 @@
 #define TIMER_COMPARE_VALUE     (CORE_TIMER_FREQUENCY / 10)
 
 /* CAN Tx FIFO size */
-#define CAN_TX_FIFO_BUFFER_SIZE		16U
+#define CAN_TX_FIFO_BUFFER_SIZE     16U
 
 enum
 {
@@ -113,20 +113,15 @@ enum
 // *****************************************************************************
 // *****************************************************************************
 
-static uint8_t	CACHE_ALIGN flash_data[PAGE_SIZE];
+static uint8_t  CACHE_ALIGN flash_data[PAGE_SIZE];
 static uint32_t flash_addr, flash_size, flash_ptr;
 
 static uint32_t begin, end;
 static uint32_t unlock_begin, unlock_end;
 
-static uint8_t rx_message[HEADER_SIZE + MAX_DATA_SIZE];
-static uint8_t txFiFo [CAN_TX_FIFO_BUFFER_SIZE];
-
-CAN_MSG_RX_ATTRIBUTE msgAttr = CAN_MSG_RX_DATA_FRAME;
+static uint8_t rx_msg[HEADER_SIZE + MAX_DATA_SIZE];
 
 static uint8_t data_seq = 0;
-
-static bool canBLInitDone      = false;
 
 static bool canBLActive        = false;
 
@@ -136,176 +131,111 @@ static bool canBLActive        = false;
 // *****************************************************************************
 // *****************************************************************************
 
-/* Function to Generate CRC by reading the firmware programmed into internal flash */
-static uint32_t crc_generate(void)
-{
-    uint32_t   i, j, value;
-    uint32_t   crc_tab[256];
-    uint32_t   size    = unlock_end - unlock_begin;
-    uint32_t   crc     = 0xffffffff;
-    uint8_t    data;
-
-    for (i = 0; i < 256; i++)
-    {
-        value = i;
-
-        for (j = 0; j < 8; j++)
-        {
-            if (value & 1)
-            {
-                value = (value >> 1) ^ 0xEDB88320;
-            }
-            else
-            {
-                value >>= 1;
-            }
-        }
-        crc_tab[i] = value;
-    }
-
-    for (i = 0; i < size; i++)
-    {
-        data = *(uint8_t *)KVA0_TO_KVA1(unlock_begin + i);
-        crc = crc_tab[(crc ^ data) & 0xff] ^ (crc >> 8);
-    }
-    return crc;
-}
-
 /* Function to program received application firmware data into internal flash */
 static void flash_write(void)
 {
-    if (0 == (flash_addr % ERASE_BLOCK_SIZE))
+    if (0U == (flash_addr % ERASE_BLOCK_SIZE))
     {
         /* Erase the Current sector */
-        NVM_PageErase(flash_addr);
+        (void)NVM_PageErase(flash_addr);
 
         while(NVM_IsBusy() == true)
-		{
-		}
+        {
+        }
     }
 
     /* Write Page */
-    NVM_RowWrite((uint32_t *)&flash_data[0], flash_addr);
+    (void)NVM_RowWrite((void *)&flash_data[0], flash_addr);
 
     while(NVM_IsBusy() == true)
 {
-	}
+    }
 }
 
 /* Function to process command from the received message */
 static void process_command(uint8_t *rx_message, uint8_t rx_messageLength)
-{    
+{
     uint32_t command = rx_message[HEADER_CMD_OFFSET];
     uint32_t size = rx_message[HEADER_SIZE_OFFSET];
-    uint32_t *data = (uint32_t *)rx_message;
-    CAN_TX_RX_MSG_BUFFER *txBuffer = NULL;
-    
-    memset (txFiFo, 0x00, CAN_TX_FIFO_BUFFER_SIZE);
-    txBuffer = (CAN_TX_RX_MSG_BUFFER *)txFiFo;
-    txBuffer->msgSID = WRITE_ID (CAN_FILTER_ID);
+    uint32_t *data = (uint32_t *)(uintptr_t)rx_message;
+    uint8_t  tx_message[3];
 
     if ((rx_messageLength < HEADER_SIZE) || (size > MAX_DATA_SIZE) ||
         (rx_messageLength < (HEADER_SIZE + size)) || (HEADER_MAGIC != rx_message[HEADER_MAGIC_OFFSET]))
-	{
-        LED2_Clear ();
-        
-		txBuffer->msgData[0] = BL_RESP_ERROR;
-        CAN2_MessageTransmit(txBuffer->msgSID, 1, txBuffer->msgData, 0, CAN_MSG_RX_DATA_FRAME);		
-        while (CAN2_InterruptGet(0, CAN_FIFO_INTERRUPT_TXEMPTYIF_MASK) == false);
+    {
+        tx_message[0] = BL_RESP_ERROR;
+        (void)CAN2_MessageTransmit(CAN_FILTER_ID, 1U, tx_message, 0U, CAN_MSG_TX_DATA_FRAME);
     }
     else if (BL_CMD_READ_VERSION == command)
     {
-        uint16_t btlVersion = bootloader_GetVersion ();
-        
-        txBuffer->msgData[0] = BL_RESP_OK;
-        
-        txBuffer->msgData[1] = (uint8_t)((btlVersion >> 8) & 0xFF);
-        txBuffer->msgData[2] = (uint8_t)(btlVersion & 0xFF);        
-        
-        CAN2_MessageTransmit(txBuffer->msgSID, 3, txBuffer->msgData, 0, CAN_MSG_RX_DATA_FRAME);		
-        while (CAN2_InterruptGet(0, CAN_FIFO_INTERRUPT_TXEMPTYIF_MASK) == false);
+        uint16_t btlVersion = bootloader_GetVersion();
+
+        tx_message[0] = BL_RESP_OK;
+
+        tx_message[1] = (uint8_t)((btlVersion >> 8) & 0xFFU);
+        tx_message[2] = (uint8_t)(btlVersion & 0xFFU);
+
+        (void)CAN2_MessageTransmit(CAN_FILTER_ID, 3U, tx_message, 0U, CAN_MSG_TX_DATA_FRAME);
     }
     else if (BL_CMD_UNLOCK == command)
-    {        
-		if (rx_message[HEADER_SEQ_OFFSET] != data_seq)
-		{
-            LED2_Clear ();
-            
-			txBuffer->msgData[0] = BL_RESP_SEQ_ERROR;
-			CAN2_MessageTransmit(txBuffer->msgSID, 1, txBuffer->msgData, 0, CAN_MSG_RX_DATA_FRAME);		
-			while (CAN2_InterruptGet(0, CAN_FIFO_INTERRUPT_TXEMPTYIF_MASK) == false);
-		}
-		else
-		{
-			if (data_seq == 0)
-			{
-                LED_Clear ();
-                
-				begin = (data[ADDR_OFFSET] & OFFSET_ALIGN_MASK);
-				
-				txBuffer->msgData[0] = BL_RESP_OK;
-				CAN2_MessageTransmit(txBuffer->msgSID, 1, txBuffer->msgData, 0, CAN_MSG_RX_DATA_FRAME);		
-				while (CAN2_InterruptGet(0, CAN_FIFO_INTERRUPT_TXEMPTYIF_MASK) == false);
-                
-                LED_Set ();
-			}
-			else if (data_seq == 1)
-			{
-				end = begin + (data[SIZE_OFFSET] & SIZE_ALIGN_MASK);
-				size += size;
-				
-				if (end > begin && end <= (FLASH_START + FLASH_LENGTH) && size == (OFFSET_SIZE + SIZE_SIZE))
-				{					
-					unlock_begin = begin;
-					unlock_end = end;
-				
-                    LED_Clear ();
-                
-					txBuffer->msgData[0] = BL_RESP_OK;
-					CAN2_MessageTransmit(txBuffer->msgSID, 1, txBuffer->msgData, 0, CAN_MSG_RX_DATA_FRAME);
-					while (CAN2_InterruptGet(0, CAN_FIFO_INTERRUPT_TXEMPTYIF_MASK) == false);
-                    
-                    LED_Set ();
-				}
-				else
-				{
-                    LED2_Clear ();
-                    
-					unlock_begin = 0;
-					unlock_end = 0;
-				
-					txBuffer->msgData[0] = BL_RESP_ERROR;
-					CAN2_MessageTransmit(txBuffer->msgSID, 1, txBuffer->msgData, 0, CAN_MSG_RX_DATA_FRAME);		
-					while (CAN2_InterruptGet(0, CAN_FIFO_INTERRUPT_TXEMPTYIF_MASK) == false);
-				}
-			}
-			else
-			{
-                LED2_Clear ();
-                
-				unlock_begin = 0;
-				unlock_end = 0;
-			
-				txBuffer->msgData[0] = BL_RESP_ERROR;
-				CAN2_MessageTransmit(txBuffer->msgSID, 1, txBuffer->msgData, 0, CAN_MSG_RX_DATA_FRAME);		
-				while (CAN2_InterruptGet(0, CAN_FIFO_INTERRUPT_TXEMPTYIF_MASK) == false);
-			}
-			
-			data_seq++;
-			flash_ptr = 0;
-			flash_addr = unlock_begin;
-			flash_size = unlock_end;
-		}
+    {
+        if (rx_message[HEADER_SEQ_OFFSET] != data_seq)
+        {
+            tx_message[0] = BL_RESP_SEQ_ERROR;
+            (void)CAN2_MessageTransmit(CAN_FILTER_ID, 1U, tx_message, 0U, CAN_MSG_TX_DATA_FRAME);
+        }
+        else
+        {
+            if (data_seq == 0)
+            {
+                begin = (data[ADDR_OFFSET] & OFFSET_ALIGN_MASK);
+
+                tx_message[0] = BL_RESP_OK;
+                (void)CAN2_MessageTransmit(CAN_FILTER_ID, 1U, tx_message, 0U, CAN_MSG_TX_DATA_FRAME);
+            }
+            else if (data_seq == 1)
+            {
+                end = begin + (data[SIZE_OFFSET] & SIZE_ALIGN_MASK);
+                size += size;
+
+                if (end > begin && end <= (FLASH_START + FLASH_LENGTH) && size == (OFFSET_SIZE + SIZE_SIZE))
+                {
+                    unlock_begin = begin;
+                    unlock_end = end;
+
+                    tx_message[0] = BL_RESP_OK;
+                    (void)CAN2_MessageTransmit(CAN_FILTER_ID, 1U, tx_message, 0U, CAN_MSG_TX_DATA_FRAME);
+                }
+                else
+                {
+                    unlock_begin = 0;
+                    unlock_end = 0;
+
+                    tx_message[0] = BL_RESP_ERROR;
+                    (void)CAN2_MessageTransmit(CAN_FILTER_ID, 1U, tx_message, 0U, CAN_MSG_TX_DATA_FRAME);
+                }
+            }
+            else
+            {
+                unlock_begin = 0;
+                unlock_end = 0;
+
+                tx_message[0] = BL_RESP_ERROR;
+                (void)CAN2_MessageTransmit(CAN_FILTER_ID, 1U, tx_message, 0U, CAN_MSG_TX_DATA_FRAME);
+            }
+
+            data_seq++;
+            flash_ptr = 0;
+            flash_addr = unlock_begin;
+            flash_size = unlock_end;
+        }
     }
     else if (BL_CMD_DATA == command)
     {
         if (rx_message[HEADER_SEQ_OFFSET] != data_seq)
         {
-            LED2_Clear ();
-            
-			txBuffer->msgData[0] = BL_RESP_ERROR;
-			CAN2_MessageTransmit(txBuffer->msgSID, 1, txBuffer->msgData, 0, CAN_MSG_RX_DATA_FRAME);		
-			while (CAN2_InterruptGet(0, CAN_FIFO_INTERRUPT_TXEMPTYIF_MASK) == false);
+            tx_message[0] = BL_RESP_ERROR;
+            (void)CAN2_MessageTransmit(CAN_FILTER_ID, 1U, tx_message, 0U, CAN_MSG_TX_DATA_FRAME);
         }
         else
         {
@@ -313,13 +243,10 @@ static void process_command(uint8_t *rx_message, uint8_t rx_messageLength)
             {
                 if (0 == flash_size)
                 {
-                    LED2_Clear ();
-                    
-					txBuffer->msgData[0] = BL_RESP_ERROR;
-					CAN2_MessageTransmit(txBuffer->msgSID, 1, txBuffer->msgData, 0, CAN_MSG_RX_DATA_FRAME);		
-					while (CAN2_InterruptGet(0, CAN_FIFO_INTERRUPT_TXEMPTYIF_MASK) == false);
-					
-					return;
+                    tx_message[0] = BL_RESP_ERROR;
+                    (void)CAN2_MessageTransmit(CAN_FILTER_ID, 1U, tx_message, 0U, CAN_MSG_TX_DATA_FRAME);
+
+                    return;
                 }
 
                 flash_data[flash_ptr++] = rx_message[HEADER_SIZE + i];
@@ -334,14 +261,9 @@ static void process_command(uint8_t *rx_message, uint8_t rx_messageLength)
                 }
             }
             data_seq++;
-			
-            LED_Clear ();
-            
-            txBuffer->msgData[0] = BL_RESP_OK;
-            CAN2_MessageTransmit(txBuffer->msgSID, 1, txBuffer->msgData, 0, CAN_MSG_RX_DATA_FRAME);
-			while (CAN2_InterruptGet(0, CAN_FIFO_INTERRUPT_TXEMPTYIF_MASK) == false);
-            
-            LED_Set ();
+
+            tx_message[0] = BL_RESP_OK;
+            (void)CAN2_MessageTransmit(CAN_FILTER_ID, 1U, tx_message, 0U, CAN_MSG_TX_DATA_FRAME);
         }
     }
     else if (BL_CMD_VERIFY == command)
@@ -350,53 +272,38 @@ static void process_command(uint8_t *rx_message, uint8_t rx_messageLength)
         uint32_t crc_gen    = 0;
 
         if (size != CRC_SIZE)
-        {	
-            LED2_Clear ();
-            
-			txBuffer->msgData[0] = BL_RESP_ERROR;
-			CAN2_MessageTransmit(txBuffer->msgSID, 1, txBuffer->msgData, 0, CAN_MSG_RX_DATA_FRAME);		
-			while (CAN2_InterruptGet(0, CAN_FIFO_INTERRUPT_TXEMPTYIF_MASK) == false);
+        {
+            tx_message[0] = BL_RESP_ERROR;
+            (void)CAN2_MessageTransmit(CAN_FILTER_ID, 1U, tx_message, 0U, CAN_MSG_TX_DATA_FRAME);
         }
 
-        crc_gen = crc_generate();
+        crc_gen = bootloader_CRCGenerate(unlock_begin, (unlock_end - unlock_begin));
 
         if (crc == crc_gen)
         {
-            LED_Clear ();			
-            
-            txBuffer->msgData[0] = BL_RESP_CRC_OK;
-            CAN2_MessageTransmit(txBuffer->msgSID, 1, txBuffer->msgData, 0, CAN_MSG_RX_DATA_FRAME);		
-			while (CAN2_InterruptGet(0, CAN_FIFO_INTERRUPT_TXEMPTYIF_MASK) == false);
-            
-            LED_Set ();
+            tx_message[0] = BL_RESP_CRC_OK;
+            (void)CAN2_MessageTransmit(CAN_FILTER_ID, 1U, tx_message, 0U, CAN_MSG_TX_DATA_FRAME);
         }
         else
         {
-            LED2_Clear ();
-            
-			txBuffer->msgData[0] = BL_RESP_CRC_FAIL;
-			CAN2_MessageTransmit(txBuffer->msgSID, 1, txBuffer->msgData, 0, CAN_MSG_RX_DATA_FRAME);		
-			while (CAN2_InterruptGet(0, CAN_FIFO_INTERRUPT_TXEMPTYIF_MASK) == false);
+            tx_message[0] = BL_RESP_CRC_FAIL;
+            (void)CAN2_MessageTransmit(CAN_FILTER_ID, 1U, tx_message, 0U, CAN_MSG_TX_DATA_FRAME);
         }
     }
     else if (BL_CMD_RESET == command)
     {
-        txBuffer->msgData[0] = BL_RESP_OK;
-        
-        LED_Clear ();
-        
-		CAN2_MessageTransmit(txBuffer->msgSID, 1, txBuffer->msgData, 0, msgAttr);
-        while (CAN2_InterruptGet(0, CAN_FIFO_INTERRUPT_TXNFULLIF_MASK) == false);
+        tx_message[0] = BL_RESP_OK;
+        (void)CAN2_MessageTransmit(CAN_FILTER_ID, 1U, tx_message, 0U, CAN_MSG_TX_DATA_FRAME);
+        while (CAN2_InterruptGet(0U, CAN_FIFO_INTERRUPT_TXEMPTYIF_MASK) == false)
+        {
+        }
 
         bootloader_TriggerReset();
     }
     else
     {
-        LED2_Clear ();
-        
-        txBuffer->msgData[0] = BL_RESP_INVALID;
-        CAN2_MessageTransmit(txBuffer->msgSID, 1, txBuffer->msgData, 0, CAN_MSG_RX_DATA_FRAME);
-		while (CAN2_InterruptGet(0, CAN_FIFO_INTERRUPT_TXEMPTYIF_MASK) == false);
+        tx_message[0] = BL_RESP_INVALID;
+        (void)CAN2_MessageTransmit(CAN_FILTER_ID, 1U, tx_message, 0U, CAN_MSG_TX_DATA_FRAME);
     }
 }
 
@@ -408,28 +315,30 @@ static void CAN2_task(void)
     uint8_t  rx_messageLength = 0;
     CAN_MSG_RX_ATTRIBUTE msgFrameAttr = CAN_MSG_RX_DATA_FRAME;
 
-    if (CAN2_InterruptGet(1, CAN_FIFO_INTERRUPT_RXNEMPTYIF_MASK))
+    if (CAN2_InterruptGet(1U, CAN_FIFO_INTERRUPT_RXNEMPTYIF_MASK))
     {
         /* Check CAN2 Status */
-        status = CAN2_ErrorGet();
+        status = (uint32_t)CAN2_ErrorGet();
         if (status == CAN_ERROR_NONE)
         {
-			canBLActive = true;
-			
-            memset (rx_message, 0x00, sizeof(rx_message));
+            canBLActive = true;
+
+            (void)memset(rx_msg, 0x00, sizeof(rx_msg));
 
             /* Receive FIFO 1 New Message */
-            if (CAN2_MessageReceive(&rx_messageID, &rx_messageLength, rx_message, 0, 1, &msgFrameAttr) == true)
+            if (CAN2_MessageReceive(&rx_messageID, &rx_messageLength, rx_msg, NULL, 1U, &msgFrameAttr) == true)
             {
-				/* Check CAN2 Status */
-				status = CAN2_ErrorGet();
-				if (status == CAN_ERROR_NONE)
-				{
-					process_command(rx_message, rx_messageLength);
-					(void)rx_messageID;
-				}
-				else
-					canBLActive = false;
+                /* Check CAN2 Status */
+                status = (uint32_t)CAN2_ErrorGet();
+                if (status == CAN_ERROR_NONE)
+                {
+                    process_command(rx_msg, rx_messageLength);
+                    (void)rx_messageID;
+                }
+                else
+                {
+                    canBLActive = false;
+                }
             }
         }
     }
@@ -443,14 +352,6 @@ static void CAN2_task(void)
 
 void bootloader_CAN_Tasks(void)
 {
-    if (canBLInitDone == false)
-    {		
-        LED_Clear ();
-        LED3_Clear ();
-        
-        canBLInitDone = true;
-    }
-
     do
     {
         CAN2_task();

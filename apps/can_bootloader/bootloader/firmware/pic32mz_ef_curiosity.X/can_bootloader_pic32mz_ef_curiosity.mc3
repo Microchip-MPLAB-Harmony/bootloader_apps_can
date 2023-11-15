@@ -1,4 +1,4 @@
-<config configName="pic32mz_ef_curiosity" projectName="can_bootloader_pic32mz_ef_curiosity" configVersion="1.1" device="PIC32MZ2048EFM144" deviceLibraryClass="com.microchip.mcc.harmony.Harmony3Library" coreVersion="5.4.14">
+<config configName="pic32mz_ef_curiosity" projectName="can_bootloader_pic32mz_ef_curiosity" configVersion="1.1" device="PIC32MZ2048EFM144" deviceLibraryClass="com.microchip.mcc.harmony.Harmony3Library" coreVersion="5.5.7">
    <usedPackages class="java.util.ArrayList"/>
    <usedClasses class="java.util.TreeMap">
       <entry>
@@ -2863,9 +2863,7 @@
          <key class="com.microchip.mcc.core.tokenManager.CustomKey" moduleName="can2" name="NOMINAL_BITRATE"/>
          <value>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;&lt;can2&gt;
   &lt;can2 dnOrder=&quot;0&quot; id=&quot;NOMINAL_BITRATE&quot;&gt;
-    &lt;Values dnOrder=&quot;0&quot;&gt;
-      &lt;Dynamic dnOrder=&quot;0&quot; id=&quot;can_bootloader&quot; value=&quot;500&quot;/&gt;
-    &lt;/Values&gt;
+    &lt;Values dnOrder=&quot;0&quot;/&gt;
   &lt;/can2&gt;
 &lt;/can2&gt;
 </value>
@@ -2874,9 +2872,7 @@
          <key class="com.microchip.mcc.core.tokenManager.CustomKey" moduleName="can2" name="NOMINAL_SAMPLE_POINT"/>
          <value>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;&lt;can2&gt;
   &lt;can2 dnOrder=&quot;0&quot; id=&quot;NOMINAL_SAMPLE_POINT&quot;&gt;
-    &lt;Values dnOrder=&quot;0&quot;&gt;
-      &lt;Dynamic dnOrder=&quot;0&quot; id=&quot;can_bootloader&quot; value=&quot;75&quot;/&gt;
-    &lt;/Values&gt;
+    &lt;Values dnOrder=&quot;0&quot;/&gt;
   &lt;/can2&gt;
 &lt;/can2&gt;
 </value>
@@ -2947,9 +2943,7 @@
          <key class="com.microchip.mcc.core.tokenManager.CustomKey" moduleName="can2" name="PROPAG_TIME"/>
          <value>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;&lt;can2&gt;
   &lt;can2 dnOrder=&quot;0&quot; id=&quot;PROPAG_TIME&quot;&gt;
-    &lt;Values dnOrder=&quot;0&quot;&gt;
-      &lt;Dynamic dnOrder=&quot;0&quot; id=&quot;can_bootloader&quot; value=&quot;300&quot;/&gt;
-    &lt;/Values&gt;
+    &lt;Values dnOrder=&quot;0&quot;/&gt;
   &lt;/can2&gt;
 &lt;/can2&gt;
 </value>
@@ -3034,9 +3028,7 @@
          <key class="com.microchip.mcc.core.tokenManager.CustomKey" moduleName="can_bootloader" name="BTL_APP_JUMP_ADDRESS"/>
          <value>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;&lt;can_bootloader&gt;
   &lt;can_bootloader dnOrder=&quot;0&quot; id=&quot;BTL_APP_JUMP_ADDRESS&quot;&gt;
-    &lt;Values dnOrder=&quot;0&quot;&gt;
-      &lt;Dynamic dnOrder=&quot;0&quot; id=&quot;can_bootloader&quot; value=&quot;1d000200&quot;/&gt;
-    &lt;/Values&gt;
+    &lt;Values dnOrder=&quot;0&quot;/&gt;
   &lt;/can_bootloader&gt;
 &lt;/can_bootloader&gt;
 </value>
@@ -3078,15 +3070,6 @@
 </value>
       </entry>
       <entry>
-         <key class="com.microchip.mcc.core.tokenManager.CustomKey" moduleName="can_bootloader" name="BTL_HW_CRC_GEN"/>
-         <value>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;&lt;can_bootloader&gt;
-  &lt;can_bootloader dnOrder=&quot;0&quot; id=&quot;BTL_HW_CRC_GEN&quot;&gt;
-    &lt;Values dnOrder=&quot;0&quot;/&gt;
-  &lt;/can_bootloader&gt;
-&lt;/can_bootloader&gt;
-</value>
-      </entry>
-      <entry>
          <key class="com.microchip.mcc.core.tokenManager.CustomKey" moduleName="can_bootloader" name="BTL_RAM_SIZE"/>
          <value>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;&lt;can_bootloader&gt;
   &lt;can_bootloader dnOrder=&quot;0&quot; id=&quot;BTL_RAM_SIZE&quot;&gt;
@@ -3108,14 +3091,8 @@
          <key class="com.microchip.mcc.core.tokenManager.CustomKey" moduleName="can_bootloader" name="BTL_SIZE"/>
          <value>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;&lt;can_bootloader&gt;
   &lt;can_bootloader dnOrder=&quot;0&quot; id=&quot;BTL_SIZE&quot;&gt;
-    &lt;Attributes dnOrder=&quot;0&quot;&gt;
-      &lt;Boolean dnOrder=&quot;0&quot; id=&quot;visible&quot;&gt;
-        &lt;Value dnOrder=&quot;0&quot;&gt;true&lt;/Value&gt;
-      &lt;/Boolean&gt;
-    &lt;/Attributes&gt;
-    &lt;Values dnOrder=&quot;1&quot;&gt;
+    &lt;Values dnOrder=&quot;0&quot;&gt;
       &lt;Dynamic dnOrder=&quot;0&quot; id=&quot;can_bootloader&quot; value=&quot;16384&quot;/&gt;
-      &lt;User dnOrder=&quot;1&quot; value=&quot;8192&quot;/&gt;
     &lt;/Values&gt;
   &lt;/can_bootloader&gt;
 &lt;/can_bootloader&gt;
@@ -3135,7 +3112,7 @@
          <value>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;&lt;can_bootloader&gt;
   &lt;can_bootloader dnOrder=&quot;0&quot; id=&quot;BTL_TRIGGER_ENABLE&quot;&gt;
     &lt;Values dnOrder=&quot;0&quot;&gt;
-      &lt;Dynamic dnOrder=&quot;0&quot; id=&quot;can_bootloader&quot; value=&quot;true&quot;/&gt;
+      &lt;User dnOrder=&quot;0&quot; value=&quot;true&quot;/&gt;
     &lt;/Values&gt;
   &lt;/can_bootloader&gt;
 &lt;/can_bootloader&gt;
@@ -3145,7 +3122,14 @@
          <key class="com.microchip.mcc.core.tokenManager.CustomKey" moduleName="can_bootloader" name="BTL_TRIGGER_LEN"/>
          <value>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;&lt;can_bootloader&gt;
   &lt;can_bootloader dnOrder=&quot;0&quot; id=&quot;BTL_TRIGGER_LEN&quot;&gt;
-    &lt;Values dnOrder=&quot;0&quot;/&gt;
+    &lt;Attributes dnOrder=&quot;0&quot;&gt;
+      &lt;Boolean dnOrder=&quot;0&quot; id=&quot;visible&quot;&gt;
+        &lt;Value dnOrder=&quot;0&quot;&gt;true&lt;/Value&gt;
+      &lt;/Boolean&gt;
+    &lt;/Attributes&gt;
+    &lt;Values dnOrder=&quot;1&quot;&gt;
+      &lt;User dnOrder=&quot;0&quot; value=&quot;16&quot;/&gt;
+    &lt;/Values&gt;
   &lt;/can_bootloader&gt;
 &lt;/can_bootloader&gt;
 </value>
@@ -3180,6 +3164,17 @@
 </value>
       </entry>
       <entry>
+         <key class="com.microchip.mcc.core.tokenManager.CustomKey" moduleName="can_bootloader" name="PERIPH_CANFD_USED"/>
+         <value>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;&lt;can_bootloader&gt;
+  &lt;can_bootloader dnOrder=&quot;0&quot; id=&quot;PERIPH_CANFD_USED&quot;&gt;
+    &lt;Values dnOrder=&quot;0&quot;&gt;
+      &lt;Dynamic dnOrder=&quot;0&quot; id=&quot;can_bootloader&quot; value=&quot;CAN&quot;/&gt;
+    &lt;/Values&gt;
+  &lt;/can_bootloader&gt;
+&lt;/can_bootloader&gt;
+</value>
+      </entry>
+      <entry>
          <key class="com.microchip.mcc.core.tokenManager.CustomKey" moduleName="can_bootloader" name="PERIPH_NAME"/>
          <value>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;&lt;can_bootloader&gt;
   &lt;can_bootloader dnOrder=&quot;0&quot; id=&quot;PERIPH_NAME&quot;&gt;
@@ -3205,11 +3200,11 @@
          <key class="com.microchip.mcc.core.tokenManager.CustomKey" moduleName="core" name="!@#harmonyUserData"/>
          <value>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;&lt;UserData&gt;
   &lt;UserData dnOrder=&quot;0&quot;&gt;
-    &lt;GraphSettings canvasHeight=&quot;305&quot; canvasWidth=&quot;424&quot; dnOrder=&quot;0&quot;/&gt;
+    &lt;GraphSettings canvasHeight=&quot;354&quot; canvasWidth=&quot;392&quot; dnOrder=&quot;0&quot;/&gt;
     &lt;ComponentGraph dnOrder=&quot;1&quot; id=&quot;__ROOTVIEW&quot;&gt;
       &lt;ElementPositions dnOrder=&quot;0&quot;&gt;
         &lt;ElementPosition dnOrder=&quot;0&quot; id=&quot;can2&quot; x=&quot;53&quot; y=&quot;131&quot;/&gt;
-        &lt;ElementPosition dnOrder=&quot;1&quot; id=&quot;can_bootloader&quot; x=&quot;272&quot; y=&quot;169&quot;/&gt;
+        &lt;ElementPosition dnOrder=&quot;1&quot; id=&quot;can_bootloader&quot; x=&quot;226&quot; y=&quot;179&quot;/&gt;
         &lt;ElementPosition dnOrder=&quot;2&quot; id=&quot;core&quot; x=&quot;30&quot; y=&quot;60&quot;/&gt;
         &lt;ElementPosition dnOrder=&quot;3&quot; id=&quot;dfp&quot; x=&quot;20&quot; y=&quot;20&quot;/&gt;
         &lt;ElementPosition dnOrder=&quot;4&quot; id=&quot;nvm&quot; x=&quot;48&quot; y=&quot;242&quot;/&gt;
@@ -5586,6 +5581,9 @@
       &lt;Boolean dnOrder=&quot;0&quot; id=&quot;enabled&quot;&gt;
         &lt;Value dnOrder=&quot;0&quot;&gt;false&lt;/Value&gt;
       &lt;/Boolean&gt;
+      &lt;String dnOrder=&quot;1&quot; id=&quot;value&quot;&gt;
+        &lt;Value dnOrder=&quot;0&quot;&gt;ROM_ORIGIN=0x1d000000;ROM_LENGTH=0x200000&lt;/Value&gt;
+      &lt;/String&gt;
     &lt;/Attributes&gt;
   &lt;/core&gt;
 &lt;/core&gt;
@@ -5787,15 +5785,15 @@
    <generatedFileHashHistoryMap class="java.util.HashMap">
       <entry>
          <file>..\src\config\pic32mz_ef_curiosity\peripheral\evic\plib_evic.c</file>
-         <hash>ce229acaa92abd27467a836982e4ebc2766754a3d7b7826ba19a989892f84169</hash>
+         <hash>353a4e860c4dedcc45269eff9d046ab4ca6932601ea964278e65bc7d52630677</hash>
       </entry>
       <entry>
          <file>..\src\config\pic32mz_ef_curiosity\peripheral\can\plib_can2.c</file>
-         <hash>0106f0c7451701e8df843d9b95c35f48318b00c8559a9bbcd851bb55c0c6896f</hash>
+         <hash>d06d1b2bc2278323f1fa3ea945db8a95461dd3005c4b5acb0b1c1f0cda78d18a</hash>
       </entry>
       <entry>
          <file>..\src\config\pic32mz_ef_curiosity\btl.ld</file>
-         <hash>812f0b2e5c785422b1f8fa49a95a561e47a2dd78c98a055f9df7b165b20dc5eb</hash>
+         <hash>878e216676ad9359ae08b75b42fa5444588c28b63110a3673933aa15520f1e9e</hash>
       </entry>
       <entry>
          <file>..\src\config\pic32mz_ef_curiosity\device.h</file>
@@ -5803,31 +5801,31 @@
       </entry>
       <entry>
          <file>..\src\config\pic32mz_ef_curiosity\peripheral\can\plib_can_common.h</file>
-         <hash>94676ea19a45f1291a1b6244d62d41e0d3ae1d8a21d8f3bd473527976392c694</hash>
+         <hash>efb2f6eb2247b2a709dffa2d046517af67cd5d5c167aa2815505cdf64445e379</hash>
       </entry>
       <entry>
          <file>..\src\config\pic32mz_ef_curiosity\peripheral\nvm\plib_nvm.c</file>
-         <hash>d0283b141173b0577d7fe98e706b3f3cc83188d704b8dcffcbd22bc19fab64fb</hash>
+         <hash>3ac9665a3d3b28f8966c8c8d2c4d1eaaac10665efd708db83f5966ba04789ee5</hash>
       </entry>
       <entry>
          <file>..\src\config\pic32mz_ef_curiosity\initialization.c</file>
-         <hash>1c4def223e975984fe54a77c5489aa9d8a9c68d7866f4996e0097fbe348f82e8</hash>
+         <hash>bedb5e1da021653d5150f9561dc2bb38bcd84655296a95c87c8f9f9cf178b9ca</hash>
       </entry>
       <entry>
          <file>..\src\config\pic32mz_ef_curiosity\bootloader\bootloader_common.h</file>
-         <hash>6ff2a49a08e6a0c1d18f7c6032213a91bb8948de36cf51f5e3539bdf1f1eb125</hash>
+         <hash>50c3ed84edfc70d1734f0770884da3fc0887b1023b023abac798dce9d4f8d282</hash>
       </entry>
       <entry>
          <file>..\src\config\pic32mz_ef_curiosity\peripheral\clk\plib_clk.h</file>
-         <hash>aeb73e24e5a518024b1c3f7dce953a5cbacead08f55e80ae465fc8d2e522e477</hash>
+         <hash>35384f2e13e59b7190bf77f6996baf3ea2377ec42df94979a6f793326def5255</hash>
       </entry>
       <entry>
          <file>..\src\config\pic32mz_ef_curiosity\peripheral\clk\plib_clk.c</file>
-         <hash>2656940acef0c2613d64c338475b040a2b46225a192bfd1d33dd1cea05a5450d</hash>
+         <hash>9f4891cefcce509ab956071075ba6f552f48bc3552bed581799b000dc9ded82b</hash>
       </entry>
       <entry>
          <file>..\src\config\pic32mz_ef_curiosity\peripheral\gpio\plib_gpio.c</file>
-         <hash>5c7ada9a5df3930b1764c77032c625ecb0eac0d7802531a3e6d620afeb2be05d</hash>
+         <hash>228860e2d87407d738e8ac02e8fc4b27035d03c3f0914c3274b77e92701a1836</hash>
       </entry>
       <entry>
          <file>..\src\config\pic32mz_ef_curiosity\bootloader\bootloader_can.h</file>
@@ -5835,27 +5833,27 @@
       </entry>
       <entry>
          <file>..\src\config\pic32mz_ef_curiosity\bootloader\bootloader_common.c</file>
-         <hash>516740603dfaa21fdbfeb80731bb300c9b115d03b9922dc53c81b51e2cd3188f</hash>
+         <hash>9fa03b7520d3470a1a1f187d8a5168ebe96e1c6da945e7e90c2b341ebc32e1f1</hash>
       </entry>
       <entry>
          <file>..\src\config\pic32mz_ef_curiosity\bootloader\bootloader_can.c</file>
-         <hash>b8a3942dd8830601075271bbe9259acc3c502e7e4530fc2891b7c6b4309c7c61</hash>
+         <hash>34c8f9a875c2cb15f80a7b9384006dbcec5b1fde28f28a6f31ef889c1632091f</hash>
       </entry>
       <entry>
          <file>..\src\config\pic32mz_ef_curiosity\toolchain_specifics.h</file>
-         <hash>84276afca06869943bba17727ff4f41fea61e4f81329ee20a333cafe39562a73</hash>
+         <hash>fd2fc7bbe60706409cc0c0a525825c0194f6f71adc0a89e6310041f06dc2f645</hash>
       </entry>
       <entry>
          <file>..\src\config\pic32mz_ef_curiosity\peripheral\nvm\plib_nvm.h</file>
-         <hash>d081c9a11abcb48eea2f438c8f5b1156eff355d1068631cf5474fcacbe8127cc</hash>
+         <hash>13d7fbaabb735790e7ab8f30b71e499aead17b1972c5fffbab0f9913c287d988</hash>
       </entry>
       <entry>
          <file>..\src\config\pic32mz_ef_curiosity\peripheral\can\plib_can2.h</file>
-         <hash>c8b756144a82f6e639184411407f73043b77f802d00a707898658b640261fdba</hash>
+         <hash>162df0db3884b8eff5ace40c24144bd5fe2dcef471944ba02eb30c5cebcfff4b</hash>
       </entry>
       <entry>
          <file>..\src\main.c</file>
-         <hash>0675252848994ea9c54b376d624a8969ee7a57299efd394983ae3f0b7d6581f3</hash>
+         <hash>0a9aae85e0811d67ec10c4d9fe11ba14c057f3729442374c49aabbaa556caf6a</hash>
       </entry>
       <entry>
          <file>..\src\config\pic32mz_ef_curiosity\peripheral\gpio\plib_gpio.h</file>
@@ -5863,11 +5861,11 @@
       </entry>
       <entry>
          <file>..\src\config\pic32mz_ef_curiosity\peripheral\evic\plib_evic.h</file>
-         <hash>8b7673c73f8d03aa75093884824ba31d5b4af59a88890b86d8fedf8fe2a0a3e5</hash>
+         <hash>55a4d4a3985da6e88a9548a0a29a4f8d08e077348dbad6cd6ddce5fe40d01a33</hash>
       </entry>
       <entry>
          <file>..\src\config\pic32mz_ef_curiosity\definitions.h</file>
-         <hash>b600a3407cfa5798062001a86c2dd3536eaaa3cd9e11f817876c989702baa9b1</hash>
+         <hash>204d5d122e9c90a6bddea1599cceee27fd882661627c23385bf9dafd025c57c2</hash>
       </entry>
    </generatedFileHashHistoryMap>
 </config>

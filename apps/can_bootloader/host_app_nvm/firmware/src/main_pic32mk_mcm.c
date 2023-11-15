@@ -138,7 +138,7 @@ static uint8_t status = 0;
 static uint32_t rx_messageID = 0;
 static uint8_t rx_message[64];
 static uint8_t rx_messageLength = 0;
-CANFD_MSG_RX_ATTRIBUTE msgAttr = CANFD_MSG_RX_DATA_FRAME;
+CANFD_MSG_RX_ATTRIBUTE msgAttr1 = CANFD_MSG_RX_DATA_FRAME;
 
 // *****************************************************************************
 // *****************************************************************************
@@ -275,7 +275,7 @@ void APP_CheckBTLResponse(void)
 		{
             memset (rx_message, 0x00, sizeof(rx_message));
 
-            if (CAN1_MessageReceive (&rx_messageID, &rx_messageLength, rx_message, 0, 2, &msgAttr) == true)
+            if (CAN1_MessageReceive (&rx_messageID, &rx_messageLength, rx_message, 0, 2, &msgAttr1) == true)
             {
                 if ((rx_messageID == CAN_FILTER_ID) && (rx_messageLength == 1))
                 {
