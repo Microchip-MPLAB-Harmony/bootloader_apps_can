@@ -75,7 +75,7 @@ extern "C" {
  * This macro takes one of the following values: 
  * PIC32MZ_W1_CURIOSITY, PIC32MK_MCM_CURIOSITY_PRO, PIC32MK_MCJ_CURIOSITY_PRO
  */       
-#define APP_CAN_BOOTLOADER_TARGET_DEVICE        PIC32MZ_W1_CURIOSITY
+#define APP_CAN_BOOTLOADER_TARGET_DEVICE        PIC32MK_MCJ_CURIOSITY_PRO
     
 #if APP_CAN_BOOTLOADER_TARGET_DEVICE == PIC32MZ_W1_CURIOSITY 
 #define APP_HEX_HEADER_FILE         "test_app_images/image_pattern_hex_pic32mz_w1_curiosity.h"
