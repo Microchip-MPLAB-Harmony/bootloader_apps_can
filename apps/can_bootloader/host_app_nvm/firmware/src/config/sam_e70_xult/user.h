@@ -67,10 +67,11 @@ extern "C" {
  * start address. 
  */
     
-#define SAM_C21N_XPRO    1
-#define SAM_E54_XPRO     2
-#define SAM_E70_XULT     3
-#define SAM_V71_XULT     4
+#define SAM_C21N_XPRO         1
+#define SAM_E54_XPRO          2
+#define SAM_E70_XULT          3
+#define SAM_V71_XULT          4
+#define PIC32CZ_CA80_CULT     5
 
 /* Select the device being upgraded by the CAN bootloader host. 
  * This macro takes one of the following values: 
@@ -93,6 +94,10 @@ extern "C" {
 #elif APP_CAN_BOOTLOADER_TARGET_DEVICE == SAM_V71_XULT   
 #define APP_HEX_HEADER_FILE         "test_app_images/image_pattern_hex_sam_v71_xult.h"
 #define APP_IMAGE_START_ADDR        0x402000UL
+
+#elif APP_CAN_BOOTLOADER_TARGET_DEVICE == PIC32CZ_CA80_CULT   
+#define APP_HEX_HEADER_FILE         "test_app_images/image_pattern_hex_pic32cz_ca80_cult.h"
+#define APP_IMAGE_START_ADDR        0xc000000UL
 
 #endif    
     

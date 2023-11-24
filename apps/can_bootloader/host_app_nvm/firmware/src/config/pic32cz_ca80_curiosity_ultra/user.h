@@ -77,7 +77,7 @@ extern "C" {
  * This macro takes one of the following values: 
  * SAM_C21N_XPRO, SAM_E54_XPRO, SAM_E70_XULT, SAM_V71_XULT
  */       
-#define APP_CAN_BOOTLOADER_TARGET_DEVICE        SAM_E54_XPRO    
+#define APP_CAN_BOOTLOADER_TARGET_DEVICE        PIC32CZ_CA80_CULT    
     
 #if APP_CAN_BOOTLOADER_TARGET_DEVICE == SAM_C21N_XPRO
 #define APP_HEX_HEADER_FILE         "test_app_images/image_pattern_hex_sam_c21n_xpro.h"
