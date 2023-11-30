@@ -179,15 +179,15 @@ void CAN2_Initialize(void)
 
     /* Set the Data bitrate to 3000 Kbps */
     CFD2DBTCFG = ((0UL << _CFD2DBTCFG_BRP_POSITION) & _CFD2DBTCFG_BRP_MASK)
-               | ((10UL << _CFD2DBTCFG_TSEG1_POSITION) & _CFD2DBTCFG_TSEG1_MASK)
-               | ((3UL << _CFD2DBTCFG_TSEG2_POSITION) & _CFD2DBTCFG_TSEG2_MASK)
-               | ((3UL << _CFD2DBTCFG_SJW_POSITION) & _CFD2DBTCFG_SJW_MASK);
+               | ((22UL << _CFD2DBTCFG_TSEG1_POSITION) & _CFD2DBTCFG_TSEG1_MASK)
+               | ((7UL << _CFD2DBTCFG_TSEG2_POSITION) & _CFD2DBTCFG_TSEG2_MASK)
+               | ((7UL << _CFD2DBTCFG_SJW_POSITION) & _CFD2DBTCFG_SJW_MASK);
 
     /* Set the Nominal bitrate to 500 Kbps */
     CFD2NBTCFG = ((0UL << _CFD2NBTCFG_BRP_POSITION) & _CFD2NBTCFG_BRP_MASK)
-               | ((70UL << _CFD2NBTCFG_TSEG1_POSITION) & _CFD2NBTCFG_TSEG1_MASK)
-               | ((23UL << _CFD2NBTCFG_TSEG2_POSITION) & _CFD2NBTCFG_TSEG2_MASK)
-               | ((23UL << _CFD2NBTCFG_SJW_POSITION) & _CFD2NBTCFG_SJW_MASK);
+               | ((142UL << _CFD2NBTCFG_TSEG1_POSITION) & _CFD2NBTCFG_TSEG1_MASK)
+               | ((47UL << _CFD2NBTCFG_TSEG2_POSITION) & _CFD2NBTCFG_TSEG2_MASK)
+               | ((47UL << _CFD2NBTCFG_SJW_POSITION) & _CFD2NBTCFG_SJW_MASK);
 
     /* Set Message memory base address for all FIFOs/Queue */
     CFD2FIFOBA = (uint32_t)KVA_TO_PA(can_message_buffer);
