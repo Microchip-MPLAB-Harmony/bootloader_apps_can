@@ -68,8 +68,6 @@ extern "C" {
  */
     
 #define PIC32MZ_W1_CURIOSITY         1
-#define PIC32MK_MCM_CURIOSITY_PRO    2
-#define PIC32MK_MCJ_CURIOSITY_PRO    3
 
 /* Select the device being upgraded by the CAN bootloader host. 
  * This macro takes one of the following values: 
@@ -80,14 +78,6 @@ extern "C" {
 #if APP_CAN_BOOTLOADER_TARGET_DEVICE == PIC32MZ_W1_CURIOSITY 
 #define APP_HEX_HEADER_FILE         "test_app_images/image_pattern_hex_pic32mz_w1_curiosity.h"
 #define APP_IMAGE_START_ADDR        0x90000000UL
-
-#elif APP_CAN_BOOTLOADER_TARGET_DEVICE == PIC32MK_MCM_CURIOSITY_PRO   
-#define APP_HEX_HEADER_FILE         "test_app_images/image_pattern_hex_pic32mk_mcm_curiosity_pro.h"
-#define APP_IMAGE_START_ADDR        0x9d000000UL
-
-#elif APP_CAN_BOOTLOADER_TARGET_DEVICE == PIC32MK_MCJ_CURIOSITY_PRO   
-#define APP_HEX_HEADER_FILE         "test_app_images/image_pattern_hex_pic32mk_mcj_curiosity_pro.h"
-#define APP_IMAGE_START_ADDR        0x9d000000UL
 
 #endif    
     

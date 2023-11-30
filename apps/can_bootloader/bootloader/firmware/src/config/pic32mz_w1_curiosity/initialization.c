@@ -200,7 +200,7 @@ void SYS_Initialize ( void* data )
 	CLK_Initialize();
 
     /* Configure Wait States */
-    PRECONbits.PFMWS = 3;
+    PRECONbits.PFMWS = 5;
 
 
 

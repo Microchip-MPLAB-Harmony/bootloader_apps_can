@@ -192,11 +192,11 @@ void CLK_Initialize( void )
             /* CF       = NO_FAILDET       */
             /* SLPEN    = IDLE    */
             /* CLKLOCK  = UNLOCKED  */
-            /* NOSC     = USBCLK     */
+            /* NOSC     = SPLL     */
             /* WAKE2SPD = SELECTED_CLK */
             /* DRMEN    = NO_EFFECT    */
             /* FRCDIV   = OSC_FRC_DIV_1   */
-            OSCCON = 0x300;
+            OSCCON = 0x100;
 
             OSCCONSET = _OSCCON_OSWEN_MASK;  /* request oscillator switch to occur */
 
@@ -241,16 +241,8 @@ void CLK_Initialize( void )
         /* Power down the EWPLL */
         EWPLLCONbits.EWPLLPWDN = 1;
 
-        /* Configure UPLL */
-        /* UPLLBSWSEL   = 5 */
-        /* UPLLPWDN     = PLL_ON */
-        /* UPLLPOSTDIV1 = 10 */
-        /* UPLLFLOCK    = NOFORCE_LOCK */
-        /* UPLLRST      = DEASSERT_RST */
-        /* UPLLFBDIV    = 24 */
-        /* UPLLREFDIV   = 1 */
-        /* UPLL_BYP     = UPLL */
-        UPLLCON = 0x404180a5;
+        /* Power down the UPLL */
+        UPLLCONbits.UPLLPWDN = 1;
 
         /* Power down the BTPLL */
         BTPLLCONbits.BTPLLPWDN = 1;
@@ -301,16 +293,8 @@ void CLK_Initialize( void )
         SPLLCON = 0x1496061;
 
 
-        /* Configure UPLL */
-        /* UPLLBSWSEL   = 5 */
-        /* UPLLPWDN     = PLL_ON */
-        /* UPLLPOSTDIV1 = 10 */
-        /* UPLLFLOCK    = NOFORCE_LOCK */
-        /* UPLLRST      = DEASSERT_RST */
-        /* UPLLFBDIV    = 24 */
-        /* UPLLREFDIV   = 1 */
-        /* UPLL_BYP     = UPLL */
-        UPLLCON = 0x404180a5;
+        /* Power down the UPLL */
+        UPLLCONbits.UPLLPWDN = 1;
 
         /* Power down the EWPLL */
         EWPLLCONbits.EWPLLPWDN = 1;
@@ -329,11 +313,11 @@ void CLK_Initialize( void )
         /* CF       = NO_FAILDET       */
         /* SLPEN    = IDLE    */
         /* CLKLOCK  = UNLOCKED  */
-        /* NOSC     = USBCLK     */
+        /* NOSC     = SPLL     */
         /* WAKE2SPD = SELECTED_CLK */
         /* DRMEN    = NO_EFFECT    */
         /* FRCDIV   = OSC_FRC_DIV_1   */
-        OSCCON = 0x300;
+        OSCCON = 0x100;
 
         OSCCONSET = _OSCCON_OSWEN_MASK;  /* request oscillator switch to occur */
 
@@ -349,10 +333,6 @@ void CLK_Initialize( void )
     {
         /* Nothing to do */
     }
-    /* Peripheral Bus 2 is by default enabled, set its divisor */
-    /* PBDIV = 1 */
-    PB2DIVbits.PBDIV = 0;
-
     /* Peripheral Bus 4 is by default enabled, set its divisor */
     /* PBDIV = 10 */
     PB4DIVbits.PBDIV = 9;
