@@ -349,6 +349,10 @@ void CLK_Initialize( void )
     {
         /* Nothing to do */
     }
+    /* Peripheral Bus 2 is by default enabled, set its divisor */
+    /* PBDIV = 1 */
+    PB2DIVbits.PBDIV = 0;
+
     /* Peripheral Bus 4 is by default enabled, set its divisor */
     /* PBDIV = 10 */
     PB4DIVbits.PBDIV = 9;
