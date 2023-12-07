@@ -62,6 +62,15 @@
 // *****************************************************************************
 
 
+/*** Macros for LED pin ***/
+#define LED_Set()               (LATESET = (1U<<13))
+#define LED_Clear()             (LATECLR = (1U<<13))
+#define LED_Toggle()            (LATEINV= (1U<<13))
+#define LED_OutputEnable()      (TRISECLR = (1U<<13))
+#define LED_InputEnable()       (TRISESET = (1U<<13))
+#define LED_Get()               ((PORTE >> 13) & 0x1U)
+#define LED_PIN                  GPIO_PIN_RE13
+
 /*** Macros for SWITCH pin ***/
 #define SWITCH_Set()               (LATBSET = (1U<<8))
 #define SWITCH_Clear()             (LATBCLR = (1U<<8))
