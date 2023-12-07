@@ -40,6 +40,7 @@
 
 #include "device.h"
 #include "plib_uart3.h"
+#include "interrupts.h"
 
 // *****************************************************************************
 // *****************************************************************************
@@ -47,7 +48,6 @@
 // *****************************************************************************
 // *****************************************************************************
 
-UART_OBJECT uart3Obj;
 
 void static UART3_ErrorClear( void )
 {
@@ -59,23 +59,17 @@ void static UART3_ErrorClear( void )
     if(errors != UART_ERROR_NONE)
     {
         /* If it's a overrun error then clear it to flush FIFO */
-        if(U3STA & _U3STA_OERR_MASK)
+        if((U3STA & _U3STA_OERR_MASK) != 0U)
         {
             U3STACLR = _U3STA_OERR_MASK;
         }
 
         /* Read existing error bytes from FIFO to clear parity and framing error flags */
-        while(U3STA & _U3STA_URXDA_MASK)
+        while((U3STA & _U3STA_URXDA_MASK) != 0U)
         {
-            dummyData = U3RXREG;
+            dummyData = (uint8_t)U3RXREG;
         }
 
-        /* Clear error interrupt flag */
-        IFS4CLR = _IFS4_U3EIF_MASK;
-
-        /* Clear up the receive interrupt flag so that RX interrupt is not
-         * triggered for error bytes */
-        IFS4CLR = _IFS4_U3RXIF_MASK;
     }
 
     // Ignore the warning
@@ -97,26 +91,6 @@ void UART3_Initialize( void )
     /* BAUD Rate register Setup */
     U3BRG = 129;
 
-    /* Disable Interrupts */
-    IEC4CLR = _IEC4_U3EIE_MASK;
-
-    IEC4CLR = _IEC4_U3RXIE_MASK;
-
-    IEC4CLR = _IEC4_U3TXIE_MASK;
-
-    /* Initialize instance object */
-    uart3Obj.rxBuffer = NULL;
-    uart3Obj.rxSize = 0;
-    uart3Obj.rxProcessedSize = 0;
-    uart3Obj.rxBusyStatus = false;
-    uart3Obj.rxCallback = NULL;
-    uart3Obj.txBuffer = NULL;
-    uart3Obj.txSize = 0;
-    uart3Obj.txProcessedSize = 0;
-    uart3Obj.txBusyStatus = false;
-    uart3Obj.txCallback = NULL;
-    uart3Obj.errors = UART_ERROR_NONE;
-
     /* Turn ON UART3 */
     U3MODESET = _U3MODE_ON_MASK;
 }
@@ -126,41 +100,33 @@ bool UART3_SerialSetup( UART_SERIAL_SETUP *setup, uint32_t srcClkFreq )
     bool status = false;
     uint32_t baud;
     uint32_t status_ctrl;
-    bool brgh = 1;
-    int32_t uxbrg = 0;
-
-    if((uart3Obj.rxBusyStatus == true) || (uart3Obj.txBusyStatus == true))
-    {
-        /* Transaction is in progress, so return without updating settings */
-        return status;
-    }
+    uint32_t uxbrg = 0;
 
     if (setup != NULL)
     {
         baud = setup->baudRate;
 
-        if ((baud == 0) || ((setup->dataWidth == UART_DATA_9_BIT) && (setup->parity != UART_PARITY_NONE)))
+        if ((baud == 0U) || ((setup->dataWidth == UART_DATA_9_BIT) && (setup->parity != UART_PARITY_NONE)))
         {
             return status;
         }
 
-        if(srcClkFreq == 0)
+        if(srcClkFreq == 0U)
         {
             srcClkFreq = UART3_FrequencyGet();
         }
 
         /* Calculate BRG value */
-        if (brgh == 0)
+        uxbrg = (((srcClkFreq >> 2) + (baud >> 1)) / baud);
+        /* Check if the baud value can be set with low baud settings */
+        if (uxbrg < 1U)
         {
-            uxbrg = (((srcClkFreq >> 4) + (baud >> 1)) / baud ) - 1;
-        }
-        else
-        {
-            uxbrg = (((srcClkFreq >> 2) + (baud >> 1)) / baud ) - 1;
+            return status;
         }
 
-        /* Check if the baud value can be set with low baud settings */
-        if((uxbrg < 0) || (uxbrg > UINT16_MAX))
+        uxbrg -= 1U;
+
+        if (uxbrg > UINT16_MAX)
         {
             return status;
         }
@@ -190,7 +156,7 @@ bool UART3_SerialSetup( UART_SERIAL_SETUP *setup, uint32_t srcClkFreq )
 
         U3MODESET = _U3MODE_ON_MASK;
 
-        /* Re-enable UTXEN, URXEN and UTXBRK. */
+        /* Restore UTXEN, URXEN and UTXBRK bits. */
         U3STASET = status_ctrl;
 
         status = true;
@@ -201,10 +167,13 @@ bool UART3_SerialSetup( UART_SERIAL_SETUP *setup, uint32_t srcClkFreq )
 
 bool UART3_AutoBaudQuery( void )
 {
-    if(U3MODE & _U3MODE_ABAUD_MASK)
-        return true;
-    else
-        return false;
+    bool autobaudqcheck = false;
+    if((U3MODE & _U3MODE_ABAUD_MASK) != 0U)
+    {
+
+       autobaudqcheck = true;
+    }
+    return autobaudqcheck;
 }
 
 void UART3_AutoBaudSet( bool enable )
@@ -221,29 +190,46 @@ void UART3_AutoBaudSet( bool enable )
 bool UART3_Read(void* buffer, const size_t size )
 {
     bool status = false;
-    uint8_t* lBuffer = (uint8_t* )buffer;
+    uint32_t errorStatus = 0;
+    size_t processedSize = 0;
 
-    if(lBuffer != NULL)
+    if(buffer != NULL)
     {
-        /* Check if receive request is in progress */
-        if(uart3Obj.rxBusyStatus == false)
+
+        /* Clear error flags and flush out error data that may have been received when no active request was pending */
+        UART3_ErrorClear();
+
+        while( size > processedSize )
         {
-            /* Clear error flags and flush out error data that may have been received when no active request was pending */
-            UART3_ErrorClear();
+            while((U3STA & _U3STA_URXDA_MASK) == 0U)
+            {
+                /* Wait for receiver to be ready */
+            }
 
-            uart3Obj.rxBuffer = lBuffer;
-            uart3Obj.rxSize = size;
-            uart3Obj.rxProcessedSize = 0;
-            uart3Obj.rxBusyStatus = true;
-            uart3Obj.errors = UART_ERROR_NONE;
+            /* Error status */
+            errorStatus = (U3STA & (_U3STA_OERR_MASK | _U3STA_FERR_MASK | _U3STA_PERR_MASK));
 
+            if(errorStatus != 0U)
+            {
+                break;
+            }
+            if (( U3MODE & (_U3MODE_PDSEL0_MASK | _U3MODE_PDSEL1_MASK)) == (_U3MODE_PDSEL0_MASK | _U3MODE_PDSEL1_MASK))
+            {
+                /* 9-bit mode */
+                ((uint16_t*)(buffer))[processedSize] = (uint16_t)(U3RXREG );
+            }
+            else
+            {
+                /* 8-bit mode */
+                ((uint8_t*)(buffer))[processedSize] = (uint8_t)(U3RXREG);
+            }
+
+            processedSize++;
+        }
+
+        if(size == processedSize)
+        {
             status = true;
-
-            /* Enable UART3_FAULT Interrupt */
-            IEC4SET = _IEC4_U3EIE_MASK;
-
-            /* Enable UART3_RX Interrupt */
-            IEC4SET = _IEC4_U3RXIE_MASK;
         }
     }
 
@@ -253,36 +239,33 @@ bool UART3_Read(void* buffer, const size_t size )
 bool UART3_Write( void* buffer, const size_t size )
 {
     bool status = false;
-    uint8_t* lBuffer = (uint8_t*)buffer;
+    size_t processedSize = 0;
 
-    if(lBuffer != NULL)
+    if(buffer != NULL)
     {
-        /* Check if transmit request is in progress */
-        if(uart3Obj.txBusyStatus == false)
+        while( size > processedSize )
         {
-            uart3Obj.txBuffer = lBuffer;
-            uart3Obj.txSize = size;
-            uart3Obj.txProcessedSize = 0;
-            uart3Obj.txBusyStatus = true;
-            status = true;
-
-            /* Initiate the transfer by writing as many bytes as we can */
-            while((!(U3STA & _U3STA_UTXBF_MASK)) && (uart3Obj.txSize > uart3Obj.txProcessedSize) )
+            /* Wait while TX buffer is full */
+            while ((U3STA & _U3STA_UTXBF_MASK) != 0U)
             {
-                if (( U3MODE & (_U3MODE_PDSEL0_MASK | _U3MODE_PDSEL1_MASK)) == (_U3MODE_PDSEL0_MASK | _U3MODE_PDSEL1_MASK))
-                {
-                    /* 9-bit mode */
-                    U3TXREG = ((uint16_t*)uart3Obj.txBuffer)[uart3Obj.txProcessedSize++];
-                }
-                else
-                {
-                    /* 8-bit mode */
-                    U3TXREG = uart3Obj.txBuffer[uart3Obj.txProcessedSize++];
-                }
+                /* Wait for transmitter to be ready */
             }
 
-            IEC4SET = _IEC4_U3TXIE_MASK;
+            if (( U3MODE & (_U3MODE_PDSEL0_MASK | _U3MODE_PDSEL1_MASK)) == (_U3MODE_PDSEL0_MASK | _U3MODE_PDSEL1_MASK))
+            {
+                /* 9-bit mode */
+                U3TXREG = ((uint16_t*)(buffer))[processedSize];
+            }
+            else
+            {
+                /* 8-bit mode */
+                U3TXREG = ((uint8_t*)(buffer))[processedSize];
+            }
+
+            processedSize++;
         }
+
+        status = true;
     }
 
     return status;
@@ -290,185 +273,63 @@ bool UART3_Write( void* buffer, const size_t size )
 
 UART_ERROR UART3_ErrorGet( void )
 {
-    UART_ERROR errors = uart3Obj.errors;
+    UART_ERROR errors = UART_ERROR_NONE;
 
-    uart3Obj.errors = UART_ERROR_NONE;
+    errors = (U3STA & (_U3STA_OERR_MASK | _U3STA_FERR_MASK | _U3STA_PERR_MASK));
+
+    if(errors != UART_ERROR_NONE)
+    {
+        UART3_ErrorClear();
+    }
 
     /* All errors are cleared, but send the previous error state */
     return errors;
 }
 
-void UART3_ReadCallbackRegister( UART_CALLBACK callback, uintptr_t context )
+void UART3_WriteByte(int data)
 {
-    uart3Obj.rxCallback = callback;
-
-    uart3Obj.rxContext = context;
-}
-
-bool UART3_ReadIsBusy( void )
-{
-    return uart3Obj.rxBusyStatus;
-}
-
-size_t UART3_ReadCountGet( void )
-{
-    return uart3Obj.rxProcessedSize;
-}
-
-bool UART3_ReadAbort(void)
-{
-    if (uart3Obj.rxBusyStatus == true)
+    while (((U3STA & _U3STA_UTXBF_MASK) != 0U))
     {
-        /* Disable the fault interrupt */
-        IEC4CLR = _IEC4_U3EIE_MASK;
-
-        /* Disable the receive interrupt */
-        IEC4CLR = _IEC4_U3RXIE_MASK;
-
-        uart3Obj.rxBusyStatus = false;
-
-        /* If required application should read the num bytes processed prior to calling the read abort API */
-        uart3Obj.rxSize = uart3Obj.rxProcessedSize = 0;
+        /* Do Nothing */
     }
 
-    return true;
+    U3TXREG = (uint32_t)data;
 }
 
-void UART3_WriteCallbackRegister( UART_CALLBACK callback, uintptr_t context )
+bool UART3_TransmitterIsReady( void )
 {
-    uart3Obj.txCallback = callback;
+    bool status = false;
 
-    uart3Obj.txContext = context;
-}
-
-bool UART3_WriteIsBusy( void )
-{
-    return uart3Obj.txBusyStatus;
-}
-
-size_t UART3_WriteCountGet( void )
-{
-    return uart3Obj.txProcessedSize;
-}
-
-void UART3_FAULT_InterruptHandler (void)
-{
-    /* Save the error to be reported later */
-    uart3Obj.errors = (UART_ERROR)(U3STA & (_U3STA_OERR_MASK | _U3STA_FERR_MASK | _U3STA_PERR_MASK));
-
-    /* Disable the fault interrupt */
-    IEC4CLR = _IEC4_U3EIE_MASK;
-
-    /* Disable the receive interrupt */
-    IEC4CLR = _IEC4_U3RXIE_MASK;
-
-    /* Clear rx status */
-    uart3Obj.rxBusyStatus = false;
-
-    UART3_ErrorClear();
-
-    /* Client must call UARTx_ErrorGet() function to get the errors */
-    if( uart3Obj.rxCallback != NULL )
+    if((U3STA & _U3STA_UTXBF_MASK) == 0U)
     {
-        uart3Obj.rxCallback(uart3Obj.rxContext);
+        status = true;
     }
+
+    return status;
 }
 
-void UART3_RX_InterruptHandler (void)
+int UART3_ReadByte( void )
 {
-    if(uart3Obj.rxBusyStatus == true)
-    {
-        while((_U3STA_URXDA_MASK == (U3STA & _U3STA_URXDA_MASK)) && (uart3Obj.rxSize > uart3Obj.rxProcessedSize) )
-        {
-            if (( U3MODE & (_U3MODE_PDSEL0_MASK | _U3MODE_PDSEL1_MASK)) == (_U3MODE_PDSEL0_MASK | _U3MODE_PDSEL1_MASK))
-            {
-                /* 9-bit mode */
-                ((uint16_t*)uart3Obj.rxBuffer)[uart3Obj.rxProcessedSize++] = (uint16_t )(U3RXREG);
-            }
-            else
-            {
-                /* 8-bit mode */
-                uart3Obj.rxBuffer[uart3Obj.rxProcessedSize++] = (uint8_t )(U3RXREG);
-            }
-        }
-
-        /* Clear UART3 RX Interrupt flag */
-        IFS4CLR = _IFS4_U3RXIF_MASK;
-
-        /* Check if the buffer is done */
-        if(uart3Obj.rxProcessedSize >= uart3Obj.rxSize)
-        {
-            uart3Obj.rxBusyStatus = false;
-
-            /* Disable the fault interrupt */
-            IEC4CLR = _IEC4_U3EIE_MASK;
-
-            /* Disable the receive interrupt */
-            IEC4CLR = _IEC4_U3RXIE_MASK;
-
-
-            if(uart3Obj.rxCallback != NULL)
-            {
-                uart3Obj.rxCallback(uart3Obj.rxContext);
-            }
-        }
-    }
-    else
-    {
-        // Nothing to process
-        ;
-    }
+    return (int)(U3RXREG);
 }
 
-void UART3_TX_InterruptHandler (void)
+bool UART3_ReceiverIsReady( void )
 {
-    if(uart3Obj.txBusyStatus == true)
+    bool status = false;
+
+    if(_U3STA_URXDA_MASK == (U3STA & _U3STA_URXDA_MASK))
     {
-        while((!(U3STA & _U3STA_UTXBF_MASK)) && (uart3Obj.txSize > uart3Obj.txProcessedSize) )
-        {
-            if (( U3MODE & (_U3MODE_PDSEL0_MASK | _U3MODE_PDSEL1_MASK)) == (_U3MODE_PDSEL0_MASK | _U3MODE_PDSEL1_MASK))
-            {
-                /* 9-bit mode */
-                U3TXREG = ((uint16_t*)uart3Obj.txBuffer)[uart3Obj.txProcessedSize++];
-            }
-            else
-            {
-                /* 8-bit mode */
-                U3TXREG = uart3Obj.txBuffer[uart3Obj.txProcessedSize++];
-            }
-        }
-
-        /* Clear UART3TX Interrupt flag */
-        IFS4CLR = _IFS4_U3TXIF_MASK;
-
-        /* Check if the buffer is done */
-        if(uart3Obj.txProcessedSize >= uart3Obj.txSize)
-        {
-            uart3Obj.txBusyStatus = false;
-
-            /* Disable the transmit interrupt, to avoid calling ISR continuously */
-            IEC4CLR = _IEC4_U3TXIE_MASK;
-
-            if(uart3Obj.txCallback != NULL)
-            {
-                uart3Obj.txCallback(uart3Obj.txContext);
-            }
-        }
+        status = true;
     }
-    else
-    {
-        // Nothing to process
-        ;
-    }
+
+    return status;
 }
-
-
 
 bool UART3_TransmitComplete( void )
 {
     bool transmitComplete = false;
 
-    if((U3STA & _U3STA_TRMT_MASK))
+    if((U3STA & _U3STA_TRMT_MASK) != 0U)
     {
         transmitComplete = true;
     }

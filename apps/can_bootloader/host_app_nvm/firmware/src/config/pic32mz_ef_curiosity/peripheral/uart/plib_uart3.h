@@ -79,19 +79,14 @@ bool UART3_Read( void *buffer, const size_t size );
 
 UART_ERROR UART3_ErrorGet( void );
 
-bool UART3_ReadIsBusy( void );
+int UART3_ReadByte( void );
 
-size_t UART3_ReadCountGet( void );
+bool UART3_ReceiverIsReady( void );
 
-bool UART3_ReadAbort(void);
+void UART3_WriteByte( int data );
 
-bool UART3_WriteIsBusy( void );
+bool UART3_TransmitterIsReady( void );
 
-size_t UART3_WriteCountGet( void );
-
-void UART3_WriteCallbackRegister( UART_CALLBACK callback, uintptr_t context );
-
-void UART3_ReadCallbackRegister( UART_CALLBACK callback, uintptr_t context );
 
 bool UART3_TransmitComplete( void );
 

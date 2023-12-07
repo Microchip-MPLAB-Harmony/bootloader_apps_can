@@ -48,9 +48,9 @@
 // Section: Included Files
 // *****************************************************************************
 // *****************************************************************************
-
 #include "interrupts.h"
 #include "definitions.h"
+
 
 
 // *****************************************************************************
@@ -60,29 +60,23 @@
 // *****************************************************************************
 
 
-void UART3_FAULT_InterruptHandler( void );
-void UART3_RX_InterruptHandler( void );
-void UART3_TX_InterruptHandler( void );
-void NVM_InterruptHandler( void );
-
-
-
 /* All the handlers are defined here.  Each will call its PLIB-specific function. */
-void __ISR(_UART3_FAULT_VECTOR, ipl1SRS) UART3_FAULT_Handler (void)
-{
-    UART3_FAULT_InterruptHandler();
-}
+// *****************************************************************************
+// *****************************************************************************
+// Section: System Interrupt Vector declarations
+// *****************************************************************************
+// *****************************************************************************
+void FLASH_CONTROL_Handler (void);
+void UART6_FAULT_Handler (void);
+void UART6_RX_Handler (void);
+void UART6_TX_Handler (void);
 
-void __ISR(_UART3_RX_VECTOR, ipl1SRS) UART3_RX_Handler (void)
-{
-    UART3_RX_InterruptHandler();
-}
 
-void __ISR(_UART3_TX_VECTOR, ipl1SRS) UART3_TX_Handler (void)
-{
-    UART3_TX_InterruptHandler();
-}
-
+// *****************************************************************************
+// *****************************************************************************
+// Section: System Interrupt Vector definitions
+// *****************************************************************************
+// *****************************************************************************
 void __ISR(_FLASH_CONTROL_VECTOR, ipl1SRS) FLASH_CONTROL_Handler (void)
 {
     NVM_InterruptHandler();
