@@ -11,4 +11,4 @@ settings:
   TRUSTZONE: 'false'
   CMSISPath: .\dev_packs\arm\CMSIS\5.7.0
   MERGE_STRATEGY: USER_ALL
-  DFPPath: .\dev_packs\Microchip\SAMC21_DFP\3.5.89\samc21n\atdf\ATSAMC21N18A.atdf
+  DFPPath: SAMC21_DFP\3.8.119
