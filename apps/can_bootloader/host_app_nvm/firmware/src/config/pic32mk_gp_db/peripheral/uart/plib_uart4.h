@@ -79,19 +79,14 @@ bool UART4_AutoBaudQuery( void );
 
 void UART4_AutoBaudSet( bool enable );
 
-bool UART4_ReadIsBusy( void );
+int UART4_ReadByte( void );
 
-size_t UART4_ReadCountGet( void );
+bool UART4_ReceiverIsReady( void );
 
-bool UART4_ReadAbort(void);
+void UART4_WriteByte( int data );
 
-bool UART4_WriteIsBusy( void );
+bool UART4_TransmitterIsReady( void );
 
-size_t UART4_WriteCountGet( void );
-
-void UART4_WriteCallbackRegister( UART_CALLBACK callback, uintptr_t context );
-
-void UART4_ReadCallbackRegister( UART_CALLBACK callback, uintptr_t context );
 
 bool UART4_TransmitComplete( void );
 

@@ -4,16 +4,14 @@
 
 
 project: host_app_nvm
-creation_date: 2023-01-18T10:56:38.370+01:00[Europe/Paris]    # ISO 8601 format: https://www.w3.org/TR/NOTE-datetime
+creation_date: 2023-12-07T15:10:26.262+05:30[Asia/Calcutta]    # ISO 8601 format: https://www.w3.org/TR/NOTE-datetime
 operating_system: Windows 10
 mcc_mode: IDE            # [IDE|Standalone|Headless]
-mcc_version: v5.2.1
-mcc_core_version: v5.4.14
-mplabx_version: v6.05        # if MPLAB X plugin only
-harmony_version: v1.2.0
-compiler: XC32 (v4.20) 
+mcc_version: v5.4.1
+mcc_core_version: v5.6.1
+mplabx_version: v6.15        # if MPLAB X plugin only
+harmony_version: v1.4.0
+compiler: XC32 (v4.35)
 
 modules:
-    - {name: "csp", version: "v3.13.1"}
-    - {name: "dev_packs", version: "v3.13.1"}
-
+    - {name: "csp", version: "v3.18.1"}

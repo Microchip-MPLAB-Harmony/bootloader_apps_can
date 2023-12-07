@@ -48,9 +48,9 @@
 // Section: Included Files
 // *****************************************************************************
 // *****************************************************************************
-
 #include "interrupts.h"
 #include "definitions.h"
+
 
 
 // *****************************************************************************
@@ -60,32 +60,23 @@
 // *****************************************************************************
 
 
-void NVM_InterruptHandler( void );
-void UART4_FAULT_InterruptHandler( void );
-void UART4_RX_InterruptHandler( void );
-void UART4_TX_InterruptHandler( void );
-
-
-
 /* All the handlers are defined here.  Each will call its PLIB-specific function. */
+// *****************************************************************************
+// *****************************************************************************
+// Section: System Interrupt Vector declarations
+// *****************************************************************************
+// *****************************************************************************
+void FLASH_CONTROL_Handler (void);
+
+
+// *****************************************************************************
+// *****************************************************************************
+// Section: System Interrupt Vector definitions
+// *****************************************************************************
+// *****************************************************************************
 void __ISR(_FLASH_CONTROL_VECTOR, ipl1SOFT) FLASH_CONTROL_Handler (void)
 {
     NVM_InterruptHandler();
-}
-
-void __ISR(_UART4_FAULT_VECTOR, ipl1SOFT) UART4_FAULT_Handler (void)
-{
-    UART4_FAULT_InterruptHandler();
-}
-
-void __ISR(_UART4_RX_VECTOR, ipl1SOFT) UART4_RX_Handler (void)
-{
-    UART4_RX_InterruptHandler();
-}
-
-void __ISR(_UART4_TX_VECTOR, ipl1SOFT) UART4_TX_Handler (void)
-{
-    UART4_TX_InterruptHandler();
 }
 
 
