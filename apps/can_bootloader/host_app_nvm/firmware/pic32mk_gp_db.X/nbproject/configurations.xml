@@ -26,8 +26,8 @@
               <itemPath>../src/config/pic32mk_gp_db/peripheral/nvm/plib_nvm.h</itemPath>
             </logicalFolder>
             <logicalFolder name="uart" displayName="uart" projectFiles="true">
-              <itemPath>../src/config/pic32mk_gp_db/peripheral/uart/plib_uart4.h</itemPath>
               <itemPath>../src/config/pic32mk_gp_db/peripheral/uart/plib_uart_common.h</itemPath>
+              <itemPath>../src/config/pic32mk_gp_db/peripheral/uart/plib_uart6.h</itemPath>
             </logicalFolder>
           </logicalFolder>
           <itemPath>../src/config/pic32mk_gp_db/interrupts.h</itemPath>
@@ -73,7 +73,7 @@
               <itemPath>../src/config/pic32mk_gp_db/peripheral/nvm/plib_nvm.c</itemPath>
             </logicalFolder>
             <logicalFolder name="uart" displayName="uart" projectFiles="true">
-              <itemPath>../src/config/pic32mk_gp_db/peripheral/uart/plib_uart4.c</itemPath>
+              <itemPath>../src/config/pic32mk_gp_db/peripheral/uart/plib_uart6.c</itemPath>
             </logicalFolder>
           </logicalFolder>
           <logicalFolder name="stdio" displayName="stdio" projectFiles="true">
@@ -106,7 +106,7 @@
         <targetPluginBoard></targetPluginBoard>
         <platformTool>PKOBSKDEPlatformTool</platformTool>
         <languageToolchain>XC32</languageToolchain>
-        <languageToolchainVersion>4.20</languageToolchainVersion>
+        <languageToolchainVersion>4.35</languageToolchainVersion>
         <platform>3</platform>
       </toolsSet>
       <packs>
