@@ -37,11 +37,18 @@ To build the application, refer to the following table and open the project usin
 
     ![can_bootloader_host_target_connection](../../docs/images/can_bootloader_host_target_connection.png)
 
-- Connect the CAN_L on CAN connector of the **Host development kit** to the CAN_L on CAN connector of the **Target development kit**
-- Connect the CAN_H on CAN connector of the **Host development kit** to the CAN_H on CAN connector of the **Target development kit**
-- Connect a ground wire between the Host development kit and Target development kit
+- Connect PIC32MK GPE Development Kit to another PIC32MK GPE Development Kit as per the pin connections shown below
+
+    | PIC32MK GPE Development Kit - 1   | PIC32MK GPE Development Kit - 2    |
+    | ----------------- | ------------------ |
+    | CANH, CAN3        | CANH, CAN3         |
+    | CANL, CAN3        | CANL, CAN3         |
+    | GND,  CAN3        | GND,  CAN3         |
+    |||
+
 - Connect the Debug USB port on the Host development kit to the computer using a micro USB cable
-- Connect the Debug USB port on the Target development kit to the computer using a micro USB cable
+
+- Connect the Debug USB port and OTG USB port on the Target development kit to the computer using a micro USB cable
 
 
 ## Building and Configuring CAN Host Applications
@@ -91,10 +98,6 @@ If the NVM Host Development Kit being used is other than [PIC32MK GPE Developmen
 7. Press Reset button on the Host development kit to reprogram the application binary
 8. Repeat Steps 4-5 once
     - This step is to verify that bootloader is running after triggering bootloader from test application in Step 6
-9. Note that **LED2** light on when an error occurs during the progamming sequence.
-10. This is possible to see log from host on a console using an FTDI cable connected to U3RX (RD15) and U3TX (RF4) pins of the PIC32MZ EF Curiosity 2.0 Development Kit
-
-	![output](./images/host_app_nvm_console_output.png)
 
 
 ## Additional Steps (Optional)

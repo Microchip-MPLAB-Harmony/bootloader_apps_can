@@ -66,7 +66,7 @@ void GPIO_Initialize ( void )
     /* PORTE Initialization */
     /* PORTF Initialization */
     /* PORTG Initialization */
-    LATG = 0x0U; /* Initial Latch Value */
+    LATG = 0x1000U; /* Initial Latch Value */
     TRISGCLR = 0x7000U; /* Direction Control */
     ANSELGCLR = 0x840U; /* Digital Mode Enable */
     CNPUGSET = 0x800U; /* Pull-Up Enable */

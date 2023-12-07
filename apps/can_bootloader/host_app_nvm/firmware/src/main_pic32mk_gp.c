@@ -174,7 +174,6 @@ static uint32_t crc_generate (void)
         data = *(uint8_t *)(&image_pattern[0] + i);
         crc = crc_tab[(crc ^ data) & 0xff] ^ (crc >> 8);
     }
-    printf ("CRC Value: 0x%08x\n\r", crc);
     return crc;
 }
 
@@ -202,7 +201,6 @@ static uint32_t APP_ImageDataWrite (uint32_t memAddr, uint32_t nBytes)
     for (k = 0; k < nBytes; k++, nTxBytes++)
     {        
         appData.wrBuffer[nTxBytes] = image_pattern[wrIndex + k];
-        printf ("Data to send: 0x%02x\n\r", appData.wrBuffer[nTxBytes]);
     }
     
     return nTxBytes;
@@ -233,7 +231,6 @@ static uint32_t APP_UnlockCommandSend (uint32_t appStartAddr, uint32_t appSize, 
     for (k = 0; k < nBytes; k++, nTxBytes++)
     {
         appData.wrBuffer[nTxBytes] = appConfiguration[k + 4 * sequence];
-        printf ("Data to send: 0x%02x\n\r", appData.wrBuffer[nTxBytes]);
     }
     
     sequence++;
@@ -289,32 +286,27 @@ void APP_CheckBTLResponse (void)
                     
                     if (rx_message[0] == BL_RESP_OK || rx_message[0] == BL_RESP_CRC_OK)
                     {
-                        printf ("/*** Received successful ***/\n\r");
                         appData.transferStatus = APP_TRANSFER_STATUS_SUCCESS;
                     }
                     
                     else
                     {
-                        printf ("Received failed\n\r");
                         appData.transferStatus = APP_TRANSFER_STATUS_ERROR;
                     }
                 }
                 
                 else
                 {
-                    printf ("Error in application reply\n\r");
                     appData.transferStatus = APP_TRANSFER_STATUS_ERROR;
                 }
             }
             else
             {
-                printf ("Message reception failed\n\r");
                 appData.transferStatus = APP_TRANSFER_STATUS_ERROR;
             }
         }
         else
         {
-            printf ("Last CAN communication generated an error\n\r");
             appData.transferStatus = APP_TRANSFER_STATUS_ERROR;
         }
     }
@@ -341,19 +333,16 @@ int main ( void )
         {
             case APP_STATE_INIT:
                 appData.state = APP_STATE_WAIT_SW_PRESS;                
-                printf ("/*** Please press the SW1 on-board button ***/\n\n\r");
                 break;
                 
             case APP_STATE_WAIT_SW_PRESS:
                 if (SWITCH_GET() == SWITCH_PRESSED)
                 {
-                    printf ("/*** Button pressed ***/\n\n\r");
                     appData.state = APP_STATE_SEND_UNLOCK_COMMAND;
                 }
                 break;
                 
             case APP_STATE_SEND_UNLOCK_COMMAND:
-                printf ("/*** Unlock Command Start ***/\n\n\r");
                 appData.nPendingBytes = CAN_DATA_FRAME_SIZE - appData.nBytesWritten;
                 
                 if (appData.nPendingBytes >= CAN_DATA_FRAME_SIZE)
@@ -370,28 +359,22 @@ int main ( void )
                 txBuffer = (CAN_TX_RX_MSG_BUFFER *)txFiFo;
                 txBuffer->msgSID = WRITE_ID (CAN_FILTER_ID);
                 
-                printf ("Unlock command transfer in-progress\n\r");
                 for (loop_count = 0; loop_count < nTxBytes; loop_count++)
                 {
                     txBuffer->msgData[loop_count] = appData.wrBuffer[loop_count];
-                    printf ("Data sent: 0x%02x\n\r", txBuffer->msgData[loop_count]);
                 }
                 
-                printf ("Wait for Unlock command transfer to complete\n\r");
                 if (CAN3_MessageTransmit (txBuffer->msgSID, 8, txBuffer->msgData, 0, CAN_MSG_TX_DATA_FRAME) == true)
                 {
                     appData.state = APP_STATE_WAIT_UNLOCK_COMMAND_TRANSFER_COMPLETE;
-                    printf ("Wait for Unlock command transfer...\n\r");
                 }
                 else
                 {
                     appData.state = APP_STATE_ERROR;
-                    printf ("/*** Unlock command transfer failed ***/\n\n\r");
                 }
                 break;
                 
             case APP_STATE_SEND_DATA_COMMAND:
-                printf ("/*** Prepare for sending data ***/\n\n\r");
                 
                 appData.nPendingBytes = APP_IMAGE_SIZE - appData.nBytesWritten;
                 
@@ -409,23 +392,19 @@ int main ( void )
                 txBuffer = (CAN_TX_RX_MSG_BUFFER *)txFiFo;
                 txBuffer->msgSID = WRITE_ID(CAN_FILTER_ID);
                 
-                printf ("Data transfer in-progress\n\r");
                     
                 for (loop_count = 0; loop_count < nTxBytes; loop_count++)
                 {
                     txBuffer->msgData[loop_count] = appData.wrBuffer[loop_count];
-                    printf ("Data sent: 0x%02x\n\r", txBuffer->msgData[loop_count]);
                 }
                 
                 if (CAN3_MessageTransmit (txBuffer->msgSID, 8, txBuffer->msgData, 0, CAN_MSG_TX_DATA_FRAME) == true)
                 {
                     appData.state = APP_STATE_WAIT_DATA_COMMAND_TRANSFER_COMPLETE;
-                    printf ("Wait for Data transfer...\n\r");
                 }
                 else
                 {
                     appData.state = APP_STATE_ERROR;
-                    printf ("/*** Data transfer failed ***/\n\n\r");
                 }
                 break;
                 
@@ -441,18 +420,15 @@ int main ( void )
                 for (loop_count = 0; loop_count < nTxBytes; loop_count++)
                 {
                     txBuffer->msgData[loop_count] = appData.wrBuffer[loop_count];
-                    printf ("Data sent: 0x%02x\n\r", txBuffer->msgData[loop_count]);
                 }
                 
                 if (CAN3_MessageTransmit (txBuffer->msgSID, 8, txBuffer->msgData, 0, CAN_MSG_TX_DATA_FRAME) == true)
                 {
                     appData.state = APP_STATE_WAIT_VERIFY_COMMAND_TRANSFER_COMPLETE;
-                    printf ("Wait for Verify command transfer...\n\r");
                 }
                 else
                 {
                     appData.state = APP_STATE_ERROR;
-                    printf ("/*** Verify command transfer failed ***/\n\n\r");
                 }
                 break;
                 
@@ -467,18 +443,15 @@ int main ( void )
                 for (loop_count = 0; loop_count < nTxBytes; loop_count++)
                 {
                     txBuffer->msgData[loop_count] = appData.wrBuffer[loop_count];
-                    printf ("Data sent: 0x%02x\n\r", txBuffer->msgData[loop_count]);
                 }
                 
                 if (CAN3_MessageTransmit (txBuffer->msgSID, 8, txBuffer->msgData, 0, CAN_MSG_TX_DATA_FRAME) == true)
                 {
                     appData.state = APP_STATE_WAIT_RESET_COMMAND_TRANSFER_COMPLETE;
-                    printf ("Wait for Reset command transfer...\n\r");
                 }
                 else
                 {
                     appData.state = APP_STATE_ERROR;
-                    printf ("/*** Reset command transfer failed ***/\n\n\r");
                 }
                 break;
                 
@@ -493,7 +466,6 @@ int main ( void )
                     if (appData.state == APP_STATE_WAIT_UNLOCK_COMMAND_TRANSFER_COMPLETE)
                     {
                         appData.nBytesWritten += appData.nBytesSent;
-                        printf ("/*** Unlock command transfer completed ***/\n\n\r");
                         
                         if (appData.nBytesWritten < CAN_DATA_FRAME_SIZE)
                             appData.state = APP_STATE_SEND_UNLOCK_COMMAND;
@@ -508,7 +480,6 @@ int main ( void )
                     {
                         appData.nBytesWritten += appData.nBytesSent;
                         
-                        printf ("/*** Data command transfer completed ***/\n\n\r");
                         if (appData.nBytesWritten < APP_IMAGE_SIZE)
                             appData.state = APP_STATE_SEND_DATA_COMMAND;
                         else
@@ -517,12 +488,10 @@ int main ( void )
                     
                     else if (appData.state == APP_STATE_WAIT_VERIFY_COMMAND_TRANSFER_COMPLETE)
                     {                        
-                        printf ("/*** Verify command transfer completed ***/\n\n\r");
                         appData.state = APP_STATE_SEND_RESET_COMMAND;
                     }
                     else if (appData.state == APP_STATE_WAIT_RESET_COMMAND_TRANSFER_COMPLETE)
                     {                        
-                        printf ("/*** Reset command transfer completed ***/\n\n\r");
                         appData.state = APP_STATE_SUCCESSFUL;
                     }
                 }
@@ -534,14 +503,12 @@ int main ( void )
             case APP_STATE_SUCCESSFUL:
                 LED3_ON ();
                 appData.state = APP_STATE_IDLE;
-                printf ("/*** Successful ***/\n\n\r");
                 break;
                 
             case APP_STATE_ERROR:
                 LED_OFF();
                 LED2_ON ();
                 appData.state = APP_STATE_IDLE;
-                printf ("/*** Failure ***/\n\n\r");
                 break;
 
             case APP_STATE_IDLE:
