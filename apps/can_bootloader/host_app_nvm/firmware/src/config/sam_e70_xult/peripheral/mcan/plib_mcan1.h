@@ -73,6 +73,8 @@
 // Section: Data Types
 // *****************************************************************************
 // *****************************************************************************
+#define MCAN1_CLOCK_FREQUENCY    150000000U
+
 /* MCAN1 Message RAM Configuration Size */
 #define MCAN1_RX_FIFO0_ELEMENT_SIZE       16U
 #define MCAN1_RX_FIFO0_SIZE               16U
@@ -104,6 +106,9 @@ void MCAN1_InterruptClear(MCAN_INTERRUPT_MASK interruptMask);
 void MCAN1_MessageRAMConfigSet(uint8_t *msgRAMConfigBaseAddress);
 void MCAN1_SleepModeEnter(void);
 void MCAN1_SleepModeExit(void);
+bool MCAN1_BitTimingCalculationGet(MCAN_BIT_TIMING_SETUP *setup, MCAN_BIT_TIMING *bitTiming);
+bool MCAN1_BitTimingSet(MCAN_BIT_TIMING *bitTiming);
+
 // DOM-IGNORE-BEGIN
 #ifdef __cplusplus  // Provide C++ Compatibility
     }
