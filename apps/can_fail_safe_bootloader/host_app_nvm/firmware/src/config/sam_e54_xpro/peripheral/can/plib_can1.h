@@ -73,6 +73,8 @@
 // Section: Data Types
 // *****************************************************************************
 // *****************************************************************************
+#define CAN1_CLOCK_FREQUENCY    60000000U
+
 /* CAN1 Message RAM Configuration Size */
 #define CAN1_RX_FIFO0_ELEMENT_SIZE       16U
 #define CAN1_RX_FIFO0_SIZE               16U
@@ -104,6 +106,9 @@ void CAN1_InterruptClear(CAN_INTERRUPT_MASK interruptMask);
 void CAN1_MessageRAMConfigSet(uint8_t *msgRAMConfigBaseAddress);
 void CAN1_SleepModeEnter(void);
 void CAN1_SleepModeExit(void);
+bool CAN1_BitTimingCalculationGet(CAN_BIT_TIMING_SETUP *setup, CAN_BIT_TIMING *bitTiming);
+bool CAN1_BitTimingSet(CAN_BIT_TIMING *bitTiming);
+
 // DOM-IGNORE-BEGIN
 #ifdef __cplusplus  // Provide C++ Compatibility
     }
