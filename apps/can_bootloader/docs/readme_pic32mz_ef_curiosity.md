@@ -91,10 +91,6 @@ If the NVM Host Development Kit being used is other than [PIC32MZ EF Curiosity 2
 7. Press Reset button on the Host development kit to reprogram the application binary
 8. Repeat Steps 4-5 once
     - This step is to verify that bootloader is running after triggering bootloader from test application in Step 6
-9. Note that **LED2** light on when an error occurs during the progamming sequence.
-10. This is possible to see log from host on a console using an FTDI cable connected to U3RX (RD15) and U3TX (RF4) pins of the PIC32MZ EF Curiosity 2.0 Development Kit
-
-	![output](./images/host_app_nvm_console_output.png)
 
 ## Additional Steps (Optional)
 

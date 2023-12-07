@@ -69,7 +69,7 @@ void GPIO_Initialize ( void )
     /* PORTH Initialization */
     /* PORTJ Initialization */
     ODCJSET = 0x88U; /* Open Drain Enable */
-    LATJ = 0x88U; /* Initial Latch Value */
+    LATJ = 0x8U; /* Initial Latch Value */
     TRISJCLR = 0x88U; /* Direction Control */
     /* PORTK Initialization */
     ODCKSET = 0x80U; /* Open Drain Enable */

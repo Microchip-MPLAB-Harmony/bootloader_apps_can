@@ -48,12 +48,66 @@
 #include "device.h"
 
 
-
 // ****************************************************************************
 // ****************************************************************************
 // Section: Configuration Bits
 // ****************************************************************************
 // ****************************************************************************
+
+/*** DEVCFG0 ***/
+#pragma config DEBUG =      OFF
+#pragma config JTAGEN =     OFF
+#pragma config ICESEL =     ICS_PGx1
+#pragma config TRCEN =      OFF
+#pragma config BOOTISA =    MIPS32
+#pragma config FECCCON =    OFF_UNLOCKED
+#pragma config FSLEEP =     OFF
+#pragma config DBGPER =     PG_ALL
+#pragma config SMCLR =      MCLR_NORM
+#pragma config SOSCGAIN =   GAIN_LEVEL_3
+#pragma config SOSCBOOST =  ON
+#pragma config POSCGAIN =   GAIN_LEVEL_3
+#pragma config POSCBOOST =  ON
+#pragma config EJTAGBEN =   NORMAL
+#pragma config CP =         OFF
+
+/*** DEVCFG1 ***/
+#pragma config FNOSC =      SPLL
+#pragma config DMTINTV =    WIN_127_128
+#pragma config FSOSCEN =    OFF
+#pragma config IESO =       ON
+#pragma config POSCMOD =    OFF
+#pragma config OSCIOFNC =   OFF
+#pragma config FCKSM =      CSECME
+#pragma config WDTPS =      PS1048576
+#pragma config WDTSPGM =    STOP
+#pragma config FWDTEN =     OFF
+#pragma config WINDIS =     NORMAL
+#pragma config FWDTWINSZ =  WINSZ_25
+#pragma config DMTCNT =     DMT31
+#pragma config FDMTEN =     OFF
+
+/*** DEVCFG2 ***/
+#pragma config FPLLIDIV =   DIV_1
+#pragma config FPLLRNG =    RANGE_5_10_MHZ
+#pragma config FPLLICLK =   PLL_FRC
+#pragma config FPLLMULT =   MUL_60
+#pragma config FPLLODIV =   DIV_4
+#pragma config UPLLFSEL =   FREQ_24MHZ
+
+/*** DEVCFG3 ***/
+#pragma config USERID =     0xffff
+#pragma config FMIIEN =     ON
+#pragma config FETHIO =     ON
+#pragma config PGL1WAY =    ON
+#pragma config PMDL1WAY =   ON
+#pragma config IOL1WAY =    ON
+#pragma config FUSBIDIO =   ON
+
+/*** BF1SEQ0 ***/
+
+#pragma config TSEQ =       0xffff
+#pragma config CSEQ =       0x0
 
 
 
@@ -64,6 +118,11 @@
 // Section: Driver Initialization Data
 // *****************************************************************************
 // *****************************************************************************
+/* Following MISRA-C rules are deviated in the below code block */
+/* MISRA C-2012 Rule 11.1 */
+/* MISRA C-2012 Rule 11.3 */
+/* MISRA C-2012 Rule 11.8 */
+
 
 
 // *****************************************************************************
@@ -104,6 +163,8 @@
  ********************************************************************************/
 static void STDIO_BufferModeSet(void)
 {
+    /* MISRAC 2012 deviation block start */
+    /* MISRA C-2012 Rule 21.6 deviated 2 times in this file.  Deviation record ID -  H3_MISRAC_2012_R_21_6_DR_3 */
 
     /* Make stdin unbuffered */
     setbuf(stdin, NULL);
@@ -113,7 +174,7 @@ static void STDIO_BufferModeSet(void)
 }
 
 
-
+/* MISRAC 2012 deviation block end */
 
 /*******************************************************************************
   Function:
@@ -127,11 +188,12 @@ static void STDIO_BufferModeSet(void)
 
 void SYS_Initialize ( void* data )
 {
+
     /* MISRAC 2012 deviation block start */
     /* MISRA C-2012 Rule 2.2 deviated in this file.  Deviation record ID -  H3_MISRAC_2012_R_2_2_DR_1 */
 
     /* Start out with interrupts disabled before configuring any modules */
-    __builtin_disable_interrupts();
+    (void)__builtin_disable_interrupts();
 
     STDIO_BufferModeSet();
 
@@ -140,7 +202,7 @@ void SYS_Initialize ( void* data )
     CLK_Initialize();
     /* Configure Prefetch, Wait States and ECC */
     PRECONbits.PREFEN = 3;
-    PRECONbits.PFMWS = 3;
+    PRECONbits.PFMWS = 1;
     CFGCONbits.ECCCON = 3;
 
 
@@ -153,20 +215,25 @@ void SYS_Initialize ( void* data )
 
 
 
+    /* MISRAC 2012 deviation block start */
+    /* Following MISRA-C rules deviated in this block  */
+    /* MISRA C-2012 Rule 11.3 - Deviation record ID - H3_MISRAC_2012_R_11_3_DR_1 */
+    /* MISRA C-2012 Rule 11.8 - Deviation record ID - H3_MISRAC_2012_R_11_8_DR_1 */
 
 
+
+
+    /* MISRAC 2012 deviation block end */
     APP_Initialize();
 
 
     EVIC_Initialize();
 
-	/* Enable global interrupts */
-    __builtin_enable_interrupts();
+
 
 
     /* MISRAC 2012 deviation block end */
 }
-
 
 /*******************************************************************************
  End of File

@@ -44,14 +44,14 @@
 #include <stdbool.h>
 
 #ifdef __cplusplus // Provide C++ Compatibility
-	extern "C" {
+    extern "C" {
 #endif
 
-#define CORE_TIMER_FREQUENCY    100000000
+#define CORE_TIMER_FREQUENCY    (60000000U)
 
 
 
-#define CORE_TIMER_COMPARE_VALUE    0x186a0
+#define CORE_TIMER_COMPARE_VALUE    0xea60
 
 void CORETIMER_Initialize(void);
 void CORETIMER_Start(void);

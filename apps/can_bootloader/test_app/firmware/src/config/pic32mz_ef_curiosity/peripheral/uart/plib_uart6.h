@@ -61,7 +61,7 @@
 // *****************************************************************************
 // *****************************************************************************
 
-#define UART6_FrequencyGet()    (uint32_t)(100000000UL)
+#define UART6_FrequencyGet()    (uint32_t)(60000000UL)
 
 /****************************** UART6 API *********************************/
 
@@ -79,19 +79,14 @@ bool UART6_Read( void *buffer, const size_t size );
 
 UART_ERROR UART6_ErrorGet( void );
 
-bool UART6_ReadIsBusy( void );
+int UART6_ReadByte( void );
 
-size_t UART6_ReadCountGet( void );
+bool UART6_ReceiverIsReady( void );
 
-bool UART6_ReadAbort(void);
+void UART6_WriteByte( int data );
 
-bool UART6_WriteIsBusy( void );
+bool UART6_TransmitterIsReady( void );
 
-size_t UART6_WriteCountGet( void );
-
-void UART6_WriteCallbackRegister( UART_CALLBACK callback, uintptr_t context );
-
-void UART6_ReadCallbackRegister( UART_CALLBACK callback, uintptr_t context );
 
 bool UART6_TransmitComplete( void );
 
