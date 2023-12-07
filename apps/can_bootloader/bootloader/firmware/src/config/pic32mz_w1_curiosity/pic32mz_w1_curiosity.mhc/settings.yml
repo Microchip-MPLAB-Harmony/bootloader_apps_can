@@ -1,6 +1,6 @@
-format_version: v1.0
 configName: pic32mz_w1_curiosity
 folderName: pic32mz_w1_curiosity
+format_version: v1.0
 frameworkPath: C:\h3
 processor: PIC32MZ1025W104132
 projectName: pic32mz_w1_curiosity
@@ -11,4 +11,4 @@ settings:
   TRUSTZONE: 'false'
   CMSISPath: dev_packs\arm\CMSIS\5.8.0
   MERGE_STRATEGY: USER_ALL
-  DFPPath: dev_packs\Microchip\PIC32MZ-W_DFP\1.8.326\atdf\PIC32MZ1025W104132.atdf
+  DFPPath: PIC32MZ-W_DFP\1.8.326
