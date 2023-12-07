@@ -196,6 +196,7 @@ void SYS_Initialize ( void* data )
         run_Application(APP_JUMP_ADDRESS);
     }
 
+
     CAN3_Initialize();
 
     NVM_Initialize();

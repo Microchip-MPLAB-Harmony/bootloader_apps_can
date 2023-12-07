@@ -1,6 +1,6 @@
-format_version: v1.0
 configName: pic32mk_gp_db
 folderName: pic32mk_gp_db
+format_version: v1.0
 frameworkPath: C:\HF
 processor: PIC32MK1024GPE100
 projectName: pic32mk_gp_db
@@ -11,4 +11,4 @@ settings:
   TRUSTZONE: 'false'
   CMSISPath: dev_packs\arm\CMSIS\5.8.0
   MERGE_STRATEGY: USER_ALL
-  DFPPath: dev_packs\Microchip\PIC32MK-GP_DFP\1.6.144\atdf\PIC32MK1024GPE100.atdf
+  DFPPath: PIC32MK-GP_DFP\1.6.144
