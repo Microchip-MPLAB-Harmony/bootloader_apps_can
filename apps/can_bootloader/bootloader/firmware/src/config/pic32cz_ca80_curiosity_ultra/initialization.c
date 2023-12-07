@@ -332,9 +332,9 @@ void SYS_Initialize ( void* data )
 
     CLOCK_Initialize();
 
-    FCW_Initialize();
-
     CAN3_Initialize();
+
+    FCW_Initialize();
 
     EVSYS_Initialize();
 

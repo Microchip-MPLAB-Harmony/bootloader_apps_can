@@ -54,7 +54,7 @@ Pin Number,Pin ID,Custom Name,Function,Mode, Direction,Latch,Pull Up,Pull Down,O
 63,PB05,,Available,,,,,,No,FAST
 66,PB21,,Available,,,,,,No,FAST
 67,PB06,,Available,,,,,,No,FAST
-68,PB22,,Available,,,,,,No,FAST
+68,PB22,LED1,GPIO,Digital,Out,Low,,,No,FAST
 69,PB23,,Available,,,,,,No,FAST
 70,PB07,,Available,,,,,,No,FAST
 71,PB08,,Available,,,,,,No,FAST
