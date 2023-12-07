@@ -52,8 +52,8 @@
 
 /* Bootloader Major and Minor version sent for a Read Version command (MAJOR.MINOR)*/
 #define BTL_MAJOR_VERSION       3U
-#define BTL_MINOR_VERSION       6U
-#define ASM_VECTOR             asm("bx %0"::"r" (reset_vector))
+#define BTL_MINOR_VERSION       7U
+#define ASM_VECTOR              asm("bx %0"::"r" (reset_vector))
 
 #define WORD_ALIGN_MASK         (~(sizeof(uint32_t) - 1U))
 
@@ -142,9 +142,9 @@ uint32_t bootloader_CRCGenerate(uint32_t start_addr, uint32_t size)
 void bootloader_TriggerReset(void)
 {
     /* Perform system unlock sequence */
-    SYSKEY = 0x00000000;
+    SYSKEY = 0x00000000U;
     SYSKEY = 0xAA996655U;
-    SYSKEY = 0x556699AA;
+    SYSKEY = 0x556699AAU;
 
     RSWRSTSET = _RSWRST_SWRST_MASK;
     (void)RSWRST;
