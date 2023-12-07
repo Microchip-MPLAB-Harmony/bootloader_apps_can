@@ -636,7 +636,10 @@
          <value>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;&lt;UserData&gt;
   &lt;UserData dnOrder=&quot;0&quot;&gt;
     &lt;GraphSettings canvasHeight=&quot;236&quot; canvasWidth=&quot;585&quot; dnOrder=&quot;0&quot;/&gt;
-    &lt;ComponentGraph dnOrder=&quot;1&quot; id=&quot;__ROOTVIEW&quot;&gt;
+    &lt;PowerProfiles dnOrder=&quot;1&quot;&gt;
+      &lt;Profile dnOrder=&quot;0&quot; id=&quot;profile0&quot; name=&quot;Main&quot;/&gt;
+    &lt;/PowerProfiles&gt;
+    &lt;ComponentGraph dnOrder=&quot;2&quot; id=&quot;__ROOTVIEW&quot;&gt;
       &lt;ElementPositions dnOrder=&quot;0&quot;&gt;
         &lt;ElementPosition dnOrder=&quot;0&quot; id=&quot;can1&quot; x=&quot;190&quot; y=&quot;100&quot;/&gt;
         &lt;ElementPosition dnOrder=&quot;1&quot; id=&quot;can_bootloader&quot; x=&quot;30&quot; y=&quot;100&quot;/&gt;
@@ -1899,7 +1902,7 @@
          <value>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;&lt;core&gt;
   &lt;core dnOrder=&quot;0&quot; id=&quot;PIN_72_LAT&quot;&gt;
     &lt;Values dnOrder=&quot;0&quot;&gt;
-      &lt;User dnOrder=&quot;0&quot; value=&quot;High&quot;/&gt;
+      &lt;User dnOrder=&quot;0&quot; value=&quot;&quot;/&gt;
     &lt;/Values&gt;
   &lt;/core&gt;
 &lt;/core&gt;
@@ -2119,7 +2122,7 @@
          <value>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;&lt;core&gt;
   &lt;core dnOrder=&quot;0&quot; id=&quot;PORT_GROUP_2_OUT&quot;&gt;
     &lt;Values dnOrder=&quot;0&quot;&gt;
-      &lt;Dynamic dnOrder=&quot;0&quot; id=&quot;core&quot; value=&quot;0x40000&quot;/&gt;
+      &lt;Dynamic dnOrder=&quot;0&quot; id=&quot;core&quot; value=&quot;0x0&quot;/&gt;
     &lt;/Values&gt;
   &lt;/core&gt;
 &lt;/core&gt;
@@ -2909,7 +2912,7 @@
       </entry>
       <entry>
          <file>..\src\config\sam_e54_xpro\peripheral\port\plib_port.c</file>
-         <hash>f3ee59a387e1a79eff3a6f58f720ce6799938701f3719721a4b00cfd89dd4702</hash>
+         <hash>b3122ab20ff5d383d955facb4e48aa77ed9bf9c51cf4f8f90e0707f4b47e677f</hash>
       </entry>
       <entry>
          <file>..\src\config\sam_e54_xpro\peripheral\port\plib_port.h</file>
@@ -2917,7 +2920,7 @@
       </entry>
       <entry>
          <file>..\src\config\sam_e54_xpro\pin_configurations.csv</file>
-         <hash>8d3dda4e755f815a08b0b65494358b51f3a3d46ef130a08cef1162a4646e9a39</hash>
+         <hash>5e447399c72b123523bcd0c42c13065770649264f1beb7c2390ef0b41d77f85b</hash>
       </entry>
       <entry>
          <file>..\src\config\sam_e54_xpro\startup_xc32.c</file>
@@ -3369,7 +3372,7 @@
       </entry>
       <entry>
          <file>..\src\packs\CMSIS\CMSIS\Core\Include\cmsis_version.h</file>
-         <hash>2de01ae2556a38eb82c389de23c701805ec63308cfbcf3f84cb12141589b0858</hash>
+         <hash>8cda7ac3ff6f0eb5e83c4fe613dd195151b24da54167f5c3c007e599a03f1edc</hash>
       </entry>
       <entry>
          <file>..\src\packs\CMSIS\CMSIS\Core\Include\core_cm4.h</file>

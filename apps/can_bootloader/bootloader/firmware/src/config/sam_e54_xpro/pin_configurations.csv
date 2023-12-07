@@ -54,7 +54,7 @@ Pin Number,Pin ID,Custom Name,Function,Mode, Direction,Latch,Pull Up,Pull Down,D
 69,PA19,,Available,,,,,,NORMAL
 70,PC16,,Available,,,,,,NORMAL
 71,PC17,,Available,,,,,,NORMAL
-72,PC18,LED,GPIO,Digital,Out,High,,,NORMAL
+72,PC18,LED,GPIO,Digital,Out,Low,,,NORMAL
 73,PC19,,Available,,,,,,NORMAL
 74,PC20,,Available,,,,,,NORMAL
 75,PC21,,Available,,,,,,NORMAL
