@@ -71,6 +71,15 @@
 #define SWITCH_Get()               ((PORTG >> 11) & 0x1U)
 #define SWITCH_PIN                  GPIO_PIN_RG11
 
+/*** Macros for LED3 pin ***/
+#define LED3_Set()               (LATGSET = (1U<<14))
+#define LED3_Clear()             (LATGCLR = (1U<<14))
+#define LED3_Toggle()            (LATGINV= (1U<<14))
+#define LED3_OutputEnable()      (TRISGCLR = (1U<<14))
+#define LED3_InputEnable()       (TRISGSET = (1U<<14))
+#define LED3_Get()               ((PORTG >> 14) & 0x1U)
+#define LED3_PIN                  GPIO_PIN_RG14
+
 
 // *****************************************************************************
 /* GPIO Port
