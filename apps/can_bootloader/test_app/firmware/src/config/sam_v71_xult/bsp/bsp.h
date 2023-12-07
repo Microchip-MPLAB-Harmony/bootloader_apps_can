@@ -40,8 +40,8 @@
 *******************************************************************************/
 // DOM-IGNORE-END
 
-#ifndef _BSP_H
-#define _BSP_H
+#ifndef BSP_H
+#define BSP_H
 
 // *****************************************************************************
 // *****************************************************************************
@@ -60,14 +60,17 @@
 // Section: BSP Macros
 // *****************************************************************************
 // *****************************************************************************
+#define sam_v71_xult
+#define BSP_NAME             "sam_v71_xult"
+
 /*** LED Macros for LED0 ***/
-#define LED0_Toggle() (PIOA_REGS->PIO_ODSR ^= (1<<23))
-#define LED0_On() (PIOA_REGS->PIO_CODR = (1<<23))
-#define LED0_Off() (PIOA_REGS->PIO_SODR = (1<<23))
+#define LED0_Toggle() (PIOA_REGS->PIO_ODSR ^= (1UL<<23))
+#define LED0_On() (PIOA_REGS->PIO_CODR = (1UL<<23))
+#define LED0_Off() (PIOA_REGS->PIO_SODR = (1UL<<23))
 /*** LED Macros for LED1 ***/
-#define LED1_Toggle() (PIOC_REGS->PIO_ODSR ^= (1<<9))
-#define LED1_On() (PIOC_REGS->PIO_CODR = (1<<9))
-#define LED1_Off() (PIOC_REGS->PIO_SODR = (1<<9))
+#define LED1_Toggle() (PIOC_REGS->PIO_ODSR ^= (1UL<<9))
+#define LED1_On() (PIOC_REGS->PIO_CODR = (1UL<<9))
+#define LED1_Off() (PIOC_REGS->PIO_SODR = (1UL<<9))
 /*** SWITCH Macros for SWITCH0 ***/
 #define SWITCH0_Get() ((PIOA_REGS->PIO_PDSR >> 9) & 0x1)
 #define SWITCH0_STATE_PRESSED 0
@@ -77,8 +80,8 @@
 #define SWITCH1_STATE_PRESSED 0
 #define SWITCH1_STATE_RELEASED 1
 /*** VBUS Macros for VBUS_HOST_EN ***/
-#define VBUS_HOST_EN_PowerEnable() (PIOC_REGS->PIO_CODR = (1<<16))
-#define VBUS_HOST_EN_PowerDisable() (PIOC_REGS->PIO_SODR = (1<<16))
+#define VBUS_HOST_EN_PowerEnable() (PIOC_REGS->PIO_CODR = (1UL<<16))
+#define VBUS_HOST_EN_PowerDisable() (PIOC_REGS->PIO_SODR = (1UL<<16))
 
 
 
@@ -112,7 +115,6 @@
 
   Example:
     <code>
-    //Initialize the BSP
     BSP_Initialize();
     </code>
 
@@ -122,7 +124,7 @@
 
 void BSP_Initialize(void);
 
-#endif // _BSP_H
+#endif // BSP_H
 
 /*******************************************************************************
  End of File
