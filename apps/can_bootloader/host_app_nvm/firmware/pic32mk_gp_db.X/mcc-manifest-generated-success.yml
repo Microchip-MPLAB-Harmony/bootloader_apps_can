@@ -2,7 +2,7 @@
 
 manifest_file_version: 1.0.0
 project: can_bootloader_host_nvm_app_pic32mk_gp_db
-creation_date: 2023-12-20T19:01:39.469+05:30[Asia/Calcutta]
+creation_date: 2024-01-08T14:53:12.166+05:30[Asia/Calcutta]
 operating_system: Windows 10
 mcc_mode: IDE
 mcc_mode_version: v6.15
@@ -15,7 +15,7 @@ is_mcc_offline: false
 is_using_prerelease_versions: false
 mcc_content_registries: https://registry.npmjs.org/
 device_library: {library_class: com.microchip.mcc.harmony.Harmony3Library, name: Harmony
-    V3, version: 1.4.0}
+    V3, version: 1.4.1}
 packs: {name: PIC32MK-GP_DFP, version: 1.6.144}
 modules:
-- {name: csp, type: HARMONY, version: dev}
+- {name: csp, type: HARMONY, version: v3.18.2}
