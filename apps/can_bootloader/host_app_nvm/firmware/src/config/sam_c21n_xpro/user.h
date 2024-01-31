@@ -99,6 +99,10 @@ extern "C" {
 #define APP_HEX_HEADER_FILE         "test_app_images/image_pattern_hex_pic32cz_ca80_cult.h"
 #define APP_IMAGE_START_ADDR        0xc000000UL
 
+#elif APP_CAN_BOOTLOADER_TARGET_DEVICE == PIC32CK_GC01_CULT   
+#define APP_HEX_HEADER_FILE         "test_app_images/image_pattern_hex_pic32ck_gc01_cult.h"
+#define APP_IMAGE_START_ADDR        0xc000000UL
+    
 #endif    
     
 //DOM-IGNORE-BEGIN
