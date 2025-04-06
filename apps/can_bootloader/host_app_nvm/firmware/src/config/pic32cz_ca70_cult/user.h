@@ -73,7 +73,7 @@ extern "C" {
  * This macro takes one of the following values: 
  * PIC32CZ_CA70_CULT
  */       
-#define APP_CAN_BOOTLOADER_TARGET_DEVICE        PIC32CZ_CA70_CULT    
+#define APP_CAN_BOOTLOADER_TARGET_DEVICE        PIC32CZ_CA70_CULT   
     
 #if APP_CAN_BOOTLOADER_TARGET_DEVICE == PIC32CZ_CA70_CULT   
 #define APP_HEX_HEADER_FILE         "test_app_images/image_pattern_hex_pic32cz_ca70_cult.h"
