@@ -72,6 +72,7 @@ extern "C" {
 #define SAM_E70_XULT          3
 #define SAM_V71_XULT          4
 #define PIC32CZ_CA80_CULT     5
+#define PIC32WM_BZ6_curiosity 6
 
 /* Select the device being upgraded by the CAN bootloader host. 
  * This macro takes one of the following values: 
@@ -98,6 +99,10 @@ extern "C" {
 #elif APP_CAN_BOOTLOADER_TARGET_DEVICE == PIC32CZ_CA80_CULT   
 #define APP_HEX_HEADER_FILE         "test_app_images/image_pattern_hex_pic32cz_ca80_cult.h"
 #define APP_IMAGE_START_ADDR        0xc000000UL
+
+#elif APP_CAN_BOOTLOADER_TARGET_DEVICE == PIC32WM_BZ6_curiosity   
+#define APP_HEX_HEADER_FILE         "test_app_images/image_pattern_hex_pic32wm_bz6_curiosity.h"
+#define APP_IMAGE_START_ADDR        0x1002000UL
 
 #endif    
     
