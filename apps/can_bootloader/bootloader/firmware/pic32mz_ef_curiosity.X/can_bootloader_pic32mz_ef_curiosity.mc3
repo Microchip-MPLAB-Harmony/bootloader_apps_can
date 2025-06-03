@@ -1,4 +1,4 @@
-<config configName="pic32mz_ef_curiosity" projectName="can_bootloader_pic32mz_ef_curiosity" configVersion="1.1" device="PIC32MZ2048EFM144" deviceLibraryClass="com.microchip.mcc.harmony.Harmony3Library" coreVersion="5.6.1">
+<config configName="pic32mz_ef_curiosity" projectName="can_bootloader_pic32mz_ef_curiosity" configVersion="1.1" device="PIC32MZ2048EFM144" deviceLibraryClass="com.microchip.mcc.harmony.Harmony3Library" coreVersion="5.7.1">
    <usedPackages class="java.util.ArrayList"/>
    <usedClasses class="java.util.TreeMap">
       <entry>
@@ -23,7 +23,7 @@
       </entry>
    </usedClasses>
    <usedLibraries class="java.util.ArrayList">
-      <ILibraryFile class="com.microchip.mcc.core.library.BaseLibraryFile" libraryClass="com.microchip.mcc.harmony.Harmony3Library" version="1.4.1"/>
+      <ILibraryFile class="com.microchip.mcc.core.library.BaseLibraryFile" libraryClass="com.microchip.mcc.harmony.Harmony3Library" version="1.5.5"/>
    </usedLibraries>
    <tokenMap class="java.util.TreeMap">
       <entry>
@@ -5800,19 +5800,19 @@
       </entry>
       <entry>
          <file>..\src\config\pic32mz_ef_curiosity\bootloader\bootloader_common.h</file>
-         <hash>e85c662fa6d3d7e9611ffe7a33b550645cc0c2463cca07c0b7540cf1e794192d</hash>
+         <hash>ec1e55e7f48735b0487696bb6264b20e736937cfe7d867e36841f04f5290e4c1</hash>
       </entry>
       <entry>
          <file>..\src\config\pic32mz_ef_curiosity\btl.ld</file>
-         <hash>878e216676ad9359ae08b75b42fa5444588c28b63110a3673933aa15520f1e9e</hash>
+         <hash>448f9db5708ec1ab70d394bd7550d5712c335e5a6785b4a869a3fd0d1700af0e</hash>
       </entry>
       <entry>
          <file>..\src\config\pic32mz_ef_curiosity\definitions.h</file>
-         <hash>204d5d122e9c90a6bddea1599cceee27fd882661627c23385bf9dafd025c57c2</hash>
+         <hash>0b99e4ae6ecfed16e1d2d33e16d90c2ed82a6b1512c0efe930357873d7dfdce9</hash>
       </entry>
       <entry>
          <file>..\src\config\pic32mz_ef_curiosity\device.h</file>
-         <hash>10ec93c43a7b158a129ae05bd8f4a59ff5bcf3d0f3f062fdd64c374bc2d42099</hash>
+         <hash>4d4341a6f9628cea0bf73f980b639f7cb81089e55a60ad7e434be2a71e477442</hash>
       </entry>
       <entry>
          <file>..\src\config\pic32mz_ef_curiosity\initialization.c</file>
@@ -5832,7 +5832,7 @@
       </entry>
       <entry>
          <file>..\src\config\pic32mz_ef_curiosity\peripheral\clk\plib_clk.c</file>
-         <hash>9f4891cefcce509ab956071075ba6f552f48bc3552bed581799b000dc9ded82b</hash>
+         <hash>3c974aeba5b535dd5ecfb209942b1e82766466673ca713da9a2c31455d3d331c</hash>
       </entry>
       <entry>
          <file>..\src\config\pic32mz_ef_curiosity\peripheral\clk\plib_clk.h</file>
@@ -5840,11 +5840,11 @@
       </entry>
       <entry>
          <file>..\src\config\pic32mz_ef_curiosity\peripheral\evic\plib_evic.c</file>
-         <hash>353a4e860c4dedcc45269eff9d046ab4ca6932601ea964278e65bc7d52630677</hash>
+         <hash>88add2ab44053a8a245e063c0abb23d0078a622af076cb284e33890562aee52d</hash>
       </entry>
       <entry>
          <file>..\src\config\pic32mz_ef_curiosity\peripheral\evic\plib_evic.h</file>
-         <hash>55a4d4a3985da6e88a9548a0a29a4f8d08e077348dbad6cd6ddce5fe40d01a33</hash>
+         <hash>8d23fbec497272607e866c677642a16f99b84018980cee72d0df73db1f696194</hash>
       </entry>
       <entry>
          <file>..\src\config\pic32mz_ef_curiosity\peripheral\gpio\plib_gpio.c</file>
@@ -5852,7 +5852,7 @@
       </entry>
       <entry>
          <file>..\src\config\pic32mz_ef_curiosity\peripheral\gpio\plib_gpio.h</file>
-         <hash>265828f2401ff7b43e355d55ced25da7e967d2f1ff3d3cb8f2a7c5103420b70c</hash>
+         <hash>579c3591cff9847366a15af97cf782d363149ee8a63a437e8b760a1b4d43310d</hash>
       </entry>
       <entry>
          <file>..\src\config\pic32mz_ef_curiosity\peripheral\nvm\plib_nvm.c</file>

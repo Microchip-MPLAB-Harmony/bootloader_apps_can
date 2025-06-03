@@ -69,6 +69,7 @@
 #define LED3_OutputEnable()      (TRISJCLR = (1U<<3))
 #define LED3_InputEnable()       (TRISJSET = (1U<<3))
 #define LED3_Get()               ((PORTJ >> 3) & 0x1U)
+#define LED3_GetLatch()          ((LATJ >> 3) & 0x1U)
 #define LED3_PIN                  GPIO_PIN_RJ3
 
 /*** Macros for LED2 pin ***/
@@ -78,6 +79,7 @@
 #define LED2_OutputEnable()      (TRISKCLR = (1U<<7))
 #define LED2_InputEnable()       (TRISKSET = (1U<<7))
 #define LED2_Get()               ((PORTK >> 7) & 0x1U)
+#define LED2_GetLatch()          ((LATK >> 7) & 0x1U)
 #define LED2_PIN                  GPIO_PIN_RK7
 
 /*** Macros for SWITCH pin ***/
@@ -87,6 +89,7 @@
 #define SWITCH_OutputEnable()      (TRISJCLR = (1U<<4))
 #define SWITCH_InputEnable()       (TRISJSET = (1U<<4))
 #define SWITCH_Get()               ((PORTJ >> 4) & 0x1U)
+#define SWITCH_GetLatch()          ((LATJ >> 4) & 0x1U)
 #define SWITCH_PIN                  GPIO_PIN_RJ4
 
 /*** Macros for LED pin ***/
@@ -96,6 +99,7 @@
 #define LED_OutputEnable()      (TRISJCLR = (1U<<7))
 #define LED_InputEnable()       (TRISJSET = (1U<<7))
 #define LED_Get()               ((PORTJ >> 7) & 0x1U)
+#define LED_GetLatch()          ((LATJ >> 7) & 0x1U)
 #define LED_PIN                  GPIO_PIN_RJ7
 
 
@@ -315,7 +319,7 @@ void GPIO_PortOutputEnable(GPIO_PORT port, uint32_t mask);
 
 static inline void GPIO_PinWrite(GPIO_PIN pin, bool value)
 {
-	 uint32_t xvalue = (uint32_t)value;
+     uint32_t xvalue = (uint32_t)value;
     GPIO_PortWrite((pin>>4U), (uint32_t)(0x1U) << (pin & 0xFU), (xvalue) << (pin & 0xFU));
 }
 
