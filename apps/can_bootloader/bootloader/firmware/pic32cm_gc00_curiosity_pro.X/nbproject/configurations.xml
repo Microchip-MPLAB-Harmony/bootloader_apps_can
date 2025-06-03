@@ -226,12 +226,12 @@
         <targetPluginBoard></targetPluginBoard>
         <platformTool>pkob4hybrid</platformTool>
         <languageToolchain>XC32</languageToolchain>
-        <languageToolchainVersion>4.45</languageToolchainVersion>
+        <languageToolchainVersion>4.60</languageToolchainVersion>
         <platform>3</platform>
       </toolsSet>
       <packs>
         <pack name="CMSIS" vendor="ARM" version="5.9.0"/>
-        <pack name="PIC32CM-GC00_DFP" vendor="Microchip" version="1.0.23"/>
+        <pack name="PIC32CM-GC00_DFP" vendor="Microchip" version="1.0.27"/>
       </packs>
       <ScriptingSettings>
       </ScriptingSettings>
