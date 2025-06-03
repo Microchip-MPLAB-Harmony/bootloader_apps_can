@@ -173,7 +173,6 @@
         <itemPath>../src/config/sam_c21n_xpro/sam_c21n_xpro.mhc/stdio.yml</itemPath>
       </logicalFolder>
       <itemPath>Makefile</itemPath>
-      <itemPath>../src/config/sam_c21n_xpro/harmony-manifest-failure.yml</itemPath>
       <itemPath>../src/config/sam_c21n_xpro/harmony-manifest-success.yml</itemPath>
       <itemPath>../src/config/sam_c21n_xpro/pin_configurations.csv</itemPath>
       <itemPath>can_bootloader_test_app_sam_c21n_xpro.mc3</itemPath>
@@ -244,7 +243,7 @@
         <targetPluginBoard/>
         <platformTool>EdbgTool</platformTool>
         <languageToolchain>XC32</languageToolchain>
-        <languageToolchainVersion>4.35</languageToolchainVersion>
+        <languageToolchainVersion>4.60</languageToolchainVersion>
         <platform>3</platform>
       </toolsSet>
       <packs>
