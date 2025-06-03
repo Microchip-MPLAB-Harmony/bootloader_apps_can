@@ -62,8 +62,14 @@ bool EFC_SectorErase( uint32_t address )
 {
     uint16_t page_number;
 
+    if (DATA_CACHE_IS_ENABLED() != 0U)
+    {
+        DCACHE_INVALIDATE_BY_ADDR((uint32_t*)address, (int32_t)EFC_SECTORSIZE);
+    }
+
     /*Calculate the Page number to be passed for FARG register*/
     page_number = (uint16_t)((address - IFLASH_ADDR) / IFLASH_PAGE_SIZE);
+
     /* Issue the FLASH erase operation*/
     EFC_REGS->EEFC_FCR = (EEFC_FCR_FCMD_EPA|EEFC_FCR_FARG((uint32_t)page_number|0x2U)|EEFC_FCR_FKEY_PASSWD);
 
@@ -89,6 +95,11 @@ bool EFC_PageBufferWrite( uint32_t *data, const uint32_t address)
 
     __DSB();
     __ISB();
+
+    if (DATA_CACHE_IS_ENABLED() != 0U)
+    {
+        DCACHE_CLEAN_BY_ADDR((uint32_t*)address, (int32_t)EFC_PAGESIZE);
+    }
 
     return true;
 }
@@ -129,6 +140,11 @@ bool EFC_PageWrite( uint32_t *data, uint32_t address )
     __DSB();
     __ISB();
 
+    if (DATA_CACHE_IS_ENABLED() != 0U)
+    {
+        DCACHE_CLEAN_BY_ADDR((uint32_t*)address, (int32_t)EFC_PAGESIZE);
+    }
+
     /* Issue the FLASH write operation*/
     EFC_REGS->EEFC_FCR = (EEFC_FCR_FCMD_WP | EEFC_FCR_FARG((uint32_t)page_number)| EEFC_FCR_FKEY_PASSWD);
 
@@ -150,6 +166,12 @@ bool EFC_QuadWordWrite( uint32_t *data, uint32_t address )
         *((uint32_t *)(( address ) + i )) = *data;
         data++;
     }
+
+    if (DATA_CACHE_IS_ENABLED() != 0U)
+    {
+        DCACHE_CLEAN_BY_ADDR((uint32_t*)address, (int32_t)16);
+    }
+
     /* Issue the FLASH write operation*/
     EFC_REGS->EEFC_FCR = (EEFC_FCR_FCMD_WP | EEFC_FCR_FARG((uint32_t)page_number)| EEFC_FCR_FKEY_PASSWD);
 
