@@ -1,13 +1,9 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version='1.0' encoding='UTF-8'?>
 <configurationDescriptor version="65">
   <logicalFolder name="root" displayName="root" projectFiles="true">
-    <logicalFolder name="HeaderFiles"
-                   displayName="Header Files"
-                   projectFiles="true">
+    <logicalFolder name="HeaderFiles" displayName="Header Files" projectFiles="true">
       <logicalFolder name="config" displayName="config" projectFiles="true">
-        <logicalFolder name="pic32ck_gc01_cult"
-                       displayName="pic32ck_gc01_cult"
-                       projectFiles="true">
+        <logicalFolder name="pic32ck_gc01_cult" displayName="pic32ck_gc01_cult" projectFiles="true">
           <logicalFolder name="peripheral" displayName="peripheral" projectFiles="true">
             <logicalFolder name="can" displayName="can" projectFiles="true">
               <itemPath>../src/config/pic32ck_gc01_cult/peripheral/can/plib_can_common.h</itemPath>
@@ -64,9 +60,7 @@
             </logicalFolder>
           </logicalFolder>
         </logicalFolder>
-        <logicalFolder name="PIC32CK2051GC01144_DFP"
-                       displayName="PIC32CK2051GC01144_DFP"
-                       projectFiles="true">
+        <logicalFolder name="PIC32CK2051GC01144_DFP" displayName="PIC32CK2051GC01144_DFP" projectFiles="true">
           <logicalFolder name="component" displayName="component" projectFiles="true">
             <itemPath>../src/packs/PIC32CK2051GC01144_DFP/component/fcw.h</itemPath>
             <itemPath>../src/packs/PIC32CK2051GC01144_DFP/component/pdec.h</itemPath>
@@ -74,7 +68,6 @@
             <itemPath>../src/packs/PIC32CK2051GC01144_DFP/component/oscctrl.h</itemPath>
             <itemPath>../src/packs/PIC32CK2051GC01144_DFP/component/adc.h</itemPath>
             <itemPath>../src/packs/PIC32CK2051GC01144_DFP/component/fuses.h</itemPath>
-            <itemPath>../src/packs/PIC32CK2051GC01144_DFP/component/sig.h</itemPath>
             <itemPath>../src/packs/PIC32CK2051GC01144_DFP/component/sdmmc.h</itemPath>
             <itemPath>../src/packs/PIC32CK2051GC01144_DFP/component/idau.h</itemPath>
             <itemPath>../src/packs/PIC32CK2051GC01144_DFP/component/eic.h</itemPath>
@@ -146,7 +139,6 @@
             <itemPath>../src/packs/PIC32CK2051GC01144_DFP/instance/sercom1.h</itemPath>
             <itemPath>../src/packs/PIC32CK2051GC01144_DFP/instance/ac.h</itemPath>
             <itemPath>../src/packs/PIC32CK2051GC01144_DFP/instance/wdt.h</itemPath>
-            <itemPath>../src/packs/PIC32CK2051GC01144_DFP/instance/sig.h</itemPath>
             <itemPath>../src/packs/PIC32CK2051GC01144_DFP/instance/eic.h</itemPath>
             <itemPath>../src/packs/PIC32CK2051GC01144_DFP/instance/usbhs.h</itemPath>
             <itemPath>../src/packs/PIC32CK2051GC01144_DFP/instance/tcc4.h</itemPath>
@@ -179,24 +171,16 @@
         </logicalFolder>
       </logicalFolder>
     </logicalFolder>
-    <logicalFolder name="LinkerScript"
-                   displayName="Linker Files"
-                   projectFiles="true">
+    <logicalFolder name="LinkerScript" displayName="Linker Files" projectFiles="true">
       <logicalFolder name="config" displayName="config" projectFiles="true">
-        <logicalFolder name="pic32ck_gc01_cult"
-                       displayName="pic32ck_gc01_cult"
-                       projectFiles="true">
+        <logicalFolder name="pic32ck_gc01_cult" displayName="pic32ck_gc01_cult" projectFiles="true">
           <itemPath>../src/config/pic32ck_gc01_cult/PIC32CK2051GC01144.ld</itemPath>
         </logicalFolder>
       </logicalFolder>
     </logicalFolder>
-    <logicalFolder name="SourceFiles"
-                   displayName="Source Files"
-                   projectFiles="true">
+    <logicalFolder name="SourceFiles" displayName="Source Files" projectFiles="true">
       <logicalFolder name="config" displayName="config" projectFiles="true">
-        <logicalFolder name="pic32ck_gc01_cult"
-                       displayName="pic32ck_gc01_cult"
-                       projectFiles="true">
+        <logicalFolder name="pic32ck_gc01_cult" displayName="pic32ck_gc01_cult" projectFiles="true">
           <logicalFolder name="peripheral" displayName="peripheral" projectFiles="true">
             <logicalFolder name="can" displayName="can" projectFiles="true">
               <itemPath>../src/config/pic32ck_gc01_cult/peripheral/can/plib_can0.c</itemPath>
@@ -236,9 +220,7 @@
       <itemPath>../src/config/pic32ck_gc01_cult/pin_configurations.csv</itemPath>
       <itemPath>../src/main_pic32ck_gc.c</itemPath>
     </logicalFolder>
-    <logicalFolder name="ExternalFiles"
-                   displayName="Important Files"
-                   projectFiles="false">
+    <logicalFolder name="ExternalFiles" displayName="Important Files" projectFiles="false">
       <itemPath>Makefile</itemPath>
       <itemPath>can_bootloader_host_app_nvm_pic32ck_gc01_cult.mc3</itemPath>
     </logicalFolder>
@@ -252,15 +234,15 @@
       <toolsSet>
         <developmentServer>localhost</developmentServer>
         <targetDevice>PIC32CK2051GC01144</targetDevice>
-        <targetHeader></targetHeader>
-        <targetPluginBoard></targetPluginBoard>
-        <platformTool></platformTool>
+        <targetHeader/>
+        <targetPluginBoard/>
+        <platformTool/>
         <languageToolchain>XC32</languageToolchain>
-        <languageToolchainVersion>4.30</languageToolchainVersion>
+        <languageToolchainVersion>4.60</languageToolchainVersion>
         <platform>3</platform>
       </toolsSet>
       <packs>
-        <pack name="PIC32CK-GC_DFP" vendor="Microchip" version="1.0.131"/>
+        <pack name="PIC32CK-GC_DFP" vendor="Microchip" version="1.1.148"/>
         <pack name="CMSIS" vendor="ARM" version="5.4.0"/>
       </packs>
       <ScriptingSettings>
@@ -275,7 +257,7 @@
         <loading>
           <useAlternateLoadableFile>false</useAlternateLoadableFile>
           <parseOnProdLoad>false</parseOnProdLoad>
-          <alternateLoadableFile></alternateLoadableFile>
+          <alternateLoadableFile/>
         </loading>
         <subordinates>
         </subordinates>
@@ -283,9 +265,9 @@
       <makeCustomizationType>
         <makeCustomizationPreStepEnabled>false</makeCustomizationPreStepEnabled>
         <makeUseCleanTarget>false</makeUseCleanTarget>
-        <makeCustomizationPreStep></makeCustomizationPreStep>
+        <makeCustomizationPreStep/>
         <makeCustomizationPostStepEnabled>false</makeCustomizationPostStepEnabled>
-        <makeCustomizationPostStep></makeCustomizationPostStep>
+        <makeCustomizationPostStep/>
         <makeCustomizationPutChecksumInUserID>false</makeCustomizationPutChecksumInUserID>
         <makeCustomizationEnableLongLines>false</makeCustomizationEnableLongLines>
         <makeCustomizationNormalizeHexFile>false</makeCustomizationNormalizeHexFile>
@@ -299,8 +281,7 @@
         <property key="enable-symbols" value="true"/>
         <property key="enable-unroll-loops" value="false"/>
         <property key="exclude-floating-point" value="false"/>
-        <property key="extra-include-directories"
-                  value="../src;../src/config/pic32ck_gc01_cult;../src/packs/CMSIS/;../src/packs/CMSIS/CMSIS/Core/Include;../src/packs/PIC32CK2051GC01144_DFP"/>
+        <property key="extra-include-directories" value="../src;../src/config/pic32ck_gc01_cult;../src/packs/CMSIS/;../src/packs/CMSIS/CMSIS/Core/Include;../src/packs/PIC32CK2051GC01144_DFP"/>
         <property key="generate-16-bit-code" value="false"/>
         <property key="generate-micro-compressed-code" value="false"/>
         <property key="isolate-each-function" value="true"/>
@@ -399,8 +380,7 @@
         <property key="enable-unroll-loops" value="false"/>
         <property key="exceptions" value="true"/>
         <property key="exclude-floating-point" value="false"/>
-        <property key="extra-include-directories"
-                  value="../src;../src/config/pic32ck_gc01_cult;../src/packs/CMSIS/;../src/packs/CMSIS/CMSIS/Core/Include;../src/packs/PIC32CK2051GC01144_DFP"/>
+        <property key="extra-include-directories" value="../src;../src/config/pic32ck_gc01_cult;../src/packs/CMSIS/;../src/packs/CMSIS/CMSIS/Core/Include;../src/packs/PIC32CK2051GC01144_DFP"/>
         <property key="generate-16-bit-code" value="false"/>
         <property key="generate-micro-compressed-code" value="false"/>
         <property key="isolate-each-function" value="true"/>
