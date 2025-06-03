@@ -69,6 +69,7 @@
 #define LED_OutputEnable()      (TRISKCLR = (1U<<1))
 #define LED_InputEnable()       (TRISKSET = (1U<<1))
 #define LED_Get()               ((PORTK >> 1) & 0x1U)
+#define LED_GetLatch()          ((LATK >> 1) & 0x1U)
 #define LED_PIN                  GPIO_PIN_RK1
 
 /*** Macros for SW1 pin ***/
@@ -78,6 +79,7 @@
 #define SW1_OutputEnable()      (TRISACLR = (1U<<10))
 #define SW1_InputEnable()       (TRISASET = (1U<<10))
 #define SW1_Get()               ((PORTA >> 10) & 0x1U)
+#define SW1_GetLatch()          ((LATA >> 10) & 0x1U)
 #define SW1_PIN                  GPIO_PIN_RA10
 
 
@@ -233,7 +235,7 @@ void GPIO_PortOutputEnable(GPIO_PORT port, uint32_t mask);
 
 static inline void GPIO_PinWrite(GPIO_PIN pin, bool value)
 {
-	 uint32_t xvalue = (uint32_t)value;
+     uint32_t xvalue = (uint32_t)value;
     GPIO_PortWrite((pin>>4U), (uint32_t)(0x1U) << (pin & 0xFU), (xvalue) << (pin & 0xFU));
 }
 
