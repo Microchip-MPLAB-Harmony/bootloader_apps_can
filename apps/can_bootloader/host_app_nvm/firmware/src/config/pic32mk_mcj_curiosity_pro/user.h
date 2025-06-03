@@ -87,7 +87,7 @@ extern "C" {
 
 #elif APP_CAN_BOOTLOADER_TARGET_DEVICE == PIC32CM_GC00_CURIOSITY_PRO  
 #define APP_HEX_HEADER_FILE         "test_app_images/image_pattern_hex_pic32cm_gc00_curiosity_pro.h"
-#define APP_IMAGE_START_ADDR        0xc001000UL
+#define APP_IMAGE_START_ADDR        0xc000000UL
 
 #endif    
     
