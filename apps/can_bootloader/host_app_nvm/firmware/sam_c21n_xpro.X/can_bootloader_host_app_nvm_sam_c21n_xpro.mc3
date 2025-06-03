@@ -1,4 +1,4 @@
-<config configName="sam_c21n_xpro" projectName="can_bootloader_host_app_nvm_sam_c21n_xpro" configVersion="1.1" device="ATSAMC21N18A" deviceLibraryClass="com.microchip.mcc.harmony.Harmony3Library" coreVersion="5.6.1">
+<config configName="sam_c21n_xpro" projectName="can_bootloader_host_app_nvm_sam_c21n_xpro" configVersion="1.1" device="ATSAMC21N18A" deviceLibraryClass="com.microchip.mcc.harmony.Harmony3Library" coreVersion="5.7.1">
    <usedPackages class="java.util.ArrayList"/>
    <usedClasses class="java.util.TreeMap">
       <entry>
@@ -31,7 +31,7 @@
       </entry>
    </usedClasses>
    <usedLibraries class="java.util.ArrayList">
-      <ILibraryFile class="com.microchip.mcc.core.library.BaseLibraryFile" libraryClass="com.microchip.mcc.harmony.Harmony3Library" version="1.4.1"/>
+      <ILibraryFile class="com.microchip.mcc.core.library.BaseLibraryFile" libraryClass="com.microchip.mcc.harmony.Harmony3Library" version="1.5.5"/>
    </usedLibraries>
    <tokenMap class="java.util.TreeMap">
       <entry>
@@ -1846,11 +1846,11 @@
       </entry>
       <entry>
          <file>..\src\config\sam_c21n_xpro\definitions.h</file>
-         <hash>c3c83b5ac455586e55467123425bec7afe737424fec00361eaa3a130d02060e6</hash>
+         <hash>f0750564937d929a9760a147401a109ca33873bec7c6e65633c4b3f00a9f72bd</hash>
       </entry>
       <entry>
          <file>..\src\config\sam_c21n_xpro\device.h</file>
-         <hash>9767b7c6ccb02f5fcf816122c92f23650e8c254e753bbde49ffe4f286e8b0fdb</hash>
+         <hash>27c4489785a0dc0d30b84aa5e0ea6097342d0f02035cf68c068136991e205455</hash>
       </entry>
       <entry>
          <file>..\src\config\sam_c21n_xpro\device_cache.h</file>
@@ -1862,19 +1862,19 @@
       </entry>
       <entry>
          <file>..\src\config\sam_c21n_xpro\exceptions.c</file>
-         <hash>5efbe5a64a17c496d2f5b177bc9cd66a7f0f80323d9558e220c073a13570a2a7</hash>
+         <hash>42f9da2668e04ccb3473d45b149683a00f80072c6883c7918d6ce93997cd6987</hash>
       </entry>
       <entry>
          <file>..\src\config\sam_c21n_xpro\initialization.c</file>
-         <hash>4977a5d4202611c4d7809e70431f054b22932ba64895a569dfe0813450256a5d</hash>
+         <hash>fa97f4eb47a9bec87bedc4a7930b8758fb9740ac5a4dd6e9bb6c6825937b6d3d</hash>
       </entry>
       <entry>
          <file>..\src\config\sam_c21n_xpro\interrupts.c</file>
-         <hash>171e9c8801d7684f1aa9b9219232637557a53b1609d245319dbffca5dccb91d5</hash>
+         <hash>6d263f072754f6676e0f3c5acd534e1ac274bf2e7feb5479184a25ab752ccc19</hash>
       </entry>
       <entry>
          <file>..\src\config\sam_c21n_xpro\interrupts.h</file>
-         <hash>6167a28db8e54a5753dcb668c4075e61e7e875113b34435c27c70b593de35928</hash>
+         <hash>f36e97a45c179afa5aa5841be046473b48f61e754f4e362fdfaa7d70e89b0057</hash>
       </entry>
       <entry>
          <file>..\src\config\sam_c21n_xpro\libc_syscalls.c</file>
@@ -1894,7 +1894,7 @@
       </entry>
       <entry>
          <file>..\src\config\sam_c21n_xpro\peripheral\clock\plib_clock.c</file>
-         <hash>0c78b586fe685716062024cebc83d2a65acfbfcf1254ebcf5f2171bc6a3d3ecc</hash>
+         <hash>09f8298c56c358a9410939e437b21247d41aa53c85b74bfb92e8ba34cd5011c2</hash>
       </entry>
       <entry>
          <file>..\src\config\sam_c21n_xpro\peripheral\clock\plib_clock.h</file>
@@ -1918,11 +1918,11 @@
       </entry>
       <entry>
          <file>..\src\config\sam_c21n_xpro\peripheral\nvic\plib_nvic.c</file>
-         <hash>1329a470f1752d41cdd4bb77aab1069fb9235530b09654344be9f3327d58db86</hash>
+         <hash>278c44f33972f67bf2a61ac1d7502f34a9e6bc23a4bcffd389016e9e8f6d5784</hash>
       </entry>
       <entry>
          <file>..\src\config\sam_c21n_xpro\peripheral\nvic\plib_nvic.h</file>
-         <hash>81e813a093101d546799e00723cbf7245e2d18471fa51c8d130c5809cecca03e</hash>
+         <hash>9936ac782115af41003255283fa2f603f4ff2212d16275b7c80ea8d067a9e208</hash>
       </entry>
       <entry>
          <file>..\src\config\sam_c21n_xpro\peripheral\nvmctrl\plib_nvmctrl.c</file>
@@ -1930,11 +1930,11 @@
       </entry>
       <entry>
          <file>..\src\config\sam_c21n_xpro\peripheral\nvmctrl\plib_nvmctrl.h</file>
-         <hash>3706575d02d502967b3a77c5d6c33f26721148603934715fcbd98c62d20a2663</hash>
+         <hash>a2f572d8ba174971959f4a9319fc61b460c00432512d38e19e28e2dfddf6cde5</hash>
       </entry>
       <entry>
          <file>..\src\config\sam_c21n_xpro\peripheral\pac\plib_pac.c</file>
-         <hash>c8c2d4d4b1fdf13070fe63a58891f1692b30206fb8847bb32e420726d81ac16d</hash>
+         <hash>8802729628864d3b4e05f8d18ee095e0d71014263ffd47069f1379ae9f1c22e2</hash>
       </entry>
       <entry>
          <file>..\src\config\sam_c21n_xpro\peripheral\pac\plib_pac.h</file>
@@ -1942,7 +1942,7 @@
       </entry>
       <entry>
          <file>..\src\config\sam_c21n_xpro\peripheral\port\plib_port.c</file>
-         <hash>7a0cdc35b65db22dcfbfa2f2f5974b3b139b8553bba542dd82f065d438a0366c</hash>
+         <hash>b00bfdc258e75d2192338874eef6fc76440eb959468968d9acbde775b03d8d54</hash>
       </entry>
       <entry>
          <file>..\src\config\sam_c21n_xpro\peripheral\port\plib_port.h</file>

@@ -62,7 +62,7 @@
 
 
 
-volatile static PAC_CALLBACK_OBJ pacCallbackObject;
+static volatile PAC_CALLBACK_OBJ pacCallbackObject;
 
 // *****************************************************************************
 // *****************************************************************************
