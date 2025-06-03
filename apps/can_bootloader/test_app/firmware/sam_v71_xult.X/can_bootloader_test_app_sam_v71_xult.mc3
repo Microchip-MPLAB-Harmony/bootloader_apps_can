@@ -1,4 +1,4 @@
-<config configName="sam_v71_xult" projectName="can_bootloader_test_app_sam_v71_xult" configVersion="1.1" device="ATSAMV71Q21B" deviceLibraryClass="com.microchip.mcc.harmony.Harmony3Library" coreVersion="5.6.1">
+<config configName="sam_v71_xult" projectName="can_bootloader_test_app_sam_v71_xult" configVersion="1.1" device="ATSAMV71Q21B" deviceLibraryClass="com.microchip.mcc.harmony.Harmony3Library" coreVersion="5.7.1">
    <usedPackages class="java.util.ArrayList"/>
    <usedClasses class="java.util.TreeMap">
       <entry>
@@ -35,7 +35,7 @@
       </entry>
    </usedClasses>
    <usedLibraries class="java.util.ArrayList">
-      <ILibraryFile class="com.microchip.mcc.core.library.BaseLibraryFile" libraryClass="com.microchip.mcc.harmony.Harmony3Library" version="1.4.1"/>
+      <ILibraryFile class="com.microchip.mcc.core.library.BaseLibraryFile" libraryClass="com.microchip.mcc.harmony.Harmony3Library" version="1.5.5"/>
    </usedLibraries>
    <tokenMap class="java.util.TreeMap">
       <entry>
@@ -1489,7 +1489,7 @@
       </entry>
       <entry>
          <file>..\src\config\sam_v71_xult\bsp\bsp.h</file>
-         <hash>a88f06ab5037c2495f13304533529a904b90b88350d96e0166c0de63db858475</hash>
+         <hash>a329e44156acb118e9266f48dd816c92ebc4c5996a8e0e3115afe729a3984741</hash>
       </entry>
       <entry>
          <file>..\src\config\sam_v71_xult\configuration.h</file>
@@ -1497,11 +1497,11 @@
       </entry>
       <entry>
          <file>..\src\config\sam_v71_xult\definitions.h</file>
-         <hash>00b2df6d3e364264cf17e8a2aad2270914e5b67023a63ab9af3ab31b04b71078</hash>
+         <hash>2b0ff20ff00db04aa6032b0f1329eabdaef85046ec115459cf621a1a4a57f268</hash>
       </entry>
       <entry>
          <file>..\src\config\sam_v71_xult\device.h</file>
-         <hash>96c2e6d2d482f8b700bcd4933f55af0bb338918b508d8b2dc3faa0562492ff27</hash>
+         <hash>2aecc75fe5031c595e00fd7fbe03793d1b9d34f12c8ae0b1fb8a8ade158a2071</hash>
       </entry>
       <entry>
          <file>..\src\config\sam_v71_xult\device_cache.h</file>
@@ -1513,19 +1513,19 @@
       </entry>
       <entry>
          <file>..\src\config\sam_v71_xult\exceptions.c</file>
-         <hash>89852728a9a1cc4c9746839cc3caf5308b8698c0c30bf6bfbad0db9e552a387e</hash>
+         <hash>a565e8d25d218b3e1069267ae9cc317161d062683a27c64e3cb454757bb82fd9</hash>
       </entry>
       <entry>
          <file>..\src\config\sam_v71_xult\initialization.c</file>
-         <hash>b647ee52817e894838c8c6ec286b9577244cfabd952ce845838e1e10e62b1c90</hash>
+         <hash>ed4e7f30079d1041e735dbecb198dab735bd60dea5a330a3bbb0f66765e3a0fa</hash>
       </entry>
       <entry>
          <file>..\src\config\sam_v71_xult\interrupts.c</file>
-         <hash>09411b7bbd665b6cd061913582e241c7c143075e590f006d193bf4a9263e13f8</hash>
+         <hash>39629645bafec9dcf4c74d7cf6dccffce94e6a8120199e0d73fba695e16225dc</hash>
       </entry>
       <entry>
          <file>..\src\config\sam_v71_xult\interrupts.h</file>
-         <hash>51a66f1b8fa6ef9e021e84e64a8eeb9cf954ef63cfdd9cb28c6808abc26a4f95</hash>
+         <hash>65c5edcf97cdaf499497c7e18d8fa01383032be88e8aedfc883cbc35dc8bbfc8</hash>
       </entry>
       <entry>
          <file>..\src\config\sam_v71_xult\libc_syscalls.c</file>
@@ -1541,7 +1541,7 @@
       </entry>
       <entry>
          <file>..\src\config\sam_v71_xult\peripheral\efc\plib_efc.c</file>
-         <hash>f68a48f3b8cad5bfef0a13c840114bbf962b54a993824bf3b8e9666204219b75</hash>
+         <hash>ee7f7eff55be42931a6abc699fc671a3b9c40c224dee710f4eaf538997e1eb4b</hash>
       </entry>
       <entry>
          <file>..\src\config\sam_v71_xult\peripheral\efc\plib_efc.h</file>
@@ -1549,11 +1549,11 @@
       </entry>
       <entry>
          <file>..\src\config\sam_v71_xult\peripheral\nvic\plib_nvic.c</file>
-         <hash>3d89f9371ce4e519ebca69b0bda48169332067a95f4dbfdb90c6131ced1470c4</hash>
+         <hash>dd717044dd36bdaf83a852c95160c3e8184a8cd8eb45179b6fa65d159c1e7306</hash>
       </entry>
       <entry>
          <file>..\src\config\sam_v71_xult\peripheral\nvic\plib_nvic.h</file>
-         <hash>81e813a093101d546799e00723cbf7245e2d18471fa51c8d130c5809cecca03e</hash>
+         <hash>9936ac782115af41003255283fa2f603f4ff2212d16275b7c80ea8d067a9e208</hash>
       </entry>
       <entry>
          <file>..\src\config\sam_v71_xult\peripheral\pio\plib_pio.c</file>
@@ -1565,7 +1565,7 @@
       </entry>
       <entry>
          <file>..\src\config\sam_v71_xult\peripheral\systick\plib_systick.c</file>
-         <hash>44cbcb5b251fce38cde2021ba6c6cdda64e2f4449b4ffb7f2a8f5c1d51731a9a</hash>
+         <hash>adc780f2fa55234e79ea6b98d1ab1cfa607d44da61351b51e9722c948a6c349a</hash>
       </entry>
       <entry>
          <file>..\src\config\sam_v71_xult\peripheral\systick\plib_systick.h</file>
@@ -1573,7 +1573,7 @@
       </entry>
       <entry>
          <file>..\src\config\sam_v71_xult\peripheral\usart\plib_usart1.c</file>
-         <hash>dc710aeca05a02fa86803442170bba967315a1bd572454214f6b41302253d1cf</hash>
+         <hash>d3b82e43fd04b4f87088aac6be981bed43435eeb38065c7bcc6442cab8855f00</hash>
       </entry>
       <entry>
          <file>..\src\config\sam_v71_xult\peripheral\usart\plib_usart1.h</file>
@@ -1581,7 +1581,7 @@
       </entry>
       <entry>
          <file>..\src\config\sam_v71_xult\peripheral\usart\plib_usart_common.h</file>
-         <hash>515630c93a179f33d4067575f9619de7269c9f1ebaee4496dad91fd1b58879b8</hash>
+         <hash>b58eca63b7625d1bb13cb6399c2991a9fb24e7a5a32e104fb2efb19952bd1957</hash>
       </entry>
       <entry>
          <file>..\src\config\sam_v71_xult\pin_configurations.csv</file>
