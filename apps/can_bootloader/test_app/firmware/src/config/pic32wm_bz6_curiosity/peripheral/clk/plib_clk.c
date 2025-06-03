@@ -121,8 +121,8 @@ void CLOCK_Initialize( void )
         (void)((FUNC_PCHE_SETUP)(*(uint32_t*)0xF2D0))((PCHE_REGS->PCHE_CHECON & (~(PCHE_CHECON_PFMWS_Msk | PCHE_CHECON_ADRWS_Msk | PCHE_CHECON_PREFEN_Msk)))
                                         | (PCHE_CHECON_PFMWS(4) | PCHE_CHECON_PREFEN(1) | PCHE_CHECON_ADRWS(1)));
     }
-    //programming 4ms delay -  programming subsys_xtal_ready_delay
-    //check xtal spec for delay required
+    
+
     //wait for crystal ready
     while((BTZBSYS_REGS->BTZBSYS_SUBSYS_STATUS_REG1 & BTZBSYS_SUBSYS_STATUS_REG1_xtal_ready_out_Msk) != BTZBSYS_SUBSYS_STATUS_REG1_xtal_ready_out_Msk)
     {
@@ -150,8 +150,9 @@ void CLOCK_Initialize( void )
 
     // Set MISC[24]=0, CLKGEN_PLLRST = 0
     CFG_REGS->CFG_MISCSTAT  &= 0x00FFFFFFU;
-	// Setting CPU QoS and FC QoS to same priority
-	CFG_REGS->CFG_CFGPGQOS1 = (CFG_REGS->CFG_CFGPGQOS1 & ~(CFG_CFGPGQOS1_FCQOS_Msk | CFG_CFGPGQOS1_CPUQOS_Msk)) | ((0x03 << CFG_CFGPGQOS1_FCQOS_Pos) | (0x03 << CFG_CFGPGQOS1_CPUQOS_Pos));
+    // Setting CPU QoS and FC QoS to same priority
+        CFG_REGS->CFG_CFGPGQOS1 = (CFG_REGS->CFG_CFGPGQOS1 & ~(CFG_CFGPGQOS1_FCQOS_Msk | CFG_CFGPGQOS1_CPUQOS_Msk)) | ((0x03UL << CFG_CFGPGQOS1_FCQOS_Pos) | (0x03UL << CFG_CFGPGQOS1_CPUQOS_Pos));
+
     //programming delay for pll lock - 500 us
     //32 us steps - check pll spec for final value
     BTZBSYS_REGS->BTZBSYS_SUBSYS_CNTRL_REG3 = ((BTZBSYS_REGS->BTZBSYS_SUBSYS_CNTRL_REG3 & ~BTZBSYS_SUBSYS_CNTRL_REG3_subsys_pll_ready_delay_Msk )
