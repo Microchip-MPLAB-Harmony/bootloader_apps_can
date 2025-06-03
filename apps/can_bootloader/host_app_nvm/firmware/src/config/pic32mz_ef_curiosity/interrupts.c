@@ -20,7 +20,7 @@
 
 // DOM-IGNORE-BEGIN
 /*******************************************************************************
-* Copyright (C) 2018 Microchip Technology Inc. and its subsidiaries.
+* Copyright (C) 2025 Microchip Technology Inc. and its subsidiaries.
 *
 * Subject to your compliance with these terms, you may use Microchip software
 * and any derivatives exclusively with Microchip products. It is your
@@ -77,20 +77,20 @@ void UART6_TX_Handler (void);
 // Section: System Interrupt Vector definitions
 // *****************************************************************************
 // *****************************************************************************
-void __ISR(_FLASH_CONTROL_VECTOR, ipl1SRS) FLASH_CONTROL_Handler (void)
+void __attribute__((used)) __ISR(_FLASH_CONTROL_VECTOR, ipl1SRS) FLASH_CONTROL_Handler (void)
 {
     NVM_InterruptHandler();
 }
 
-void __ISR(_UART6_FAULT_VECTOR, ipl1SRS) UART6_FAULT_Handler (void)
+void __attribute__((used)) __ISR(_UART6_FAULT_VECTOR, ipl1SRS) UART6_FAULT_Handler (void)
 {
 }
 
-void __ISR(_UART6_RX_VECTOR, ipl1SRS) UART6_RX_Handler (void)
+void __attribute__((used)) __ISR(_UART6_RX_VECTOR, ipl1SRS) UART6_RX_Handler (void)
 {
 }
 
-void __ISR(_UART6_TX_VECTOR, ipl1SRS) UART6_TX_Handler (void)
+void __attribute__((used)) __ISR(_UART6_TX_VECTOR, ipl1SRS) UART6_TX_Handler (void)
 {
 }
 
