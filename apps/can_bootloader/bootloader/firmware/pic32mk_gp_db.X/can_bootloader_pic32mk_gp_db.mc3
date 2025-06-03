@@ -1,4 +1,4 @@
-<config configName="pic32mk_gp_db" projectName="can_bootloader_pic32mk_gp_db" configVersion="1.1" device="PIC32MK1024GPE100" deviceLibraryClass="com.microchip.mcc.harmony.Harmony3Library" coreVersion="5.6.1">
+<config configName="pic32mk_gp_db" projectName="can_bootloader_pic32mk_gp_db" configVersion="1.1" device="PIC32MK1024GPE100" deviceLibraryClass="com.microchip.mcc.harmony.Harmony3Library" coreVersion="5.7.1">
    <usedPackages class="java.util.ArrayList"/>
    <usedClasses class="java.util.TreeMap">
       <entry>
@@ -23,7 +23,7 @@
       </entry>
    </usedClasses>
    <usedLibraries class="java.util.ArrayList">
-      <ILibraryFile class="com.microchip.mcc.core.library.BaseLibraryFile" libraryClass="com.microchip.mcc.harmony.Harmony3Library" version="1.4.1"/>
+      <ILibraryFile class="com.microchip.mcc.core.library.BaseLibraryFile" libraryClass="com.microchip.mcc.harmony.Harmony3Library" version="1.5.5"/>
    </usedLibraries>
    <tokenMap class="java.util.TreeMap">
       <entry>
@@ -4378,7 +4378,7 @@
       </entry>
       <entry>
          <file>..\src\config\pic32mk_gp_db\bootloader\bootloader_common.h</file>
-         <hash>46069d726af4578cec93ca85e481209b27583cadd2881a054262a3315e5c4d4a</hash>
+         <hash>e10c0c7b42ff80de215e90bd46d84c82c796125ec9fee250b323858d42bd6e27</hash>
       </entry>
       <entry>
          <file>..\src\config\pic32mk_gp_db\btl.ld</file>
@@ -4386,11 +4386,11 @@
       </entry>
       <entry>
          <file>..\src\config\pic32mk_gp_db\definitions.h</file>
-         <hash>0770fea38e3deaa24cf87b710e8b4e4a4769dfacf25f5d42ebdd0ab7ea52ce8a</hash>
+         <hash>086022b3a4f78273f52d7715d72872b035bd15626e147c27d9a3067b1cbdbe42</hash>
       </entry>
       <entry>
          <file>..\src\config\pic32mk_gp_db\device.h</file>
-         <hash>10ec93c43a7b158a129ae05bd8f4a59ff5bcf3d0f3f062fdd64c374bc2d42099</hash>
+         <hash>4d4341a6f9628cea0bf73f980b639f7cb81089e55a60ad7e434be2a71e477442</hash>
       </entry>
       <entry>
          <file>..\src\config\pic32mk_gp_db\initialization.c</file>
@@ -4410,7 +4410,7 @@
       </entry>
       <entry>
          <file>..\src\config\pic32mk_gp_db\peripheral\clk\plib_clk.c</file>
-         <hash>5d6c6a26a79d132c9b6ec7b763bee6dad004a5c3882c84c71905feb59730299d</hash>
+         <hash>a1b5b323d3b0b943031a2f3985a633f503a33e8d63d06aac90bd218ed06be660</hash>
       </entry>
       <entry>
          <file>..\src\config\pic32mk_gp_db\peripheral\clk\plib_clk.h</file>
@@ -4418,11 +4418,11 @@
       </entry>
       <entry>
          <file>..\src\config\pic32mk_gp_db\peripheral\evic\plib_evic.c</file>
-         <hash>6a4868a2d1fc1277d41a08d5d4cd4fb0a984fc9731fd22dfba194ea9070f9782</hash>
+         <hash>62232d2eba23028329679e339b515fd19d1e4dcb9fee96a9ed994bc055cc6a8c</hash>
       </entry>
       <entry>
          <file>..\src\config\pic32mk_gp_db\peripheral\evic\plib_evic.h</file>
-         <hash>5d2b2a2d0c07aaa79af7d507e11e666e511be2c8a65fd2179aab81c6547e985a</hash>
+         <hash>448da35a1944883bf7c38207d29b529b217079ed60240fbf90dd20a1010ee1f4</hash>
       </entry>
       <entry>
          <file>..\src\config\pic32mk_gp_db\peripheral\gpio\plib_gpio.c</file>
@@ -4430,7 +4430,7 @@
       </entry>
       <entry>
          <file>..\src\config\pic32mk_gp_db\peripheral\gpio\plib_gpio.h</file>
-         <hash>f639da9c1696c647858be4ca363cb3b04e9ba65a1823b9ec292f8c0af1b10027</hash>
+         <hash>4ee048a317bbe7cf018fb195d701e8014dd9307cb6d001bec0aac2eafc914fd4</hash>
       </entry>
       <entry>
          <file>..\src\config\pic32mk_gp_db\peripheral\nvm\plib_nvm.c</file>
