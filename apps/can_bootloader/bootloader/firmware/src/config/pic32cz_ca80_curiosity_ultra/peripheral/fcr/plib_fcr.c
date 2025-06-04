@@ -67,20 +67,24 @@ void FCR_Initialize( void )
 bool FCR_Read( uint32_t *data, uint32_t length, const uint32_t address )
 {
     uint32_t *pAddress = (uint32_t *)address;
-   (void)memcpy(data,pAddress,length);
+    if (DATA_CACHE_IS_ENABLED() != 0U)
+    {
+        DCACHE_INVALIDATE_BY_ADDR(pAddress, (int32_t)length);
+    }
+    (void)memcpy(data,pAddress,length);
 
     return true;
 }
 
 bool FCR_CRCCalculate (uint32_t startAddress, size_t length, uint32_t crcSeed, uint32_t * crc)
 {
-	// Clear CRC Registers
+    // Clear CRC Registers
     FCR_REGS->FCR_CRCCTRL |= FCR_CRCCTRL_CRCRST(1U);
     while((FCR_REGS->FCR_CRCCTRL & FCR_CRCCTRL_CRCRST_Msk) == 1U)
     {
         /* Wait for the FCR Operation to Complete */
     }
-    
+
     // Register Setup
     FCR_REGS->FCR_CRCCTRL |=    FCR_CRCCTRL_PLEN32(1U) | FCR_CRCCTRL_RIN(1U) | FCR_CRCCTRL_ROUT(1U);
 
@@ -95,9 +99,9 @@ bool FCR_CRCCalculate (uint32_t startAddress, size_t length, uint32_t crcSeed, u
     {
         /* Wait for the FCR Operation to Complete */
     }
-    
+
     /* Reading the resultant crc value from the CRCACC register */
     *crc = (uint32_t) FCR_REGS->FCR_CRCACC;
-    
+
     return true;
 }
