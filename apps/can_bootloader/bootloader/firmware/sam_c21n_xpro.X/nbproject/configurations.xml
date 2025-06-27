@@ -157,19 +157,6 @@
       </logicalFolder>
     </logicalFolder>
     <logicalFolder name="ExternalFiles" displayName="Important Files" projectFiles="true">
-      <logicalFolder name="f1" displayName="sam_c21n_xpro.mhc" projectFiles="true">
-        <itemPath>../src/config/sam_c21n_xpro/sam_c21n_xpro.mhc/can0.yml</itemPath>
-        <itemPath>../src/config/sam_c21n_xpro/sam_c21n_xpro.mhc/can_bootloader.yml</itemPath>
-        <itemPath>../src/config/sam_c21n_xpro/sam_c21n_xpro.mhc/cmsis.yml</itemPath>
-        <itemPath>../src/config/sam_c21n_xpro/sam_c21n_xpro.mhc/core.yml</itemPath>
-        <itemPath>../src/config/sam_c21n_xpro/sam_c21n_xpro.mhc/dfp.yml</itemPath>
-        <itemPath>../src/config/sam_c21n_xpro/sam_c21n_xpro.mhc/dsu.yml</itemPath>
-        <itemPath>../src/config/sam_c21n_xpro/sam_c21n_xpro.mhc/evsys.yml</itemPath>
-        <itemPath>../src/config/sam_c21n_xpro/sam_c21n_xpro.mhc/GraphSettings.yml</itemPath>
-        <itemPath>../src/config/sam_c21n_xpro/sam_c21n_xpro.mhc/nvmctrl.yml</itemPath>
-        <itemPath>../src/config/sam_c21n_xpro/sam_c21n_xpro.mhc/project.yml</itemPath>
-        <itemPath>../src/config/sam_c21n_xpro/sam_c21n_xpro.mhc/settings.yml</itemPath>
-      </logicalFolder>
       <itemPath>Makefile</itemPath>
       <itemPath>../src/config/sam_c21n_xpro/harmony-manifest-success.yml</itemPath>
       <itemPath>../src/config/sam_c21n_xpro/pin_configurations.csv</itemPath>

@@ -4,18 +4,18 @@
 
 
 project: host_app_nvm
-creation_date: 2025-06-04T15:01:55.479+05:30[Asia/Calcutta]    # ISO 8601 format: https://www.w3.org/TR/NOTE-datetime
-operating_system: Windows 11
+creation_date: 2025-06-27T14:51:53.977+05:30[Asia/Calcutta]    # ISO 8601 format: https://www.w3.org/TR/NOTE-datetime
+operating_system: Windows 10
 mcc_mode: IDE            # [IDE|Standalone|Headless]
 mcc_version: v5.5.2
 mcc_core_version: v5.7.1
 mplabx_version: v6.25        # if MPLAB X plugin only
-harmony_version: v1.5.4
+harmony_version: v1.5.5
 compiler: XC32 4.60
 
 modules:
-    - {name: "csp", version: "v3.22.4-41-gae7d08d"}
-    - {name: "CMSIS_5", version: "5.8.0"}
+    - {name: "CMSIS_5", version: "5.9.0"}
+    - {name: "csp", version: "v3.22.5"}
 
 packs:
     - {name: "PIC32CZ-CA70_DFP", version: "1.2.32"}

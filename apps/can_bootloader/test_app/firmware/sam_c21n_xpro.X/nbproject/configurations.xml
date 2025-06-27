@@ -158,20 +158,6 @@
       <itemPath>../src/app.h</itemPath>
     </logicalFolder>
     <logicalFolder name="ExternalFiles" displayName="Important Files" projectFiles="true">
-      <logicalFolder name="f1" displayName="sam_c21n_xpro.mhc" projectFiles="true">
-        <itemPath>../src/config/sam_c21n_xpro/sam_c21n_xpro.mhc/BSP_SAM_C21N_Xplained_Pro.yml</itemPath>
-        <itemPath>../src/config/sam_c21n_xpro/sam_c21n_xpro.mhc/cmsis.yml</itemPath>
-        <itemPath>../src/config/sam_c21n_xpro/sam_c21n_xpro.mhc/core.yml</itemPath>
-        <itemPath>../src/config/sam_c21n_xpro/sam_c21n_xpro.mhc/dfp.yml</itemPath>
-        <itemPath>../src/config/sam_c21n_xpro/sam_c21n_xpro.mhc/evsys.yml</itemPath>
-        <itemPath>../src/config/sam_c21n_xpro/sam_c21n_xpro.mhc/GraphSettings.yml</itemPath>
-        <itemPath>../src/config/sam_c21n_xpro/sam_c21n_xpro.mhc/HarmonyCore.yml</itemPath>
-        <itemPath>../src/config/sam_c21n_xpro/sam_c21n_xpro.mhc/nvmctrl.yml</itemPath>
-        <itemPath>../src/config/sam_c21n_xpro/sam_c21n_xpro.mhc/project.yml</itemPath>
-        <itemPath>../src/config/sam_c21n_xpro/sam_c21n_xpro.mhc/sercom4.yml</itemPath>
-        <itemPath>../src/config/sam_c21n_xpro/sam_c21n_xpro.mhc/settings.yml</itemPath>
-        <itemPath>../src/config/sam_c21n_xpro/sam_c21n_xpro.mhc/stdio.yml</itemPath>
-      </logicalFolder>
       <itemPath>Makefile</itemPath>
       <itemPath>../src/config/sam_c21n_xpro/harmony-manifest-success.yml</itemPath>
       <itemPath>../src/config/sam_c21n_xpro/pin_configurations.csv</itemPath>
