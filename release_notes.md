@@ -1,12 +1,48 @@
----
-title: Release notes
-nav_order: 99
----
-
 ![Microchip logo](https://raw.githubusercontent.com/wiki/Microchip-MPLAB-Harmony/Microchip-MPLAB-Harmony.github.io/images/microchip_logo.png)
 ![Harmony logo small](https://raw.githubusercontent.com/wiki/Microchip-MPLAB-Harmony/Microchip-MPLAB-Harmony.github.io/images/microchip_mplab_harmony_logo_small.png)
 
 # Microchip MPLAB® Harmony 3 Release Notes
+
+## CAN Bootloader Applications Release v3.3.0
+
+### New Features
+
+- This release includes support of
+    - CAN Bootloader Applications for PIC32CK-GC01, PIC32CM-GC00, PIC32CZ-CA70 and PIC32WM-BZ6 family of 32-bit microcontrollers.
+
+### Development kit and demo application support
+- The following table provides bootloader demo applications available for different development kits.
+
+    | Product Family                 | Development Kits                                    | CAN              | CAN Fail Safe             |
+    | ------------------------------ | --------------------------------------------------- | ---------------- | ------------------------- |
+    | SAM C20/C21                    | [SAM C21N Xplained Pro Evaluation Kit](https://www.microchip.com/DevelopmentTools/ProductDetails.aspx?PartNO=ATSAMC21-XPRO)   | Yes              | NA                        |
+    | SAM D5x/E5x                    | [SAM E54 Xplained Pro Evaluation Kit](https://www.microchip.com/developmenttools/ProductDetails/ATSAME54-XPRO)               | Yes              | Yes                       |
+    | SAM E70/S70/V70/V71            | [SAM E70 Xplained Ultra Evaluation Kit](https://www.microchip.com/DevelopmentTools/ProductDetails.aspx?PartNO=ATSAME70-XULT)   | Yes              | NA                        |
+    | SAM E70/S70/V70/V71            | [SAM V71 Xplained Ultra Evaluation Kit](https://www.microchip.com/DevelopmentTools/ProductDetails/PartNO/ATSAMV71-XULT)        | Yes              | NA                        |
+    | PIC32MK GPD/GPE/MCF            | [PIC32MK GP Development Kit](https://www.microchip.com/developmenttools/ProductDetails/dm320106)                                                                                       | Yes              | No                       |
+    | PIC32MK GPG/MCJ                | [PIC32MK MCJ Curiosity Pro](https://www.microchip.com/DevelopmentTools/ProductDetails/PartNO/DT100113)                                                                                       | Yes              | NA                        |
+    | PIC32MK GPK/MCM                | [PIC32MK MCM Curiosity Pro Development Board](https://www.microchip.com/Developmenttools/ProductDetails/EV31E34A)                    | Yes              | No                       |
+    | PIC32MZ EF                     | [PIC32MZ EF Curiosity 2.0 Development Kit](https://www.microchip.com/en-us/development-tool/DM320209)                    | Yes              | No                       |
+    | PIC32MZ W1                     | [PIC32 WFI32E Curiosity Board](https://www.microchip.com/Developmenttools/ProductDetails/EV12F11A)                                                                                       | Yes              | NA                        |
+    | PIC32CZ CA                     | [PIC32CZ-CA80 Curiosity Ultra board](https://www.microchip.com/en-us/development-tool/ea61x20a)                    | Yes              | NA                        |
+    | PIC32CK GC01                   | [PIC32CK GC Curiosity Ultra board](https://www.microchip.com/en-us/development-tool/ev44p93a)          | Yes              | NA                        |
+    | PIC32CM GC00                   | [PIC32CM GC Curiosity Pro board](https://www.microchip.com/en-us/development-tool/EA36K74A)            | Yes              | NA                        |
+    | PIC32CZ CA70                   | [PIC32CZ-CA70 Curiosity Ultra board](https://www.microchip.com/en-us/development-tool/ev56t44a)        | Yes              | NA                        |
+    | PIC32WM BZ6                    | [PIC32WM BZ6 Curiosity]()                                                                              | Yes              | NA                        |
+
+- **NA:** Lack of product capability
+
+### Known Issues
+
+- No changes from v3.2.0
+
+### Development Tools
+
+- [MPLAB® X IDE v6.25](https://www.microchip.com/mplab/mplab-x-ide)
+- MPLAB® X IDE plug-ins:
+  - MPLAB® Code Configurator (MCC) v5.5.2
+- [MPLAB® XC32 C/C++ Compiler v4.60](https://www.microchip.com/mplab/compilers)
+
 
 ## CAN Bootloader Applications Release v3.2.0
 
