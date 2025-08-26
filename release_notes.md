@@ -3,6 +3,19 @@
 
 # Microchip MPLAB® Harmony 3 Release Notes
 
+## CAN Bootloader Applications Release v3.3.1
+
+### New Features
+
+- None
+
+### Bug fixes and Improvements
+
+- Regenerated and tested PIC32CZ CA80 Curiosity Ultra CAN bootloader applications 
+
+### Development Tools
+- Same as v3.3.0
+
 ## CAN Bootloader Applications Release v3.3.0
 
 ### New Features
