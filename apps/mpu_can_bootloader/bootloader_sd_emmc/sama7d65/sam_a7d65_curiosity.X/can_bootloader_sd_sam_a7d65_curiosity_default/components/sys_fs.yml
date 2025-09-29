@@ -1,0 +1,79 @@
+configVersion: 1.0.0
+componentName: sys_fs
+coreVersion: 5.8.2
+device: SAMA7D65
+library: []
+dependency:
+- dependencyPackage: class com.microchip.mcc.harmony.HarmonyModule
+  name: sys_fs
+  type: module
+  version: ''
+- dependencyPackage: ''
+  name: core
+  type: package
+  version: v3.15.5
+- dependencyPackage: ''
+  name: filex
+  type: package
+  version: v6.4.0_rel
+- dependencyPackage: ''
+  name: littlefs
+  type: package
+  version: v2.9.3
+customDataClassName: com.microchip.utils_mh3.utils.persistence.CustomModuleData
+data:
+  attachments:
+    children:
+    - children:
+      - attributes:
+          id: sys_fs_DRV_MEDIA_dependency
+        children:
+        - children:
+          - attributes:
+              targetAttachmentID: drv_media
+              targetComponentID: drv_sdmmc
+            type: TargetAttachment
+          - attributes:
+              targetAttachmentID: drv_media
+              targetComponentID: drv_sdmmc_0
+            type: TargetAttachment
+          type: TargetAttachments
+        type: MultiCapability
+      type: Attachments
+    type: sys_fs
+  elementPosition:
+    attributes:
+      id: __ROOTVIEW
+    children:
+    - children:
+      - attributes:
+          id: sys_fs
+          x: '250'
+          y: '165'
+        type: ElementPosition
+      type: ElementPositions
+    type: ComponentGraph
+  symbols:
+    SYS_FS_AUTO_MOUNT:
+      attributes:
+        id: SYS_FS_AUTO_MOUNT
+      children:
+      - children:
+        - attributes:
+            id: can_bootloader
+            value: 'true'
+          type: Dynamic
+        type: Values
+      type: Boolean
+    SYS_FS_TOTAL_VOLUMES:
+      attributes:
+        id: SYS_FS_TOTAL_VOLUMES
+      children:
+      - children:
+        - attributes:
+            id: sys_fs
+            value: '1'
+          type: Dynamic
+        type: Values
+      type: Integer
+  userData: {}
