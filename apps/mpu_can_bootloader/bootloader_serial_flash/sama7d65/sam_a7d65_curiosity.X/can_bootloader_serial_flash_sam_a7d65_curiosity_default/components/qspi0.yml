@@ -1,0 +1,117 @@
+configVersion: 1.0.0
+componentName: qspi0
+coreVersion: 5.8.2
+device: SAMA7D65
+library: []
+dependency:
+- dependencyPackage: class com.microchip.mcc.harmony.HarmonyModule
+  name: qspi0
+  type: module
+  version: ''
+- dependencyPackage: ''
+  name: csp
+  type: package
+  version: v3.23.0
+customDataClassName: com.microchip.utils_mh3.utils.persistence.CustomModuleData
+data:
+  attachments:
+    children:
+    - children:
+      - attributes:
+          id: QSPI0_SPI
+        children:
+        - children:
+          - attributes:
+              id: enabled
+            children:
+            - type: Value
+              value: 'false'
+            type: Boolean
+          type: Attributes
+        type: DirectCapability
+      - attributes:
+          id: QSPI0_SQI
+        children:
+        - children:
+          - attributes:
+              id: targetComponentID
+            children:
+            - type: Value
+              value: drv_sst26
+            type: String
+          - attributes:
+              id: targetAttachmentID
+            children:
+            - type: Value
+              value: drv_sst26_SQI_dependency
+            type: String
+          type: Attributes
+        type: DirectCapability
+      type: Attachments
+    type: qspi0
+  elementPosition:
+    attributes:
+      id: __ROOTVIEW
+    children:
+    - children:
+      - attributes:
+          id: qspi0
+          x: '12'
+          y: '281'
+        type: ElementPosition
+      type: ElementPositions
+    type: ComponentGraph
+  symbols:
+    QSPI_CLK_FREQ:
+      attributes:
+        id: QSPI_CLK_FREQ
+      children:
+      - children:
+        - attributes:
+            id: qspi0
+            value: '133333350'
+          type: Dynamic
+        type: Values
+      type: Integer
+    QSPI_CPOL:
+      attributes:
+        id: QSPI_CPOL
+      children:
+      - children:
+        - attributes:
+            id: qspi0
+            value: '0'
+          type: Dynamic
+        type: Values
+      type: KeyValueSet
+    QSPI_DLLCFG_RANGE:
+      attributes:
+        id: QSPI_DLLCFG_RANGE
+      children:
+      - children:
+        - attributes:
+            id: qspi0
+            value: 'true'
+          type: Dynamic
+        type: Values
+      type: Boolean
+    QSPI_SMM:
+      attributes:
+        id: QSPI_SMM
+      children:
+      - children:
+        - attributes:
+            id: readOnly
+          children:
+          - type: Value
+            value: 'true'
+          type: Boolean
+        type: Attributes
+      - children:
+        - attributes:
+            id: qspi0
+            value: '0'
+          type: Dynamic
+        type: Values
+      type: KeyValueSet
+  userData: {}
