@@ -1,0 +1,122 @@
+configVersion: 1.0.0
+componentName: drv_nand_flash
+coreVersion: 5.8.2
+device: SAMA7D65
+library: []
+dependency:
+- dependencyPackage: class com.microchip.mcc.harmony.HarmonyModule
+  name: drv_nand_flash
+  type: module
+  version: ''
+- dependencyPackage: ''
+  name: core
+  type: package
+  version: v3.15.5
+customDataClassName: com.microchip.utils_mh3.utils.persistence.CustomModuleData
+data:
+  attachments:
+    children:
+    - children:
+      - attributes:
+          id: drv_nand_flash_NAND_CS_dependency
+        children:
+        - children:
+          - attributes:
+              id: targetComponentID
+            children:
+            - type: Value
+              value: hsmc
+            type: String
+          - attributes:
+              id: targetAttachmentID
+            children:
+            - type: Value
+              value: smc_cs0
+            type: String
+          type: Attributes
+        type: DirectDependency
+      - attributes:
+          id: memory
+        children:
+        - children:
+          - attributes:
+              id: targetComponentID
+            children:
+            - type: Value
+              value: can_bootloader
+            type: String
+          - attributes:
+              id: targetAttachmentID
+            children:
+            - type: Value
+              value: btl_MEMORY_dependency
+            type: String
+          type: Attributes
+        type: DirectCapability
+      type: Attachments
+    type: drv_nand_flash
+  elementPosition:
+    attributes:
+      id: __ROOTVIEW
+    children:
+    - children:
+      - attributes:
+          id: drv_nand_flash
+          x: '196'
+          y: '230'
+        type: ElementPosition
+      type: ElementPositions
+    type: ComponentGraph
+  symbols:
+    DRV_NAND_FLASH_CHIP_SELECT:
+      attributes:
+        id: DRV_NAND_FLASH_CHIP_SELECT
+      children:
+      - children:
+        - attributes:
+            id: drv_nand_flash
+            value: '0'
+          type: Dynamic
+        type: Values
+      type: Integer
+    DRV_NAND_FLASH_PLIB:
+      attributes:
+        id: DRV_NAND_FLASH_PLIB
+      children:
+      - children:
+        - attributes:
+            id: drv_nand_flash
+            value: HSMC
+          type: Dynamic
+        type: Values
+      type: String
+    DRV_NAND_FLASH_TX_RX_DMA:
+      attributes:
+        id: DRV_NAND_FLASH_TX_RX_DMA
+      children:
+      - children:
+        - attributes:
+            value: 'true'
+          type: User
+        type: Values
+      type: Boolean
+    DRV_NAND_FLASH_TX_RX_DMA_CHANNEL:
+      attributes:
+        id: DRV_NAND_FLASH_TX_RX_DMA_CHANNEL
+      children:
+      - children:
+        - attributes:
+            id: visible
+          children:
+          - type: Value
+            value: 'true'
+          type: Boolean
+        type: Attributes
+      - children:
+        - attributes:
+            id: drv_nand_flash
+            value: '0'
+          type: Dynamic
+        type: Values
+      type: Integer
+  userData: {}

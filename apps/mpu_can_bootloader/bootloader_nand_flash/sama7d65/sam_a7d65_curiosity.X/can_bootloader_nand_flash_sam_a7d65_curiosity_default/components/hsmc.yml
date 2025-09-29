@@ -1,0 +1,91 @@
+configVersion: 1.0.0
+componentName: hsmc
+coreVersion: 5.8.2
+device: SAMA7D65
+library: []
+dependency:
+- dependencyPackage: class com.microchip.mcc.harmony.HarmonyModule
+  name: hsmc
+  type: module
+  version: ''
+- dependencyPackage: ''
+  name: csp
+  type: package
+  version: v3.23.0
+customDataClassName: com.microchip.utils_mh3.utils.persistence.CustomModuleData
+data:
+  attachments:
+    children:
+    - children:
+      - attributes:
+          id: smc_cs0
+        children:
+        - children:
+          - attributes:
+              id: targetComponentID
+            children:
+            - type: Value
+              value: drv_nand_flash
+            type: String
+          - attributes:
+              id: targetAttachmentID
+            children:
+            - type: Value
+              value: drv_nand_flash_NAND_CS_dependency
+            type: String
+          type: Attributes
+        type: DirectCapability
+      type: Attachments
+    type: hsmc
+  elementPosition:
+    attributes:
+      id: __ROOTVIEW
+    children:
+    - children:
+      - attributes:
+          id: hsmc
+          x: '17'
+          y: '242'
+        type: ElementPosition
+      type: ElementPositions
+    type: ComponentGraph
+  symbols:
+    SMC_CHIP_SELECT_ENABLE0:
+      attributes:
+        id: SMC_CHIP_SELECT_ENABLE0
+      children:
+      - children:
+        - attributes:
+            id: readOnly
+          children:
+          - type: Value
+            value: 'true'
+          type: Boolean
+        type: Attributes
+      - children:
+        - attributes:
+            id: hsmc
+            value: 'true'
+          type: Dynamic
+        type: Values
+      type: Boolean
+    SMC_PMECC_ENABLE:
+      attributes:
+        id: SMC_PMECC_ENABLE
+      children:
+      - children:
+        - attributes:
+            id: readOnly
+          children:
+          - type: Value
+            value: 'true'
+          type: Boolean
+        type: Attributes
+      - children:
+        - attributes:
+            id: hsmc
+            value: 'true'
+          type: Dynamic
+        type: Values
+      type: Boolean
+  userData: {}
