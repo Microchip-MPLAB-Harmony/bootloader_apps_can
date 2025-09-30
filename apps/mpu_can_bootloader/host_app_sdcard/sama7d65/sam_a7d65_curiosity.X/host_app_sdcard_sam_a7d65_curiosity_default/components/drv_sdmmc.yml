@@ -1,0 +1,68 @@
+configVersion: 1.0.0
+componentName: drv_sdmmc
+coreVersion: 5.8.2
+device: SAMA7D65
+library: []
+dependency:
+- dependencyPackage: class com.microchip.mcc.harmony.HarmonyModule
+  name: drv_sdmmc
+  type: module
+  version: ''
+- dependencyPackage: ''
+  name: core
+  type: package
+  version: v3.15.5
+customDataClassName: com.microchip.utils_mh3.utils.persistence.CustomModuleData
+data:
+  attachments: {}
+  elementPosition:
+    attributes:
+      id: __ROOTVIEW
+    children:
+    - children:
+      - attributes:
+          id: drv_sdmmc
+          x: '179'
+          y: '194'
+        type: ElementPosition
+      type: ElementPositions
+    type: ComponentGraph
+  symbols:
+    DRV_SDMMC_COMMON_FS_ENABLE:
+      attributes:
+        id: DRV_SDMMC_COMMON_FS_ENABLE
+      children:
+      - children:
+        - attributes:
+            id: drv_sdmmc
+            value: 'true'
+          type: Dynamic
+        type: Values
+      type: Boolean
+    DRV_SDMMC_FS_HEADER:
+      attributes:
+        id: DRV_SDMMC_FS_HEADER
+      children:
+      - children:
+        - attributes:
+            id: enabled
+          children:
+          - type: Value
+            value: 'true'
+          type: Boolean
+        type: Attributes
+      type: File
+    DRV_SDMMC_FS_SOURCE:
+      attributes:
+        id: DRV_SDMMC_FS_SOURCE
+      children:
+      - children:
+        - attributes:
+            id: enabled
+          children:
+          - type: Value
+            value: 'true'
+          type: Boolean
+        type: Attributes
+      type: File
+  userData: {}
