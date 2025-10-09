@@ -1,0 +1,353 @@
+configVersion: 1.0.0
+componentName: core
+coreVersion: 5.8.2
+device: SAM9X75D2G
+library: []
+dependency:
+- dependencyPackage: class com.microchip.mcc.harmony.HarmonyModule
+  name: core
+  type: module
+  version: ''
+- dependencyPackage: ''
+  name: csp
+  type: package
+  version: v3.23.0
+customDataClassName: com.microchip.utils_mh3.utils.persistence.CustomModuleData
+data:
+  attachments: {}
+  elementPosition: {}
+  symbols:
+    APP_START_ADDRESS:
+      attributes:
+        id: APP_START_ADDRESS
+      children:
+      - children:
+        - attributes:
+            id: core
+            value: '0x23f00000'
+          type: Dynamic
+        - attributes:
+            value: '0x21000000'
+          type: User
+        type: Values
+      type: String
+    COMPONENT_PACKAGE:
+      attributes:
+        id: COMPONENT_PACKAGE
+      children:
+      - children:
+        - attributes:
+            value: BGA243
+          type: User
+        type: Values
+      type: Combo
+    DBGU_CLOCK_ENABLE:
+      attributes:
+        id: DBGU_CLOCK_ENABLE
+      children:
+      - children:
+        - attributes:
+            id: dbgu
+            value: 'true'
+          type: Dynamic
+        type: Values
+      type: Boolean
+    DBGU_CLOCK_FREQUENCY:
+      attributes:
+        id: DBGU_CLOCK_FREQUENCY
+      children:
+      - children:
+        - attributes:
+            id: core
+            value: '266666666'
+          type: Dynamic
+        type: Values
+      type: Integer
+    DBGU_INTERRUPT_ENABLE:
+      attributes:
+        id: DBGU_INTERRUPT_ENABLE
+      children:
+      - children:
+        - attributes:
+            id: dbgu
+            value: 'false'
+          type: Dynamic
+        type: Values
+      type: Boolean
+    DBGU_INTERRUPT_HANDLER:
+      attributes:
+        id: DBGU_INTERRUPT_HANDLER
+      children:
+      - children:
+        - attributes:
+            id: dbgu
+            value: DBGU_Handler
+          type: Dynamic
+        type: Values
+      type: String
+    DBGU_INTERRUPT_HANDLER_LOCK:
+      attributes:
+        id: DBGU_INTERRUPT_HANDLER_LOCK
+      children:
+      - children:
+        - attributes:
+            id: dbgu
+            value: 'false'
+          type: Dynamic
+        type: Values
+      type: Boolean
+    PIN_106_PERIPHERAL_FUNCTION:
+      attributes:
+        id: PIN_106_PERIPHERAL_FUNCTION
+      children:
+      - children:
+        - attributes:
+            value: SWITCH_AL
+          type: User
+        type: Values
+      type: String
+    PIN_169_FUNCTION_TYPE:
+      attributes:
+        id: PIN_169_FUNCTION_TYPE
+      children:
+      - children:
+        - attributes:
+            value: DBGU_DRXD
+          type: User
+        type: Values
+      type: String
+    PIN_169_PERIPHERAL_FUNCTION:
+      attributes:
+        id: PIN_169_PERIPHERAL_FUNCTION
+      children:
+      - children:
+        - attributes:
+            value: A
+          type: User
+        type: Values
+      type: String
+    PIN_214_FUNCTION_TYPE:
+      attributes:
+        id: PIN_214_FUNCTION_TYPE
+      children:
+      - children:
+        - attributes:
+            value: DBGU_DTXD
+          type: User
+        type: Values
+      type: String
+    PIN_214_PERIPHERAL_FUNCTION:
+      attributes:
+        id: PIN_214_PERIPHERAL_FUNCTION
+      children:
+      - children:
+        - attributes:
+            value: A
+          type: User
+        type: Values
+      type: String
+    PIN_48_LAT:
+      attributes:
+        id: PIN_48_LAT
+      children:
+      - children:
+        - attributes:
+            value: ''
+          type: User
+        type: Values
+      type: String
+    PIN_48_PERIPHERAL_FUNCTION:
+      attributes:
+        id: PIN_48_PERIPHERAL_FUNCTION
+      children:
+      - children:
+        - attributes:
+            value: LED_AH
+          type: User
+        type: Values
+      type: String
+    PIN_50_LAT:
+      attributes:
+        id: PIN_50_LAT
+      children:
+      - children:
+        - attributes:
+            value: ''
+          type: User
+        type: Values
+      type: String
+    PIN_50_PERIPHERAL_FUNCTION:
+      attributes:
+        id: PIN_50_PERIPHERAL_FUNCTION
+      children:
+      - children:
+        - attributes:
+            value: LED_AH
+          type: User
+        type: Values
+      type: String
+    PIN_79_LAT:
+      attributes:
+        id: PIN_79_LAT
+      children:
+      - children:
+        - attributes:
+            value: ''
+          type: User
+        type: Values
+      type: String
+    PIN_79_PERIPHERAL_FUNCTION:
+      attributes:
+        id: PIN_79_PERIPHERAL_FUNCTION
+      children:
+      - children:
+        - attributes:
+            value: LED_AH
+          type: User
+        type: Values
+      type: String
+    PIOA_ABCDSR1_VALUE:
+      attributes:
+        id: PIOA_ABCDSR1_VALUE
+      children:
+      - children:
+        - attributes:
+            id: core
+            value: '0'
+          type: Dynamic
+        type: Values
+      type: Hex
+    PIOA_ABCDSR2_VALUE:
+      attributes:
+        id: PIOA_ABCDSR2_VALUE
+      children:
+      - children:
+        - attributes:
+            id: core
+            value: '0'
+          type: Dynamic
+        type: Values
+      type: Hex
+    PIOA_PDR_VALUE:
+      attributes:
+        id: PIOA_PDR_VALUE
+      children:
+      - children:
+        - attributes:
+            id: core
+            value: '201326592'
+          type: Dynamic
+        type: Values
+      type: Hex
+    PIOC_ABCDSR1_VALUE:
+      attributes:
+        id: PIOC_ABCDSR1_VALUE
+      children:
+      - children:
+        - attributes:
+            id: core
+            value: '0'
+          type: Dynamic
+        type: Values
+      type: Hex
+    PIOC_ABCDSR2_VALUE:
+      attributes:
+        id: PIOC_ABCDSR2_VALUE
+      children:
+      - children:
+        - attributes:
+            id: core
+            value: '0'
+          type: Dynamic
+        type: Values
+      type: Hex
+    PIOC_OER_VALUE:
+      attributes:
+        id: PIOC_OER_VALUE
+      children:
+      - children:
+        - attributes:
+            id: core
+            value: '3162112'
+          type: Dynamic
+        type: Values
+      type: Hex
+    PIOC_PDR_VALUE:
+      attributes:
+        id: PIOC_PDR_VALUE
+      children:
+      - children:
+        - attributes:
+            id: core
+            value: '0'
+          type: Dynamic
+        type: Values
+      type: Hex
+    PIOC_PUER_VALUE:
+      attributes:
+        id: PIOC_PUER_VALUE
+      children:
+      - children:
+        - attributes:
+            id: core
+            value: '512'
+          type: Dynamic
+        type: Values
+      type: Hex
+    PIOC_SODR_VALUE:
+      attributes:
+        id: PIOC_SODR_VALUE
+      children:
+      - children:
+        - attributes:
+            id: core
+            value: '0'
+          type: Dynamic
+        type: Values
+      type: Hex
+    PIT_INTERRUPT_ENABLE:
+      attributes:
+        id: PIT_INTERRUPT_ENABLE
+      children:
+      - children:
+        - attributes:
+            id: pit
+            value: 'true'
+          type: Dynamic
+        type: Values
+      type: Boolean
+    PIT_INTERRUPT_HANDLER:
+      attributes:
+        id: PIT_INTERRUPT_HANDLER
+      children:
+      - children:
+        - attributes:
+            id: pit
+            value: PIT_InterruptHandler
+          type: Dynamic
+        type: Values
+      type: String
+    SYSC_INTERRUPT_ENABLE:
+      attributes:
+        id: SYSC_INTERRUPT_ENABLE
+      children:
+      - children:
+        - attributes:
+            id: core
+            value: 'true'
+          type: Dynamic
+        type: Values
+      type: Boolean
+  userData:
+    children:
+    - attributes:
+        canvasHeight: '0'
+        canvasWidth: '0'
+      type: GraphSettings
+    - children:
+      - attributes:
+          id: profile0
+          name: Main
+        type: Profile
+      type: PowerProfiles
+    type: UserData

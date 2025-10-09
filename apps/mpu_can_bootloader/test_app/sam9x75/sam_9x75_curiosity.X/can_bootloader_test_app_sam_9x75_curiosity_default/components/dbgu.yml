@@ -1,0 +1,116 @@
+configVersion: 1.0.0
+componentName: dbgu
+coreVersion: 5.8.2
+device: SAM9X75D2G
+library: []
+dependency:
+- dependencyPackage: class com.microchip.mcc.harmony.HarmonyModule
+  name: dbgu
+  type: module
+  version: ''
+- dependencyPackage: ''
+  name: csp
+  type: package
+  version: v3.23.0
+customDataClassName: com.microchip.utils_mh3.utils.persistence.CustomModuleData
+data:
+  attachments:
+    children:
+    - children:
+      - attributes:
+          id: DBGU_UART
+        children:
+        - children:
+          - attributes:
+              id: targetComponentID
+            children:
+            - type: Value
+              value: stdio
+            type: String
+          - attributes:
+              id: targetAttachmentID
+            children:
+            - type: Value
+              value: UART
+            type: String
+          type: Attributes
+        type: DirectCapability
+      type: Attachments
+    type: dbgu
+  elementPosition:
+    attributes:
+      id: __ROOTVIEW
+    children:
+    - children:
+      - attributes:
+          id: dbgu
+          x: '30'
+          y: '151'
+        type: ElementPosition
+      type: ElementPositions
+    type: ComponentGraph
+  symbols:
+    BRG_VALUE:
+      attributes:
+        id: BRG_VALUE
+      children:
+      - children:
+        - attributes:
+            id: dbgu
+            value: '144'
+          type: Dynamic
+        type: Values
+      type: Integer
+    DBGU_CLOCK_FREQ:
+      attributes:
+        id: DBGU_CLOCK_FREQ
+      children:
+      - children:
+        - attributes:
+            id: dbgu
+            value: '266666666'
+          type: Dynamic
+        type: Values
+      type: Integer
+    DBGU_INTERRUPT_MODE_ENABLE:
+      attributes:
+        id: DBGU_INTERRUPT_MODE_ENABLE
+      children:
+      - children:
+        - attributes:
+            id: dbgu
+            value: 'false'
+          type: Dynamic
+        type: Values
+      type: Boolean
+    DBGU_OPERATING_MODE:
+      attributes:
+        id: DBGU_OPERATING_MODE
+      children:
+      - children:
+        - attributes:
+            id: readOnly
+          children:
+          - type: Value
+            value: 'true'
+          type: Boolean
+        type: Attributes
+      - children:
+        - attributes:
+            id: dbgu
+            value: '0'
+          type: Dynamic
+        type: Values
+      type: KeyValueSet
+    DBGU_RING_BUFFER_MODE_ENABLE:
+      attributes:
+        id: DBGU_RING_BUFFER_MODE_ENABLE
+      children:
+      - children:
+        - attributes:
+            id: dbgu
+            value: 'false'
+          type: Dynamic
+        type: Values
+      type: Boolean
+  userData: {}

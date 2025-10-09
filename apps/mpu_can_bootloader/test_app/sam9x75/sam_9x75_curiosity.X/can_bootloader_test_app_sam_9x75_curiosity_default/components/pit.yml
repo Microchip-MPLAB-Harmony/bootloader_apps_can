@@ -1,0 +1,119 @@
+configVersion: 1.0.0
+componentName: pit
+coreVersion: 5.8.2
+device: SAM9X75D2G
+library: []
+dependency:
+- dependencyPackage: class com.microchip.mcc.harmony.HarmonyModule
+  name: pit
+  type: module
+  version: ''
+- dependencyPackage: ''
+  name: csp
+  type: package
+  version: v3.23.0
+customDataClassName: com.microchip.utils_mh3.utils.persistence.CustomModuleData
+data:
+  attachments: {}
+  elementPosition:
+    attributes:
+      id: __ROOTVIEW
+    children:
+    - children:
+      - attributes:
+          id: pit
+          x: '206'
+          y: '52'
+        type: ElementPosition
+      type: ElementPositions
+    type: ComponentGraph
+  symbols:
+    CALLBACK_API_NAME:
+      attributes:
+        id: CALLBACK_API_NAME
+      children:
+      - children:
+        - attributes:
+            id: pit
+            value: PIT_TimerCallbackSet
+          type: Dynamic
+        type: Values
+      type: String
+    COMPARE_SET_API_NAME:
+      attributes:
+        id: COMPARE_SET_API_NAME
+      children:
+      - children:
+        - attributes:
+            id: pit
+            value: PIT_TimerCompareSet
+          type: Dynamic
+        type: Values
+      type: String
+    COUNTER_GET_API_NAME:
+      attributes:
+        id: COUNTER_GET_API_NAME
+      children:
+      - children:
+        - attributes:
+            id: pit
+            value: PIT_TimerCounterGet
+          type: Dynamic
+        type: Values
+      type: String
+    FREQUENCY_GET_API_NAME:
+      attributes:
+        id: FREQUENCY_GET_API_NAME
+      children:
+      - children:
+        - attributes:
+            id: pit
+            value: PIT_TimerFrequencyGet
+          type: Dynamic
+        type: Values
+      type: String
+    IRQ_ENUM_NAME:
+      attributes:
+        id: IRQ_ENUM_NAME
+      children:
+      - children:
+        - attributes:
+            id: pit
+            value: PIT_IRQn
+          type: Dynamic
+        type: Values
+      type: String
+    PERIOD_SET_API_NAME:
+      attributes:
+        id: PERIOD_SET_API_NAME
+      children:
+      - children:
+        - attributes:
+            id: pit
+            value: PIT_TimerPeriodSet
+          type: Dynamic
+        type: Values
+      type: String
+    TIMER_START_API_NAME:
+      attributes:
+        id: TIMER_START_API_NAME
+      children:
+      - children:
+        - attributes:
+            id: pit
+            value: PIT_TimerStart
+          type: Dynamic
+        type: Values
+      type: String
+    TIMER_STOP_API_NAME:
+      attributes:
+        id: TIMER_STOP_API_NAME
+      children:
+      - children:
+        - attributes:
+            id: pit
+            value: 'PIT_TimerStop '
+          type: Dynamic
+        type: Values
+      type: String
+  userData: {}
