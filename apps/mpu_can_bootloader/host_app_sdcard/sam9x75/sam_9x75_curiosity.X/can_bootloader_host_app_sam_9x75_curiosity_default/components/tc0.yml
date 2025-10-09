@@ -1,0 +1,520 @@
+configVersion: 1.0.0
+componentName: tc0
+coreVersion: 5.8.2
+device: SAM9X75D2G
+library: []
+dependency:
+- dependencyPackage: class com.microchip.mcc.harmony.HarmonyModule
+  name: tc0
+  type: module
+  version: ''
+- dependencyPackage: ''
+  name: csp
+  type: package
+  version: v3.23.0
+customDataClassName: com.microchip.utils_mh3.utils.persistence.CustomModuleData
+data:
+  attachments:
+    children:
+    - children:
+      - attributes:
+          id: TC0_TMR
+        children:
+        - children:
+          - attributes:
+              id: targetComponentID
+            children:
+            - type: Value
+              value: sys_time
+            type: String
+          - attributes:
+              id: targetAttachmentID
+            children:
+            - type: Value
+              value: sys_time_TMR_dependency
+            type: String
+          type: Attributes
+        type: DirectCapability
+      type: Attachments
+    type: tc0
+  elementPosition:
+    attributes:
+      id: __ROOTVIEW
+    children:
+    - children:
+      - attributes:
+          id: tc0
+          x: '365'
+          y: '173'
+        type: ElementPosition
+      type: ElementPositions
+    type: ComponentGraph
+  symbols:
+    CALLBACK_API_NAME:
+      attributes:
+        id: CALLBACK_API_NAME
+      children:
+      - children:
+        - attributes:
+            id: tc0
+            value: TC0_CH0_TimerCallbackRegister
+          type: Dynamic
+        type: Values
+      type: String
+    COMPARE_SET_API_NAME:
+      attributes:
+        id: COMPARE_SET_API_NAME
+      children:
+      - children:
+        - attributes:
+            id: tc0
+            value: TC0_CH0_TimerCompareSet
+          type: Dynamic
+        type: Values
+      type: String
+    COUNTER_GET_API_NAME:
+      attributes:
+        id: COUNTER_GET_API_NAME
+      children:
+      - children:
+        - attributes:
+            id: tc0
+            value: TC0_CH0_TimerCounterGet
+          type: Dynamic
+        type: Values
+      type: String
+    FREQUENCY_GET_API_NAME:
+      attributes:
+        id: FREQUENCY_GET_API_NAME
+      children:
+      - children:
+        - attributes:
+            id: tc0
+            value: TC0_CH0_TimerFrequencyGet
+          type: Dynamic
+        type: Values
+      type: String
+    IRQ_ENUM_NAME:
+      attributes:
+        id: IRQ_ENUM_NAME
+      children:
+      - children:
+        - attributes:
+            id: tc0
+            value: TC0_IRQn
+          type: Dynamic
+        type: Values
+      type: String
+    PERIOD_SET_API_NAME:
+      attributes:
+        id: PERIOD_SET_API_NAME
+      children:
+      - children:
+        - attributes:
+            id: tc0
+            value: TC0_CH0_TimerPeriodSet
+          type: Dynamic
+        type: Values
+      type: String
+    SYS_TIME_COMPONENT_ID:
+      attributes:
+        id: SYS_TIME_COMPONENT_ID
+      children:
+      - children:
+        - attributes:
+            id: tc0
+            value: sys_time
+          type: Dynamic
+        type: Values
+      type: String
+    SYS_TIME_PLIB_OPERATION_MODE:
+      attributes:
+        id: SYS_TIME_PLIB_OPERATION_MODE
+      children:
+      - children:
+        - attributes:
+            id: tc0
+            value: SYS_TIME_PLIB_MODE_COMPARE
+          type: Dynamic
+        type: Values
+      type: String
+    SYS_TIME_TC_CHANNEL:
+      attributes:
+        id: SYS_TIME_TC_CHANNEL
+      children:
+      - children:
+        - attributes:
+            id: tc0
+            value: '0'
+          type: Dynamic
+        type: Values
+      type: KeyValueSet
+    TC0_CH0_INTERRUPT_ENABLE:
+      attributes:
+        id: TC0_CH0_INTERRUPT_ENABLE
+      children:
+      - children:
+        - attributes:
+            id: tc0
+            value: 'true'
+          type: Dynamic
+        type: Values
+      type: Boolean
+    TC0_CH0_INTERRUPT_HANDLER:
+      attributes:
+        id: TC0_CH0_INTERRUPT_HANDLER
+      children:
+      - children:
+        - attributes:
+            id: tc0
+            value: TC0_CH0_InterruptHandler
+          type: Dynamic
+        type: Values
+      type: String
+    TC0_CH0_INTERRUPT_HANDLER_LOCK:
+      attributes:
+        id: TC0_CH0_INTERRUPT_HANDLER_LOCK
+      children:
+      - children:
+        - attributes:
+            id: tc0
+            value: 'true'
+          type: Dynamic
+        type: Values
+      type: Boolean
+    TC0_CH1_INTERRUPT_ENABLE:
+      attributes:
+        id: TC0_CH1_INTERRUPT_ENABLE
+      children:
+      - children:
+        - attributes:
+            id: tc0
+            value: 'false'
+          type: Dynamic
+        type: Values
+      type: Boolean
+    TC0_CH1_INTERRUPT_HANDLER:
+      attributes:
+        id: TC0_CH1_INTERRUPT_HANDLER
+      children:
+      - children:
+        - attributes:
+            id: tc0
+            value: TC0_CH1_Handler
+          type: Dynamic
+        type: Values
+      type: String
+    TC0_CH1_INTERRUPT_HANDLER_LOCK:
+      attributes:
+        id: TC0_CH1_INTERRUPT_HANDLER_LOCK
+      children:
+      - children:
+        - attributes:
+            id: tc0
+            value: 'false'
+          type: Dynamic
+        type: Values
+      type: Boolean
+    TC0_CH2_INTERRUPT_ENABLE:
+      attributes:
+        id: TC0_CH2_INTERRUPT_ENABLE
+      children:
+      - children:
+        - attributes:
+            id: tc0
+            value: 'false'
+          type: Dynamic
+        type: Values
+      type: Boolean
+    TC0_CH2_INTERRUPT_HANDLER:
+      attributes:
+        id: TC0_CH2_INTERRUPT_HANDLER
+      children:
+      - children:
+        - attributes:
+            id: tc0
+            value: TC0_CH2_Handler
+          type: Dynamic
+        type: Values
+      type: String
+    TC0_CH2_INTERRUPT_HANDLER_LOCK:
+      attributes:
+        id: TC0_CH2_INTERRUPT_HANDLER_LOCK
+      children:
+      - children:
+        - attributes:
+            id: tc0
+            value: 'false'
+          type: Dynamic
+        type: Values
+      type: Boolean
+    TC0_CLOCK_FREQ:
+      attributes:
+        id: TC0_CLOCK_FREQ
+      children:
+      - children:
+        - attributes:
+            id: tc0
+            value: '266666666'
+          type: Dynamic
+        type: Values
+      type: Integer
+    TC0_ENABLE:
+      attributes:
+        id: TC0_ENABLE
+      children:
+      - children:
+        - attributes:
+            id: tc0
+            value: 'true'
+          type: Dynamic
+        type: Values
+      type: Boolean
+    TC0_IER_CPAS:
+      attributes:
+        id: TC0_IER_CPAS
+      children:
+      - children:
+        - attributes:
+            id: visible
+          children:
+          - type: Value
+            value: 'true'
+          type: Boolean
+        type: Attributes
+      - children:
+        - attributes:
+            id: tc0
+            value: 'true'
+          type: Dynamic
+        type: Values
+      type: Boolean
+    TC0_IER_CPCS:
+      attributes:
+        id: TC0_IER_CPCS
+      children:
+      - children:
+        - attributes:
+            id: tc0
+            value: 'false'
+          type: Dynamic
+        type: Values
+      type: Boolean
+    TC0_SYS_TIME_CONNECTED:
+      attributes:
+        id: TC0_SYS_TIME_CONNECTED
+      children:
+      - children:
+        - attributes:
+            id: tc0
+            value: 'true'
+          type: Dynamic
+        type: Values
+      type: Boolean
+    TC0_TIMER_PERIOD_COUNT:
+      attributes:
+        id: TC0_TIMER_PERIOD_COUNT
+      children:
+      - children:
+        - attributes:
+            id: tc0
+            value: '0'
+          type: Dynamic
+        type: Values
+      type: Long
+    TC0_TIMER_PERIOD_MS:
+      attributes:
+        id: TC0_TIMER_PERIOD_MS
+      children:
+      - children:
+        - attributes:
+            id: visible
+          children:
+          - type: Value
+            value: 'false'
+          type: Boolean
+        type: Attributes
+      - children:
+        - attributes:
+            id: tc0
+            value: '0.0'
+          type: Dynamic
+        type: Values
+      type: Float
+    TC1_ENABLE:
+      attributes:
+        id: TC1_ENABLE
+      children:
+      - children:
+        - attributes:
+            id: tc0
+            value: 'false'
+          type: Dynamic
+        type: Values
+      type: Boolean
+    TC1_IER_CPAS:
+      attributes:
+        id: TC1_IER_CPAS
+      children:
+      - children:
+        - attributes:
+            id: tc0
+            value: 'false'
+          type: Dynamic
+        type: Values
+      type: Boolean
+    TC1_IER_CPCS:
+      attributes:
+        id: TC1_IER_CPCS
+      children:
+      - children:
+        - attributes:
+            id: tc0
+            value: 'false'
+          type: Dynamic
+        type: Values
+      type: Boolean
+    TC1_SYS_TIME_CONNECTED:
+      attributes:
+        id: TC1_SYS_TIME_CONNECTED
+      children:
+      - children:
+        - attributes:
+            id: tc0
+            value: 'false'
+          type: Dynamic
+        type: Values
+      type: Boolean
+    TC1_TIMER_PERIOD_COUNT:
+      attributes:
+        id: TC1_TIMER_PERIOD_COUNT
+      children:
+      - children:
+        - attributes:
+            id: tc0
+            value: '0'
+          type: Dynamic
+        type: Values
+      type: Long
+    TC1_TIMER_PERIOD_MS:
+      attributes:
+        id: TC1_TIMER_PERIOD_MS
+      children:
+      - children:
+        - attributes:
+            id: tc0
+            value: '0.0'
+          type: Dynamic
+        type: Values
+      type: Float
+    TC2_ENABLE:
+      attributes:
+        id: TC2_ENABLE
+      children:
+      - children:
+        - attributes:
+            id: tc0
+            value: 'false'
+          type: Dynamic
+        type: Values
+      type: Boolean
+    TC2_IER_CPAS:
+      attributes:
+        id: TC2_IER_CPAS
+      children:
+      - children:
+        - attributes:
+            id: tc0
+            value: 'false'
+          type: Dynamic
+        type: Values
+      type: Boolean
+    TC2_IER_CPCS:
+      attributes:
+        id: TC2_IER_CPCS
+      children:
+      - children:
+        - attributes:
+            id: tc0
+            value: 'false'
+          type: Dynamic
+        type: Values
+      type: Boolean
+    TC2_SYS_TIME_CONNECTED:
+      attributes:
+        id: TC2_SYS_TIME_CONNECTED
+      children:
+      - children:
+        - attributes:
+            id: tc0
+            value: 'false'
+          type: Dynamic
+        type: Values
+      type: Boolean
+    TC2_TIMER_PERIOD_COUNT:
+      attributes:
+        id: TC2_TIMER_PERIOD_COUNT
+      children:
+      - children:
+        - attributes:
+            id: tc0
+            value: '0'
+          type: Dynamic
+        type: Values
+      type: Long
+    TC2_TIMER_PERIOD_MS:
+      attributes:
+        id: TC2_TIMER_PERIOD_MS
+      children:
+      - children:
+        - attributes:
+            id: tc0
+            value: '0.0'
+          type: Dynamic
+        type: Values
+      type: Float
+    TC3_CLOCK_FREQ:
+      attributes:
+        id: TC3_CLOCK_FREQ
+      children:
+      - children:
+        - attributes:
+            id: tc0
+            value: '266666666'
+          type: Dynamic
+        type: Values
+      type: Integer
+    TC_COMMON_INTERRUPT_STATUS:
+      attributes:
+        id: TC_COMMON_INTERRUPT_STATUS
+      children:
+      - children:
+        - attributes:
+            id: tc0
+            value: 'true'
+          type: Dynamic
+        type: Values
+      type: Boolean
+    TIMER_START_API_NAME:
+      attributes:
+        id: TIMER_START_API_NAME
+      children:
+      - children:
+        - attributes:
+            id: tc0
+            value: TC0_CH0_TimerStart
+          type: Dynamic
+        type: Values
+      type: String
+    TIMER_STOP_API_NAME:
+      attributes:
+        id: TIMER_STOP_API_NAME
+      children:
+      - children:
+        - attributes:
+            id: tc0
+            value: 'TC0_CH0_TimerStop '
+          type: Dynamic
+        type: Values
+      type: String
+  userData: {}
