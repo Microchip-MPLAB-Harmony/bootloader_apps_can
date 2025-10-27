@@ -1,0 +1,106 @@
+configVersion: 1.0.0
+componentName: qspi
+coreVersion: 5.8.2
+device: SAM9X75D2G
+library: []
+dependency:
+- dependencyPackage: class com.microchip.mcc.harmony.HarmonyModule
+  name: qspi
+  type: module
+  version: ''
+- dependencyPackage: ''
+  name: csp
+  type: package
+  version: v3.23.0
+customDataClassName: com.microchip.utils_mh3.utils.persistence.CustomModuleData
+data:
+  attachments:
+    children:
+    - children:
+      - attributes:
+          id: QSPI_SPI
+        children:
+        - children:
+          - attributes:
+              id: enabled
+            children:
+            - type: Value
+              value: 'false'
+            type: Boolean
+          type: Attributes
+        type: DirectCapability
+      - attributes:
+          id: QSPI_SQI
+        children:
+        - children:
+          - attributes:
+              id: targetComponentID
+            children:
+            - type: Value
+              value: drv_sst26
+            type: String
+          - attributes:
+              id: targetAttachmentID
+            children:
+            - type: Value
+              value: drv_sst26_SQI_dependency
+            type: String
+          type: Attributes
+        type: DirectCapability
+      type: Attachments
+    type: qspi
+  elementPosition:
+    attributes:
+      id: __ROOTVIEW
+    children:
+    - children:
+      - attributes:
+          id: qspi
+          x: '5'
+          y: '257'
+        type: ElementPosition
+      type: ElementPositions
+    type: ComponentGraph
+  symbols:
+    QSPI_CLK_FREQ:
+      attributes:
+        id: QSPI_CLK_FREQ
+      children:
+      - children:
+        - attributes:
+            id: qspi
+            value: '133333333'
+          type: Dynamic
+        type: Values
+      type: Integer
+    QSPI_CPOL:
+      attributes:
+        id: QSPI_CPOL
+      children:
+      - children:
+        - attributes:
+            id: qspi
+            value: '0'
+          type: Dynamic
+        type: Values
+      type: KeyValueSet
+    QSPI_SMM:
+      attributes:
+        id: QSPI_SMM
+      children:
+      - children:
+        - attributes:
+            id: readOnly
+          children:
+          - type: Value
+            value: 'true'
+          type: Boolean
+        type: Attributes
+      - children:
+        - attributes:
+            id: qspi
+            value: '0'
+          type: Dynamic
+        type: Values
+      type: KeyValueSet
+  userData: {}

@@ -1,0 +1,129 @@
+configVersion: 1.0.0
+componentName: can_bootloader
+coreVersion: 5.8.2
+device: SAM9X75D2G
+library: []
+dependency:
+- dependencyPackage: class com.microchip.mcc.harmony.HarmonyModule
+  name: can_bootloader
+  type: module
+  version: ''
+- dependencyPackage: ''
+  name: bootloader
+  type: package
+  version: v3.8.0
+customDataClassName: com.microchip.utils_mh3.utils.persistence.CustomModuleData
+data:
+  attachments:
+    children:
+    - children:
+      - attributes:
+          id: btl_CAN_dependency
+        children:
+        - children:
+          - attributes:
+              id: targetComponentID
+            children:
+            - type: Value
+              value: mcan1
+            type: String
+          - attributes:
+              id: targetAttachmentID
+            children:
+            - type: Value
+              value: MCAN1_CAN
+            type: String
+          type: Attributes
+        type: DirectDependency
+      - attributes:
+          id: btl_MEMORY_dependency
+        children:
+        - children:
+          - attributes:
+              id: targetComponentID
+            children:
+            - type: Value
+              value: drv_sst26
+            type: String
+          - attributes:
+              id: targetAttachmentID
+            children:
+            - type: Value
+              value: memory
+            type: String
+          type: Attributes
+        type: DirectDependency
+      - attributes:
+          id: btl_SYS_FS_dependency
+        children:
+        - children:
+          - attributes:
+              id: enabled
+            children:
+            - type: Value
+              value: 'false'
+            type: Boolean
+          type: Attributes
+        type: GenericDependency
+      type: Attachments
+    type: can_bootloader
+  elementPosition:
+    attributes:
+      id: __ROOTVIEW
+    children:
+    - children:
+      - attributes:
+          id: can_bootloader
+          x: '346'
+          y: '162'
+        type: ElementPosition
+      type: ElementPositions
+    type: ComponentGraph
+  symbols:
+    BOOTLOADER_STORAGE_SOURCE:
+      attributes:
+        id: BOOTLOADER_STORAGE_SOURCE
+      children:
+      - children:
+        - attributes:
+            id: source
+          children:
+          - type: Value
+            value: ../bootloader/templates/src/mpu/bootloader_storage_ext_mem.c.ftl
+          type: String
+        type: Attributes
+      type: File
+    DRIVER_USED:
+      attributes:
+        id: DRIVER_USED
+      children:
+      - children:
+        - attributes:
+            id: can_bootloader
+            value: DRV_SST26
+          type: Dynamic
+        type: Values
+      type: String
+    PERIPH_NAME:
+      attributes:
+        id: PERIPH_NAME
+      children:
+      - children:
+        - attributes:
+            id: can_bootloader
+            value: MCAN
+          type: Dynamic
+        type: Values
+      type: String
+    PERIPH_USED:
+      attributes:
+        id: PERIPH_USED
+      children:
+      - children:
+        - attributes:
+            id: can_bootloader
+            value: MCAN1
+          type: Dynamic
+        type: Values
+      type: String
+  userData: {}

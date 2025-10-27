@@ -1,0 +1,186 @@
+configVersion: 1.0.0
+componentName: drv_sst26
+coreVersion: 5.8.2
+device: SAM9X75D2G
+library: []
+dependency:
+- dependencyPackage: class com.microchip.mcc.harmony.HarmonyModule
+  name: drv_sst26
+  type: module
+  version: ''
+- dependencyPackage: ''
+  name: core
+  type: package
+  version: v3.15.5
+customDataClassName: com.microchip.utils_mh3.utils.persistence.CustomModuleData
+data:
+  attachments:
+    children:
+    - children:
+      - attributes:
+          id: drv_sst26_DRV_SPI_dependency
+        children:
+        - children:
+          - attributes:
+              id: enabled
+            children:
+            - type: Value
+              value: 'false'
+            type: Boolean
+          type: Attributes
+        type: DirectDependency
+      - attributes:
+          id: drv_sst26_SPI_dependency
+        children:
+        - children:
+          - attributes:
+              id: enabled
+            children:
+            - type: Value
+              value: 'false'
+            type: Boolean
+          type: Attributes
+        type: DirectDependency
+      - attributes:
+          id: drv_sst26_SQI_dependency
+        children:
+        - children:
+          - attributes:
+              id: targetComponentID
+            children:
+            - type: Value
+              value: qspi
+            type: String
+          - attributes:
+              id: targetAttachmentID
+            children:
+            - type: Value
+              value: QSPI_SQI
+            type: String
+          type: Attributes
+        type: DirectDependency
+      - attributes:
+          id: memory
+        children:
+        - children:
+          - attributes:
+              id: targetComponentID
+            children:
+            - type: Value
+              value: can_bootloader
+            type: String
+          - attributes:
+              id: targetAttachmentID
+            children:
+            - type: Value
+              value: btl_MEMORY_dependency
+            type: String
+          type: Attributes
+        type: DirectCapability
+      type: Attachments
+    type: drv_sst26
+  elementPosition:
+    attributes:
+      id: __ROOTVIEW
+    children:
+    - children:
+      - attributes:
+          id: drv_sst26
+          x: '169'
+          y: '238'
+        type: ElementPosition
+      type: ElementPositions
+    type: ComponentGraph
+  symbols:
+    DRV_SST26_HEADER_DEF:
+      attributes:
+        id: DRV_SST26_HEADER_DEF
+      children:
+      - children:
+        - attributes:
+            id: source
+          children:
+          - type: Value
+            value: driver/sqi_flash/sst26/templates/drv_sst26_qspi_definitions.h.ftl
+          type: String
+        type: Attributes
+      type: File
+    DRV_SST26_INTERFACE_TYPE:
+      attributes:
+        id: DRV_SST26_INTERFACE_TYPE
+      children:
+      - children:
+        - attributes:
+            id: drv_sst26
+            value: SQI_PLIB
+          type: Dynamic
+        type: Values
+      type: String
+    DRV_SST26_PLIB:
+      attributes:
+        id: DRV_SST26_PLIB
+      children:
+      - children:
+        - attributes:
+            id: drv_sst26
+            value: QSPI
+          type: Dynamic
+        type: Values
+      type: String
+    DRV_SST26_PROTOCOL:
+      attributes:
+        id: DRV_SST26_PROTOCOL
+      children:
+      - children:
+        - attributes:
+            id: drv_sst26
+            value: SQI
+          type: Dynamic
+        type: Values
+      type: Combo
+    DRV_SST26_SOURCE:
+      attributes:
+        id: DRV_SST26_SOURCE
+      children:
+      - children:
+        - attributes:
+            id: markup
+          children:
+          - type: Value
+            value: 'true'
+          type: Boolean
+        - attributes:
+            id: source
+          children:
+          - type: Value
+            value: driver/sqi_flash/sst26/src/drv_sst26_qspi.c.ftl
+          type: String
+        type: Attributes
+      type: File
+    DRV_SST26_SPI_INTERFACE_HEADER:
+      attributes:
+        id: DRV_SST26_SPI_INTERFACE_HEADER
+      children:
+      - children:
+        - attributes:
+            id: enabled
+          children:
+          - type: Value
+            value: 'false'
+          type: Boolean
+        type: Attributes
+      type: File
+    DRV_SST26_SPI_INTERFACE_SOURCE:
+      attributes:
+        id: DRV_SST26_SPI_INTERFACE_SOURCE
+      children:
+      - children:
+        - attributes:
+            id: enabled
+          children:
+          - type: Value
+            value: 'false'
+          type: Boolean
+        type: Attributes
+      type: File
+  userData: {}
