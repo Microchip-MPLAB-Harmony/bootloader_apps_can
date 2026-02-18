@@ -2,15 +2,15 @@
 
 manifest_file_version: 1.0.0
 project: can_bootloader_host_app_sam_9x75_curiosity
-creation_date: 2025-10-09T09:09:04.916+05:30[Asia/Calcutta]
+creation_date: 2026-02-18T15:35:34.946+05:30[Asia/Calcutta]
 operating_system: Windows 11
 mcc_mode: IDE
-mcc_mode_version: v6.25
+mcc_mode_version: v6.30
 device_name: SAM9X75D2G
-compiler: XC32 4.60
-mcc_version: 5.6.2
-mcc_core_version: 5.8.2
-content_manager_version: 6.0.2
+compiler: XC32 5.00
+mcc_version: 5.6.4
+mcc_core_version: 5.8.4
+content_manager_version: 6.0.4
 is_mcc_offline: false
 is_using_prerelease_versions: false
 mcc_content_registries: https://registry.npmjs.org/
@@ -18,8 +18,8 @@ device_library: {library_class: com.microchip.mcc.harmony.Harmony3Library, name:
   version: Bundled}
 packs: {name: SAM9X7_DFP, version: 1.9.170}
 modules:
-- {name: core, type: HARMONY, version: v3.15.5}
-- {name: csp, type: HARMONY, version: v3.23.0}
+- {name: core, type: HARMONY, version: v3.16.0}
+- {name: csp, type: HARMONY, version: v3.25.1}
 - {name: filex, type: HARMONY, version: v6.4.0_rel}
 - {name: littlefs, type: HARMONY, version: v2.9.3}
-- {name: bsp, type: HARMONY, version: v3.23.0}
+- {name: bsp, type: HARMONY, version: v3.24.0}

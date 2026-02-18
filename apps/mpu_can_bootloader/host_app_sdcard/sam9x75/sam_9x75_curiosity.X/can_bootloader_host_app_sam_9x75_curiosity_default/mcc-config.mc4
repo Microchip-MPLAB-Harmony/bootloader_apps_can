@@ -1,9 +1,8 @@
 configVersion: 1.0.0
-coreVersion: 5.8.2
+coreVersion: 5.8.4
 spaHostVersion: 1.0.0
 device: SAM9X75D2G
-deviceLibrary:
-  className: null
+deviceLibrary: {}
 groupModules: []
 modules:
 - BSP_SAM_9X75_Curiosity
@@ -33,9 +32,9 @@ generatedFileHashHistoryMap:
 - file: ..\src\config\default\ddram.ld
   hash: 6726b057f4693885faf7e71c8cfe44e210a9ae72e9af402661357fdf82e47276
 - file: ..\src\config\default\definitions.h
-  hash: 7a405f72b5aa945e50130083a4c5f479ee10c2877451e7abf194571474d160d8
+  hash: d92a0d989422d4e556af62af91856a6c49426d6c778d2b869846ef644c46f397
 - file: ..\src\config\default\device.h
-  hash: a6942ec56b364ca7ce59259450eb2b74fca133605592dabe382afeb005ef56b8
+  hash: c59514bb3f1551407ee3f43109f637b28b915d65539b1eb92c55ded669c4ba5f
 - file: ..\src\config\default\device_cache.h
   hash: 022a4c6bce1d10badd66bfa60707c3dbc830d5b1a6702dfd825d3317ccba1188
 - file: ..\src\config\default\driver\driver.h
@@ -57,7 +56,7 @@ generatedFileHashHistoryMap:
 - file: ..\src\config\default\fault_handlers.c
   hash: 931e951cf7431d3d70d6ab81bcd265ff0ac8b3f473b73cd7a541f59d49786b7c
 - file: ..\src\config\default\initialization.c
-  hash: e651910e38686e9f2515d2e20ba9524f8c200005a1494e399fe1b6374a7186ab
+  hash: 35dc08686e1575898afffb685e290826d6a5c363bbbe09934751a465e4aa8593
 - file: ..\src\config\default\interrupts.c
   hash: 3f257c1c617c901d65c7a959e95e16fa3baaacb7c3667d18059a321a4dbab6bf
 - file: ..\src\config\default\interrupts.h
@@ -97,7 +96,7 @@ generatedFileHashHistoryMap:
 - file: ..\src\config\default\peripheral\sdmmc\plib_sdmmc0.h
   hash: 3e4c5d26242522a5fbbc57fdc2650158fec09f032ba8a1c1f2a816ef67f65edb
 - file: ..\src\config\default\peripheral\sdmmc\plib_sdmmc_common.h
-  hash: 78f696650886b3038dd57727b7948e8806068d77d53b6c3dc9ee7f15a1df1eb0
+  hash: e2b015721e166dc96c96772961f57dbe6df1f26e4b85801609d1344df1f1816e
 - file: ..\src\config\default\peripheral\tc\plib_tc0.c
   hash: e1ac548e92a3347891aac4b309ed496d2162ded50619f871069d6e3175496fb8
 - file: ..\src\config\default\peripheral\tc\plib_tc0.h
@@ -169,7 +168,7 @@ generatedFileHashHistoryMap:
 - file: ..\src\config\default\tasks.c
   hash: 8db056daba3ab70fb27f30c7e891cd33ec55a946aa7944a08fe05be9fa4e42f3
 - file: ..\src\config\default\toolchain_specifics.h
-  hash: d93ab2a56ea91cac163fc49b5e3f3491fe3c8ada3bd2f72c752b286f280b40ef
+  hash: 61b9d7e2427b11029b90cfefa844e187899beffb4b351ccbfab471fd44dbbf2d
 - file: ..\src\config\default\user.h
   hash: 451e0878e9fcf6cf9fab046c1452ea662757988346c7f39e6bc98478ca25f995
 - file: ..\src\main.c
