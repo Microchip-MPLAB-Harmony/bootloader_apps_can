@@ -48,6 +48,7 @@
 #include "bootloader/bootloader_can.h"
 #include "bootloader_storage.h"
 
+
 typedef enum
 {
     /* Transfer being processed */
@@ -138,10 +139,11 @@ void bootloader_ImageSizeSet(uint32_t size)
     btlData.extMemoryImageSize = size;
 }
 
+
 void bootloader_Storage_Read(void)
 {
     uint32_t readLen = 0U;
-    uint32_t imageSize;
+    uint32_t imageSize = 0xFFFFFFFFU;
     bool status = false;
 
     (void)DRV_SST26_Read(btlData.handle, fileBuffer, PAGE_SIZE, btlData.extMemoryMetaDataAddr);
@@ -157,6 +159,7 @@ void bootloader_Storage_Read(void)
         {
             status = DRV_SST26_Read(btlData.handle, fileBuffer, PAGE_SIZE, memoryAddr);
             (void)bootloader_WaitForXferComplete();
+
             (void)memcpy((uint8_t *)btlData.progAddr, fileBuffer, PAGE_SIZE);
 
             btlData.progAddr += PAGE_SIZE;
@@ -179,7 +182,6 @@ bool bootloader_Storage_Write(bool imageStartFlag, void *buffer, size_t size)
     {
         memoryAddr = btlData.extMemoryImageAddr;
     }
-
     if ((memoryAddr % btlData.geometry.erase_blockSize) == 0U)
     {
         if (DRV_SST26_SectorErase(btlData.handle, memoryAddr) == true)
@@ -252,3 +254,7 @@ bool bootloader_Storage_CRC_Verify(uint32_t crc)
 
     return status;
 }
+
+
+
+
