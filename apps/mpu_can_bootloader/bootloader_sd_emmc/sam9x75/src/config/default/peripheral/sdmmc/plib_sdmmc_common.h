@@ -223,8 +223,8 @@ typedef enum
 
 }SDMMC_CLK_MODE;
 
-/* MISRAC 2012 deviation block start */
-/* MISRA C-2012 Rule 5.2 deviated: 1 times  Deviation record ID -  H3_MISRAC_2012_R_5_2_DR_1 */
+/* MISRAC 2023 deviation block start */
+/* MISRA C-2023 Rule 5.2 deviated: 1 times  Deviation record ID -  H3_MISRAC_2023_R_5_2_DR_1 */
 
 typedef enum
 {
@@ -236,7 +236,7 @@ typedef enum
 
 }SDMMC_DATA_TRANSFER_TYPE;
 
-/* MISRAC 2012 deviation block end */
+/* MISRAC 2023 deviation block end */
 
 typedef enum
 {

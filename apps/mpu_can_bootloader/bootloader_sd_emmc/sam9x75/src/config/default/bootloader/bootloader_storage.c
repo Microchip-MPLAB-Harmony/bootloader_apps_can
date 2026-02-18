@@ -172,6 +172,7 @@ bool bootloader_Storage_Write(bool imageStartFlag, void *buffer, size_t size)
         {
             attributes = SYS_FS_FILE_OPEN_WRITE;
         }
+
         btlData.fileHandle = SYS_FS_FileOpen(APP_IMAGE_FILE_PATH, attributes);
 
         if(btlData.fileHandle != SYS_FS_HANDLE_INVALID)
