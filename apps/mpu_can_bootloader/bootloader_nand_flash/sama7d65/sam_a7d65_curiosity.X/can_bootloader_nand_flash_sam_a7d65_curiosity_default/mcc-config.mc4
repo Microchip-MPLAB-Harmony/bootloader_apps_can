@@ -1,9 +1,8 @@
 configVersion: 1.0.0
-coreVersion: 5.8.2
+coreVersion: 5.8.4
 spaHostVersion: 1.0.0
 device: SAMA7D65
-deviceLibrary:
-  className: null
+deviceLibrary: {}
 groupModules: []
 modules:
 - BSP_SAM_A7D65_Curiosity
@@ -29,7 +28,7 @@ generatedFileHashHistoryMap:
 - file: ..\src\config\default\bootloader\bootloader_common.h
   hash: b82ac3397dfdc6a75338fef8d3ed0d99ce92897c418cd35d3e6b9e0f4a3a932c
 - file: ..\src\config\default\bootloader\bootloader_storage.c
-  hash: e1b53fde94e86507b36509f9124524bb7bb3c416ba4a0ef11766b71724f5b279
+  hash: e797078ecd5bee7200ae1753deefbd7742cf994b14637175b6a88232cf52a679
 - file: ..\src\config\default\bootloader\bootloader_storage.h
   hash: a715f2f6edec0ac30ef8d0db97a9ac45243aea0654f833736505d37889a088ce
 - file: ..\src\config\default\bsp\bsp.c
@@ -43,9 +42,9 @@ generatedFileHashHistoryMap:
 - file: ..\src\config\default\ddr.ld
   hash: c6454caab96febd03c6d9b487b502898fc4b492529c39a8441137c7b5feb4118
 - file: ..\src\config\default\definitions.h
-  hash: 0b79ecac4f96ebe8ac1db760e15a280f2127f67236d4d4c2e3ba164079648f9d
+  hash: aa99b2d07f339cdf1de478adff9dd44d387aa225625251d77a3d89dc3b03cad4
 - file: ..\src\config\default\device.h
-  hash: 44f59b10d8978003d7779664b040a9f5523f441f0c98c4b365b60d122fd9f9e3
+  hash: 3cf585ea5382f313611833378511af83d16bda35f00a1500229496c745c51767
 - file: ..\src\config\default\device_cache.h
   hash: ce94cf269fc251c24bb9e5a10bef856736681af405f0ac733e14610f9349cbfe
 - file: ..\src\config\default\driver\driver.h
@@ -67,7 +66,7 @@ generatedFileHashHistoryMap:
 - file: ..\src\config\default\fault_handlers.c
   hash: 931e951cf7431d3d70d6ab81bcd265ff0ac8b3f473b73cd7a541f59d49786b7c
 - file: ..\src\config\default\initialization.c
-  hash: 6cb319d9cce2c168a52efc237851a9caa74a2e23bf4b254e5f116ba44ae156fc
+  hash: 3dbf03cf8d1753b8c6f8efb5683e8a207e308d739163e53a93d9f388887320b6
 - file: ..\src\config\default\interrupts.c
   hash: c9c0873f3df64c5c0f086d2b397390386fc60a6fc63c1e6cdb0129f8be7e6f65
 - file: ..\src\config\default\interrupts.h
@@ -113,7 +112,7 @@ generatedFileHashHistoryMap:
 - file: ..\src\config\default\peripheral\xdmac\plib_xdmac0.h
   hash: 3f2d4d8d56552bd935d59cf791597dcccf31ccf2340a570df0593427b4a5ed2e
 - file: ..\src\config\default\peripheral\xdmac\plib_xdmac_common.h
-  hash: 487e50cc7068ca884cba3f7319525d76466ced2e2ab8253c38c6909615e47f21
+  hash: 36a0f96ea0c5be39dec6d138bb799581e28321fc9d46f1cec049812ec67e146f
 - file: ..\src\config\default\pin_configurations.csv
   hash: 95eefcd0b5edb67e554c7985d7f2c7191ac8983f40d51ef51b8a145e1d66ced2
 - file: ..\src\config\default\stdio\xc32_monitor.c

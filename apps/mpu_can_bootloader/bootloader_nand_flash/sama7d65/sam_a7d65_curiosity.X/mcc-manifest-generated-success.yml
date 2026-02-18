@@ -2,15 +2,15 @@
 
 manifest_file_version: 1.0.0
 project: can_bootloader_nand_flash_sam_a7d65_curiosity
-creation_date: 2025-10-09T14:26:32.714+05:30[Asia/Calcutta]
+creation_date: 2026-02-18T15:31:50.140+05:30[Asia/Calcutta]
 operating_system: Windows 11
 mcc_mode: IDE
-mcc_mode_version: v6.25
+mcc_mode_version: v6.30
 device_name: SAMA7D65
-compiler: XC32 4.60
-mcc_version: 5.6.2
-mcc_core_version: 5.8.2
-content_manager_version: 6.0.2
+compiler: XC32 5.00
+mcc_version: 5.6.4
+mcc_core_version: 5.8.4
+content_manager_version: 6.0.4
 is_mcc_offline: false
 is_using_prerelease_versions: false
 mcc_content_registries: https://registry.npmjs.org/
@@ -18,8 +18,8 @@ device_library: {library_class: com.microchip.mcc.harmony.Harmony3Library, name:
   version: Bundled}
 packs: {name: SAMA7D65_DFP, version: 1.8.85}
 modules:
-- {name: csp, type: HARMONY, version: v3.23.0}
-- {name: core, type: HARMONY, version: v3.15.5}
+- {name: csp, type: HARMONY, version: v3.25.1}
+- {name: core, type: HARMONY, version: v3.16.0}
 - {name: CMSIS_5, type: HARMONY, version: 5.9.0}
-- {name: bootloader, type: HARMONY, version: v3.8.0}
-- {name: bsp, type: HARMONY, version: v3.23.0}
+- {name: bootloader, type: HARMONY, version: v3.9.0}
+- {name: bsp, type: HARMONY, version: v3.24.0}
