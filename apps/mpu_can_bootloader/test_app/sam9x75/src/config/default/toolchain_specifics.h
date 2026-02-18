@@ -28,9 +28,9 @@
 extern "C" {
 #endif
 
-/* MISRAC 2012 deviation block start */
-/* MISRA C-2012 Rule 21.1 deviated 7 times. Deviation record ID - H3_MISRAC_2012_R_21_1_DR_2 */
-/* MISRA C-2012 Rule 21.2 deviated 14 times.  Deviation record ID - H3_MISRAC_2012_R_21_2_DR_2 */
+/* MISRAC 2023 deviation block start */
+/* MISRA C-2023 Rule 21.1 deviated 7 times. Deviation record ID - H3_MISRAC_2023_R_21_1_DR_2 */
+/* MISRA C-2023 Rule 21.2 deviated 14 times.  Deviation record ID - H3_MISRAC_2023_R_21_2_DR_2 */
 
 #ifndef __NOP
 #define __NOP __arm926_nop
@@ -98,7 +98,7 @@ static inline unsigned int __get_CPSR( void )
 #ifndef   __WEAK
 #define __WEAK __attribute__((weak))
 #endif // __WEAK
-/* MISRAC 2012 deviation block end */
+/* MISRAC 2023 deviation block end */
 #include <sys/types.h>
 
 #define NO_INIT        __attribute__((section(".no_init")))
