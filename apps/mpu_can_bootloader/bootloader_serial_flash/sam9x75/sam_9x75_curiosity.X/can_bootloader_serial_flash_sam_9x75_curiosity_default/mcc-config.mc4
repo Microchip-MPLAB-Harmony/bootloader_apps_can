@@ -1,9 +1,8 @@
 configVersion: 1.0.0
-coreVersion: 5.8.2
+coreVersion: 5.8.4
 spaHostVersion: 1.0.0
 device: SAM9X75D2G
-deviceLibrary:
-  className: null
+deviceLibrary: {}
 groupModules: []
 modules:
 - BSP_SAM_9X75_Curiosity
@@ -28,7 +27,7 @@ generatedFileHashHistoryMap:
 - file: ..\src\config\default\bootloader\bootloader_common.h
   hash: be2e87a59d6204f18da87ee1505b4530625b1ed222bd6d409498328991329a6e
 - file: ..\src\config\default\bootloader\bootloader_storage.c
-  hash: 6b82d44490ddecda16f284c7e9a460c7138d1f18ab632612e29e7d8bdb839125
+  hash: ac0ae4f08a09811becd83a68c76b7c79d2be3ebc9712f8bfe9c8738b26e17926
 - file: ..\src\config\default\bootloader\bootloader_storage.h
   hash: a715f2f6edec0ac30ef8d0db97a9ac45243aea0654f833736505d37889a088ce
 - file: ..\src\config\default\bsp\bsp.c
@@ -44,7 +43,7 @@ generatedFileHashHistoryMap:
 - file: ..\src\config\default\definitions.h
   hash: 9b664fee6856fc72ac62bea45ebe190e23e0930b17bdb9ad50ef70818d3c04a6
 - file: ..\src\config\default\device.h
-  hash: a6942ec56b364ca7ce59259450eb2b74fca133605592dabe382afeb005ef56b8
+  hash: c59514bb3f1551407ee3f43109f637b28b915d65539b1eb92c55ded669c4ba5f
 - file: ..\src\config\default\device_cache.h
   hash: 022a4c6bce1d10badd66bfa60707c3dbc830d5b1a6702dfd825d3317ccba1188
 - file: ..\src\config\default\driver\driver.h
@@ -62,7 +61,7 @@ generatedFileHashHistoryMap:
 - file: ..\src\config\default\fault_handlers.c
   hash: 931e951cf7431d3d70d6ab81bcd265ff0ac8b3f473b73cd7a541f59d49786b7c
 - file: ..\src\config\default\initialization.c
-  hash: f0176d8fdf582403e42fa8f91db74e95ce795d368d9b4f84773085e2e42537a0
+  hash: 53650d1cb22d0d3d1814896eb193f748da9c0f46b6583e140cc477730626f5d2
 - file: ..\src\config\default\interrupts.c
   hash: 3f257c1c617c901d65c7a959e95e16fa3baaacb7c3667d18059a321a4dbab6bf
 - file: ..\src\config\default\interrupts.h
@@ -98,7 +97,7 @@ generatedFileHashHistoryMap:
 - file: ..\src\config\default\peripheral\pio\plib_pio.h
   hash: c785d51de6f490e2ed6c65cede52ab5a0a663aedd1bbeda06ad1a5fa74b77332
 - file: ..\src\config\default\peripheral\qspi\plib_qspi.c
-  hash: 4682cf0195b845fbd14d219dd8f274f1f5bcdbfdb98757d9eb49e5d51fd91ad9
+  hash: f8ceddd91e1b1afcb2a396a0063d1f8ddb82c2ec39840a482814a9106f8976a3
 - file: ..\src\config\default\peripheral\qspi\plib_qspi.h
   hash: 04dcf4871aed03d6b645d2265e0f8f2172a2f209343c267cfd023fb59ad4bb58
 - file: ..\src\config\default\peripheral\qspi\plib_qspi_common.h
@@ -130,7 +129,7 @@ generatedFileHashHistoryMap:
 - file: ..\src\config\default\tasks.c
   hash: 61f85067871c2c79308166b98497b94ad6e0ac37e0d34996387f53016e64cc68
 - file: ..\src\config\default\toolchain_specifics.h
-  hash: d93ab2a56ea91cac163fc49b5e3f3491fe3c8ada3bd2f72c752b286f280b40ef
+  hash: 61b9d7e2427b11029b90cfefa844e187899beffb4b351ccbfab471fd44dbbf2d
 - file: ..\src\config\default\user.h
   hash: 451e0878e9fcf6cf9fab046c1452ea662757988346c7f39e6bc98478ca25f995
 - file: ..\src\main.c
