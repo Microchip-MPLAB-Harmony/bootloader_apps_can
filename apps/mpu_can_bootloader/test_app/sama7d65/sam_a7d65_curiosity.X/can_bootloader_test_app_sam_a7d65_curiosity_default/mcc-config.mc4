@@ -1,9 +1,8 @@
 configVersion: 1.0.0
-coreVersion: 5.8.2
+coreVersion: 5.8.4
 spaHostVersion: 1.0.0
 device: SAMA7D65
-deviceLibrary:
-  className: null
+deviceLibrary: {}
 groupModules: []
 modules:
 - BSP_SAM_A7D65_Curiosity
@@ -32,13 +31,13 @@ generatedFileHashHistoryMap:
 - file: ..\src\config\default\definitions.h
   hash: 129ba2966a8ed7408a091bdbaeb9d36daa6343b59a84ed305331ceeffb8e4eaa
 - file: ..\src\config\default\device.h
-  hash: 44f59b10d8978003d7779664b040a9f5523f441f0c98c4b365b60d122fd9f9e3
+  hash: 3cf585ea5382f313611833378511af83d16bda35f00a1500229496c745c51767
 - file: ..\src\config\default\device_cache.h
   hash: ce94cf269fc251c24bb9e5a10bef856736681af405f0ac733e14610f9349cbfe
 - file: ..\src\config\default\fault_handlers.c
   hash: 931e951cf7431d3d70d6ab81bcd265ff0ac8b3f473b73cd7a541f59d49786b7c
 - file: ..\src\config\default\initialization.c
-  hash: 0f3d4fbf2ad005c33cd84aa866a206b85d52d6467455e429e7ca686f45239c34
+  hash: 58596384b5c2afb3f5b0c008eeba0af55fb17b4b042d9c7deece38fdcdeec8f1
 - file: ..\src\config\default\interrupts.c
   hash: c9c0873f3df64c5c0f086d2b397390386fc60a6fc63c1e6cdb0129f8be7e6f65
 - file: ..\src\config\default\interrupts.h
