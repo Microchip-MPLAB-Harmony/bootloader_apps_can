@@ -1,9 +1,8 @@
 configVersion: 1.0.0
-coreVersion: 5.8.2
+coreVersion: 5.8.4
 spaHostVersion: 1.0.0
 device: SAM9X75D2G
-deviceLibrary:
-  className: null
+deviceLibrary: {}
 groupModules: []
 modules:
 - BSP_SAM_9X75_Curiosity
@@ -28,7 +27,7 @@ generatedFileHashHistoryMap:
 - file: ..\src\config\default\bootloader\bootloader_common.h
   hash: 78519fc67ae4533f51e789df4ed73d24e3abffaab3a663eae45a1a98c2e14458
 - file: ..\src\config\default\bootloader\bootloader_storage.c
-  hash: e1b53fde94e86507b36509f9124524bb7bb3c416ba4a0ef11766b71724f5b279
+  hash: e797078ecd5bee7200ae1753deefbd7742cf994b14637175b6a88232cf52a679
 - file: ..\src\config\default\bootloader\bootloader_storage.h
   hash: a715f2f6edec0ac30ef8d0db97a9ac45243aea0654f833736505d37889a088ce
 - file: ..\src\config\default\bsp\bsp.c
@@ -44,7 +43,7 @@ generatedFileHashHistoryMap:
 - file: ..\src\config\default\definitions.h
   hash: ccc16e4373a5722164485e883e4f7fd5959e0be7cf0cf9e170e26f73fecba07a
 - file: ..\src\config\default\device.h
-  hash: a6942ec56b364ca7ce59259450eb2b74fca133605592dabe382afeb005ef56b8
+  hash: c59514bb3f1551407ee3f43109f637b28b915d65539b1eb92c55ded669c4ba5f
 - file: ..\src\config\default\device_cache.h
   hash: 022a4c6bce1d10badd66bfa60707c3dbc830d5b1a6702dfd825d3317ccba1188
 - file: ..\src\config\default\driver\driver.h
@@ -66,7 +65,7 @@ generatedFileHashHistoryMap:
 - file: ..\src\config\default\fault_handlers.c
   hash: 931e951cf7431d3d70d6ab81bcd265ff0ac8b3f473b73cd7a541f59d49786b7c
 - file: ..\src\config\default\initialization.c
-  hash: c978196ec1b29eb204fbcd027036097596dad4dd22c4228736c0cfa8db221448
+  hash: 1533180597c7d84ef6c56bba8c3f02c251d76d0159cac57eca1109135c5e019d
 - file: ..\src\config\default\interrupts.c
   hash: 3f257c1c617c901d65c7a959e95e16fa3baaacb7c3667d18059a321a4dbab6bf
 - file: ..\src\config\default\interrupts.h
@@ -110,7 +109,7 @@ generatedFileHashHistoryMap:
 - file: ..\src\config\default\peripheral\xdmac\plib_xdmac.h
   hash: 3860c41bf2e5b74a7dd2cd2642b1afce660d201d4297b0bc9523b0c3cc8606fa
 - file: ..\src\config\default\peripheral\xdmac\plib_xdmac_common.h
-  hash: 487e50cc7068ca884cba3f7319525d76466ced2e2ab8253c38c6909615e47f21
+  hash: 36a0f96ea0c5be39dec6d138bb799581e28321fc9d46f1cec049812ec67e146f
 - file: ..\src\config\default\pin_configurations.csv
   hash: 7310854df48799b65c0218c85833bc61fdaa195cb789204a1622ecef8ef469cb
 - file: ..\src\config\default\stdio\xc32_monitor.c
@@ -144,7 +143,7 @@ generatedFileHashHistoryMap:
 - file: ..\src\config\default\tasks.c
   hash: 61f85067871c2c79308166b98497b94ad6e0ac37e0d34996387f53016e64cc68
 - file: ..\src\config\default\toolchain_specifics.h
-  hash: d93ab2a56ea91cac163fc49b5e3f3491fe3c8ada3bd2f72c752b286f280b40ef
+  hash: 61b9d7e2427b11029b90cfefa844e187899beffb4b351ccbfab471fd44dbbf2d
 - file: ..\src\config\default\user.h
   hash: 451e0878e9fcf6cf9fab046c1452ea662757988346c7f39e6bc98478ca25f995
 - file: ..\src\main.c
