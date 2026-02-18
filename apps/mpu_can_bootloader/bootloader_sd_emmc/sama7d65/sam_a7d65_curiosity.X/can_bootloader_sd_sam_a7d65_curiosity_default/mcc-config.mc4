@@ -1,9 +1,8 @@
 configVersion: 1.0.0
-coreVersion: 5.8.2
+coreVersion: 5.8.4
 spaHostVersion: 1.0.0
 device: SAMA7D65
-deviceLibrary:
-  className: null
+deviceLibrary: {}
 groupModules: []
 modules:
 - BSP_SAM_A7D65_Curiosity
@@ -33,7 +32,7 @@ generatedFileHashHistoryMap:
 - file: ..\src\config\default\bootloader\bootloader_common.h
   hash: fc6af3fbeeb94e68c05af57067aeb8857d8c0631069315ce2c8d71e3cd5193a9
 - file: ..\src\config\default\bootloader\bootloader_storage.c
-  hash: 06944127723503ee2550eb1be610ee222eb6596d4a758ab5d4ea3ae20bb277f8
+  hash: bfc94195af1a4821b434cb17b41243678ad74495cbf4e18eb36bfda1ac523be6
 - file: ..\src\config\default\bootloader\bootloader_storage.h
   hash: 306e0b8d62c2708754bb7853dab8da206ae7db9f9911d60b68bfe0bb229a2882
 - file: ..\src\config\default\bsp\bsp.c
@@ -49,7 +48,7 @@ generatedFileHashHistoryMap:
 - file: ..\src\config\default\definitions.h
   hash: 5006a3590b5bed8687134447db77d2ebe8f90aa22f87df7dd31abdae20b2c418
 - file: ..\src\config\default\device.h
-  hash: 44f59b10d8978003d7779664b040a9f5523f441f0c98c4b365b60d122fd9f9e3
+  hash: 3cf585ea5382f313611833378511af83d16bda35f00a1500229496c745c51767
 - file: ..\src\config\default\device_cache.h
   hash: ce94cf269fc251c24bb9e5a10bef856736681af405f0ac733e14610f9349cbfe
 - file: ..\src\config\default\driver\driver.h
@@ -71,7 +70,7 @@ generatedFileHashHistoryMap:
 - file: ..\src\config\default\fault_handlers.c
   hash: 931e951cf7431d3d70d6ab81bcd265ff0ac8b3f473b73cd7a541f59d49786b7c
 - file: ..\src\config\default\initialization.c
-  hash: ed0b4df568d0e62c31b24adfafdc76f1874d6daf0d1b449c7e656d2fb1abc3d8
+  hash: e27f24bd33b94f4ddc21790cda3d665d1e270b77f6ccb45dbe5895a24aac9173
 - file: ..\src\config\default\interrupts.c
   hash: c9c0873f3df64c5c0f086d2b397390386fc60a6fc63c1e6cdb0129f8be7e6f65
 - file: ..\src\config\default\interrupts.h
@@ -113,7 +112,7 @@ generatedFileHashHistoryMap:
 - file: ..\src\config\default\peripheral\sdmmc\plib_sdmmc1.h
   hash: e482af5422f3afb1659041783dc6b1d3e02719da3a48dd7da02849fa85295f0c
 - file: ..\src\config\default\peripheral\sdmmc\plib_sdmmc_common.h
-  hash: 78f696650886b3038dd57727b7948e8806068d77d53b6c3dc9ee7f15a1df1eb0
+  hash: e2b015721e166dc96c96772961f57dbe6df1f26e4b85801609d1344df1f1816e
 - file: ..\src\config\default\peripheral\tc\plib_tc0.c
   hash: a3c5945fd8f09a0a48718a997b01c63ad41dd9665786d5eb6e2fca7b6e62baf1
 - file: ..\src\config\default\peripheral\tc\plib_tc0.h
