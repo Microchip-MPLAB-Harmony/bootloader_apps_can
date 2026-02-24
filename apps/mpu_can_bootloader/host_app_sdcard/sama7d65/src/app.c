@@ -65,7 +65,7 @@ APP_DATA appData;
 
 static uint8_t CACHE_ALIGN __attribute__((__section__(".region_sram"))) mcan1MessageRAM[MCAN1_MESSAGE_RAM_CONFIG_SIZE];
 
-static uint32_t status = 0;
+static uint32_t status1 = 0;
 static uint8_t loop_count = 0;
 
 static uint8_t txFiFo[MCAN1_TX_FIFO_BUFFER_SIZE];
@@ -352,8 +352,8 @@ void APP_CheckBTLResponse(void)
         MCAN1_InterruptClear(MCAN_INTERRUPT_RF0N_MASK);
 
         /* Check MCAN1 Status */
-        status = MCAN1_ErrorGet();
-        if (((status & MCAN_PSR_LEC_Msk) == MCAN_ERROR_NONE) || ((status & MCAN_PSR_LEC_Msk) == MCAN_ERROR_LEC_NO_CHANGE))
+        status1 = MCAN1_ErrorGet();
+        if (((status1 & MCAN_PSR_LEC_Msk) == MCAN_ERROR_NONE) || ((status1 & MCAN_PSR_LEC_Msk) == MCAN_ERROR_LEC_NO_CHANGE))
         {
             numberOfMessage = MCAN1_RxFifoFillLevelGet(MCAN_RX_FIFO_0);
             if (numberOfMessage != 0)
